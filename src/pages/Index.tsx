@@ -5,8 +5,10 @@ import { QUESTIONS } from '@/constants/questions';
 import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
-import { CheckCircle, ArrowRight, Activity } from 'lucide-react';
+import { CheckCircle, ArrowRight, Activity, Loader2 } from 'lucide-react';
 import { AudioManager } from '@/services/audio';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
 
 type Step = 'intro' | 'pre-intro' | 'funnel' | 'capture_name' | 'capture_final' | 'results';
 
@@ -77,9 +79,46 @@ const Index: React.FC = () => {
     setCurrentQuestionIndex(3);
   };
 
-  const handleFinalSubmit = (whatsapp: string, email: string) => {
-    setUserData(prev => ({ ...prev, whatsapp, email }));
-    setStep('results');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinalSubmit = async (whatsapp: string, email: string) => {
+    setIsSubmitting(true);
+    
+    const updatedUserData = { ...userData, whatsapp, email };
+    setUserData(updatedUserData);
+    
+    // Calculate results for saving
+    const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
+    
+    try {
+      const { error } = await supabase.functions.invoke('save-lead', {
+        body: {
+          name: updatedUserData.name,
+          phone: whatsapp,
+          email: email || null,
+          answers: updatedUserData.responses,
+          score_total: resultsToSave.totalScore,
+          pillars: resultsToSave.pillars.reduce((acc, p) => ({ ...acc, [p.name]: p.score }), {}),
+          bottleneck: resultsToSave.bottleneck,
+          badges: resultsToSave.earnedBadges.map(b => b.name),
+          recommendations: resultsToSave.recommendations,
+          classification: resultsToSave.classification
+        }
+      });
+      
+      if (error) {
+        console.error('Error saving lead:', error);
+        toast.error('Erro ao salvar diagnóstico. Continuando...');
+      } else {
+        console.log('Lead saved successfully');
+      }
+    } catch (err) {
+      console.error('Failed to save lead:', err);
+      toast.error('Erro ao salvar diagnóstico. Continuando...');
+    } finally {
+      setIsSubmitting(false);
+      setStep('results');
+    }
   };
 
   const results = useMemo(() => {
@@ -244,6 +283,7 @@ const Index: React.FC = () => {
             </div>
 
             <button 
+              disabled={isSubmitting}
               onClick={() => {
                 const wa = (document.getElementById('final-wa') as HTMLInputElement).value;
                 const email = (document.getElementById('final-email') as HTMLInputElement).value;
@@ -253,14 +293,21 @@ const Index: React.FC = () => {
                   AudioManager.playBadge();
                   handleFinalSubmit(wa, email);
                 } else if (!wa) {
-                  alert("O WhatsApp é obrigatório.");
+                  toast.error("O WhatsApp é obrigatório.");
                 } else {
-                  alert("E-mail inválido.");
+                  toast.error("E-mail inválido.");
                 }
               }}
-              className="w-full bg-primary text-primary-foreground py-8 rounded-[2rem] font-black text-2xl hover:opacity-90 transition-all shadow-strong group"
+              className="w-full bg-primary text-primary-foreground py-8 rounded-[2rem] font-black text-2xl hover:opacity-90 transition-all shadow-strong group disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Liberar meu Plano de Lucro
+              {isSubmitting ? (
+                <span className="flex items-center justify-center gap-3">
+                  <Loader2 className="animate-spin" size={24} />
+                  Salvando...
+                </span>
+              ) : (
+                'Liberar meu Plano de Lucro'
+              )}
             </button>
           </motion.div>
         )}
