@@ -55,7 +55,8 @@
     --xp-gold: 45 93% 47%;
     --streak-orange: 25 95% 53%;
     --badge-amber: 38 92% 50%;
-    --success-green: 142 76% 36%;
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
 
     /* Shadows */
     --shadow-soft: 0 10px 40px -10px hsl(var(--slate-900) / 0.15);
