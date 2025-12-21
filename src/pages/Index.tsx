@@ -84,8 +84,8 @@ const Index: React.FC = () => {
 
   const results = useMemo(() => {
     if (step !== 'results') return null;
-    return calculateResults(userData.responses);
-  }, [step, userData.responses]);
+    return calculateResults(userData.responses, userData.badges);
+  }, [step, userData.responses, userData.badges]);
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 relative bg-background">

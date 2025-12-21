@@ -19,6 +19,13 @@ export interface Question {
   feedback?: string;
 }
 
+export interface Badge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+}
+
 export interface UserData {
   name: string;
   whatsapp: string;
@@ -33,18 +40,24 @@ export interface PillarScore {
   name: string;
   score: number;
   max: number;
+  description: string;
+  status: 'high' | 'medium' | 'low';
 }
 
 export interface FinalResults {
   totalScore: number;
   pillars: PillarScore[];
   classification: string;
+  classificationExplanation: string;
   bottleneck: string;
   bottleneckWhy: string;
+  bottleneckPillars: string[];
   impact: string;
   recommendations: {
-    sevenDays: string;
-    thirtyDays: string;
-    sixtyNinetyDays: string;
+    sevenDays: string[];
+    thirtyDays: string[];
+    sixtyNinetyDays: string[];
   };
+  earnedBadges: Badge[];
+  level: number;
 }

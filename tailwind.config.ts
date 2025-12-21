@@ -70,7 +70,8 @@ export default {
         xp: "hsl(var(--xp-gold))",
         streak: "hsl(var(--streak-orange))",
         badge: "hsl(var(--badge-amber))",
-        success: "hsl(var(--success-green))",
+        success: "hsl(var(--success))",
+        warning: "hsl(var(--warning))",
       },
       borderRadius: {
         lg: "var(--radius)",
