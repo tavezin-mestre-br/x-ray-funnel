@@ -1,319 +1,219 @@
 
 
-# Plano: Reestruturação do Funil para Clínicas High Ticket - Porto Velho
-## Shekinah | Marketing, Tecnologia e IA
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
 ---
 
-## Resumo Executivo
+## Objetivo
 
-Reestruturar o funil gamificado existente de 14 perguntas para **3 etapas concisas** focadas exclusivamente em clínicas high ticket de Porto Velho - RO. A gamificação será mantida, mas reformulada para transmitir um **processo de avaliação executiva premium**, não entretenimento. Todo o funil será branded com a identidade **Shekinah**.
-
----
-
-## Mudanças de Estrutura
-
-### De
-- 14 perguntas em 4 fases
-- Linguagem de "jogo" e pontuação visível
-- Foco genérico em vendas e marketing
-- Terminologia como "Raio-X 3³", "XP", "streak"
-
-### Para
-- 8 perguntas em 3 etapas
-- Linguagem corporativa e institucional
-- Foco em clínicas de Porto Velho - RO
-- Branding **Shekinah** em todo o funil
-- Terminologia como "Diagnóstico Estratégico", "Avaliação", "Análise"
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
 ---
 
-## Nova Estrutura das Etapas
+## Arquivos a Modificar (Apenas Copy)
 
-### Etapa 1 - Contexto da Clínica (3 perguntas)
-| # | Pergunta | Tipo | Opções |
-|---|----------|------|--------|
-| 1 | Tipo de clínica em Porto Velho | tiles | Estética, Odontologia, Harmonização, Outra |
-| 2 | Ticket médio do principal procedimento | tiles | Até R$2.000, R$3k-5k, R$5k-10k, Acima de R$10k |
-| 3 | Principal canal de entrada de pacientes | tiles | WhatsApp, Instagram, Indicação, Tráfego pago, Não sei |
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-### Etapa 2 - Diagnóstico Operacional (5 perguntas)
-| # | Pergunta | Tipo | Opções |
-|---|----------|------|--------|
-| 4 | Tempo médio de resposta ao lead | single | Imediato, Até 5 min, Mais de 10 min, Não existe padrão |
-| 5 | Existe processo claro de qualificação | single | Sim estruturado, Parcial, Não |
-| 6 | Volume médio mensal de leads | single | Até 50, 50-100, 100+ |
-| 7 | Taxa aproximada de agendamento | single | Não sei, Menos de 30%, 30-60%, Acima de 60% |
-| 8 | Frequência de faltas na agenda | single | Frequentes, Ocasionalmente, Raramente |
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
 
-### Etapa 3 - Resultado do Diagnóstico
-- Tela de resultados simplificada
-- Status visual da clínica
-- CTA único: "Solicitar diagnóstico estratégico"
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
 ---
 
-## Branding Shekinah
+## Mudanças Detalhadas
 
-### Elementos de Marca
-- **Logo/Nome**: "SHEKINAH" no header de todas as telas
-- **Tagline**: "Marketing, Tecnologia e IA para Clínicas"
-- **Assinatura**: "Shekinah | Porto Velho - RO" no rodapé
+### Tela de Intro (Index.tsx)
 
-### Telas com Branding
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
 ```text
-+------------------------------------------+
-|   SHEKINAH                               |
-|   Marketing · Tecnologia · IA            |
-+------------------------------------------+
-|                                          |
-|   DIAGNÓSTICO ESTRATÉGICO                |
-|   Clínicas High Ticket                   |
-|   Porto Velho - RO                       |
-|                                          |
-|   [Conteúdo]                             |
-|                                          |
-+------------------------------------------+
-|   Shekinah | Porto Velho - RO            |
-+------------------------------------------+
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
 ```
 
----
-
-## Mudanças Visuais
-
-### Tema Dark Premium
+**Novo:**
 ```text
-+------------------------------------------+
-|  Fundo:    Preto/Grafite (#0a0a0a)       |
-|  Texto:    Branco (#f5f5f5)              |
-|  Destaque: Verde tech (#22c55e)          |
-|            ou Azul petróleo (#0d9488)    |
-|  Glow:     Suave e discreto              |
-+------------------------------------------+
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
 ```
 
-### Elementos a Atualizar
-1. **CSS/Tailwind**: Inverter para dark mode como padrão
-2. **Cores primárias**: Trocar para verde/azul tech
-3. **Animações**: Manter mas tornar mais lentas e sutis
-4. **Espaçamento**: Aumentar padding e margin para sensação premium
+---
+
+### Classificações (scoreLogic.ts)
+
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
+
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
 
 ---
 
-## Elementos Gamificados (Mantidos, Reformulados)
+### Bottlenecks (scoreLogic.ts)
 
-| Atual | Novo |
-|-------|------|
-| "Score XP" | Remover exibição numérica |
-| "Streak x3" | Remover indicador visível |
-| Badges coloridos | Selo único "Diagnóstico concluído" |
-| Timer visível | Manter internamente, sem urgência visual |
-| Barra de progresso | Manter - "Etapa X de 3" |
-| Transições | Manter - suaves e elegantes |
-| Micro-feedbacks | Reformular: "Análise em andamento", "Padrão identificado" |
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
 
 ---
 
-## Telas do Funil
+### Recomendações (scoreLogic.ts)
 
-### Tela Inicial (Intro)
+**Aquisição:**
 ```text
-+------------------------------------------+
-|   SHEKINAH                               |
-|   Marketing · Tecnologia · IA            |
-+------------------------------------------+
-|                                          |
-|   DIAGNÓSTICO ESTRATÉGICO                |
-|   Clínicas High Ticket                   |
-|   Porto Velho - RO                       |
-|                                          |
-|   "Esta avaliação é exclusiva para       |
-|   clínicas de Porto Velho – RO que       |
-|   vendem procedimentos de alto valor."   |
-|                                          |
-|   [Iniciar Avaliação]                    |
-|                                          |
-|   Previsibilidade não é marketing.       |
-|   É sistema.                             |
-|                                          |
-+------------------------------------------+
-|   Shekinah | Porto Velho - RO            |
-+------------------------------------------+
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
 ```
 
-### Tela de Captura de Nome
-- Após Etapa 1 (pergunta 3)
-- "Como podemos identificá-lo neste diagnóstico?"
-- Linguagem formal
-
-### Tela de Captura Final
-- Após Etapa 2 (pergunta 8)
-- "Diagnóstico pronto. Onde deseja recebê-lo?"
-- WhatsApp obrigatório, E-mail opcional
-
-### Tela de Resultados
+**Atendimento:**
 ```text
-+------------------------------------------+
-|   SHEKINAH                               |
-|   Marketing · Tecnologia · IA            |
-+------------------------------------------+
-|   Etapa 3 de 3                           |
-|   Diagnóstico Preliminar (Porto Velho)   |
-|                                          |
-|   [Barra 100%] Diagnóstico concluído     |
-|                                          |
-|   Status: Estrutura com vazamentos no    |
-|   processo de aquisição e agendamento    |
-|                                          |
-|   "Clínicas de Porto Velho nesse         |
-|   cenário costumam perder faturamento    |
-|   por falhas de processo, não por        |
-|   falta de demanda."                     |
-|                                          |
-|   [Solicitar diagnóstico estratégico]    |
-|                                          |
-|   Implementações disponíveis apenas      |
-|   para clínicas de Porto Velho – RO.     |
-+------------------------------------------+
-|   Shekinah | Porto Velho - RO            |
-+------------------------------------------+
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
 ```
 
 ---
 
-## Arquivos a Modificar
+### Descrições dos Pilares (scoreLogic.ts)
 
-### 1. src/constants/questions.tsx
-- Substituir as 14 perguntas por 8 novas
-- Remover ícones de jogo
-- Adicionar nova estrutura de fases (1-3)
-- Usar linguagem corporativa
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
 
-### 2. src/index.css
-- Inverter tema para dark mode padrão
-- Cor primária: verde tech (#22c55e) ou azul petróleo (#0d9488)
-- Remover efeitos "gaming" (scanlines, grain excessivo)
-- Adicionar glow suave
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
 
-### 3. tailwind.config.ts
-- Atualizar paleta de cores para tema dark premium
-- Ajustar variáveis de sombra para glow suave
-
-### 4. src/pages/Index.tsx
-- Adicionar header com logo SHEKINAH
-- Atualizar textos de intro para Porto Velho
-- Remover referências a "Raio-X 3³"
-- Ajustar lógica de etapas (captura após pergunta 3)
-- Simplificar fluxo para 3 etapas
-- Adicionar footer com "Shekinah | Porto Velho - RO"
-
-### 5. src/components/funnel/Funnel.tsx
-- Remover exibição de XP, streak e badges durante funil
-- Manter apenas barra de progresso e indicador de etapa
-- Adicionar micro-feedbacks executivos
-- Remover botão de som e elementos gaming
-
-### 6. src/components/funnel/ScoreDisplay.tsx
-- Simplificar drasticamente
-- Remover score numérico detalhado
-- Focar em status qualitativo
-- CTA único para agendamento
-- Manter branding Shekinah
-- Manter exclusividade Porto Velho no rodapé
-
-### 7. src/services/scoreLogic.ts
-- Adaptar cálculo para novas perguntas
-- Simplificar classificações para contexto de clínicas
-- Ajustar bottlenecks para linguagem de saúde/clínicas
-
-### 8. src/types/funnel.ts
-- Simplificar tipos removendo elementos de gamificação excessiva
-- Manter estrutura base de Question e UserData
-
-### 9. index.html
-- Atualizar title para "Shekinah | Diagnóstico Estratégico"
-- Atualizar meta descriptions
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
 
 ---
 
-## Textos e Copy
+## Resumo das Mudanças
 
-### Frase-Guia
-> "Previsibilidade não é marketing. É sistema."
-
-### Assinatura da Marca
-> "Shekinah | Marketing, Tecnologia e IA"
-
-### Micro-feedbacks Durante Avaliação
-- "Análise em andamento..."
-- "Padrão identificado"
-- "Informação registrada"
-- "Processando dados..."
-
-### Mensagens de Transição
-- Etapa 1 concluída: "Perfil da clínica em Porto Velho registrado."
-- Etapa 2 concluída: "Estrutura operacional mapeada."
-- Final: "Diagnóstico concluído."
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
 
 ---
 
-## Remoções
+## Resultado Esperado
 
-| Elemento | Motivo |
-|----------|--------|
-| "Raio-X 3³" | Substituído por Shekinah |
-| Score XP visível | Gamificação infantil |
-| Streak indicator | Linguagem de jogo |
-| Timer visível urgente | Pressão inadequada |
-| Badges durante funil | Distração |
-| Emojis | Profissionalismo |
-| Múltiplos CTAs | Foco único |
-| Referências genéricas | Exclusividade local |
-| Scanlines intensos | Visual mais limpo |
-
----
-
-## Sequência de Implementação
-
-1. **Atualizar tema visual** (CSS + Tailwind)
-2. **Substituir perguntas** (questions.tsx)
-3. **Adaptar fluxo principal** (Index.tsx) com branding Shekinah
-4. **Simplificar componente Funnel** (Funnel.tsx)
-5. **Redesenhar tela de resultados** (ScoreDisplay.tsx)
-6. **Ajustar lógica de scoring** (scoreLogic.ts)
-7. **Atualizar tipos** (funnel.ts)
-8. **Atualizar meta tags** (index.html)
-9. **Testes de integração com backend existente**
-
----
-
-## Seção Técnica
-
-### Mapeamento de Pilares (Novo)
-```typescript
-const PILLARS = ['aquisição', 'atendimento', 'processo'] as const;
-
-// Etapa 1 (perguntas 1-3): Contexto - não pontua pilares
-// Etapa 2 (perguntas 4-8): Diagnóstico operacional
-//   - Pergunta 4 (tempo resposta): atendimento
-//   - Pergunta 5 (qualificação): processo
-//   - Pergunta 6 (volume): aquisição
-//   - Pergunta 7 (taxa agendamento): atendimento
-//   - Pergunta 8 (faltas): processo
-```
-
-### Lógica de Classificação Simplificada
-```typescript
-// Score baseado em 5 perguntas (0-15 pontos possíveis)
-// < 5:  "Estrutura crítica"
-// 5-8:  "Estrutura com vazamentos"
-// 9-12: "Estrutura funcional"
-// > 12: "Estrutura otimizada"
-```
-
-### Integração com Backend
-- Manter estrutura atual do save-lead edge function
-- Ajustar payload para refletir novas perguntas
-- Tabela leads já suporta os campos necessários
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 
