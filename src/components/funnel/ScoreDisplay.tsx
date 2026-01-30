@@ -227,27 +227,47 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-card border-2 border-primary rounded-3xl p-6 sm:p-10 text-center space-y-6"
+        className="bg-card border-2 border-primary rounded-3xl p-6 sm:p-10 space-y-6"
       >
-        <div className="space-y-2">
+        <div className="space-y-4 text-center">
           <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight font-heading">
-            Próximo Passo
+            O que implementamos para clínicas em Porto Velho
           </h3>
-          <p className="text-muted-foreground text-sm font-medium max-w-md mx-auto">
-            Agende uma reunião para receber seu plano de implementação personalizado.
-          </p>
         </div>
+
+        <ul className="space-y-3 max-w-lg mx-auto">
+          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+            <span className="text-primary font-bold shrink-0">|</span>
+            <span>Criativos de alta conversão para procedimentos estéticos</span>
+          </li>
+          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+            <span className="text-primary font-bold shrink-0">|</span>
+            <span>Tráfego pago com leads qualificados — sem curiosos</span>
+          </li>
+          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+            <span className="text-primary font-bold shrink-0">|</span>
+            <span>Funis de captação e nutrição automatizados</span>
+          </li>
+          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+            <span className="text-primary font-bold shrink-0">|</span>
+            <span>Atendimento e agendamento 24/7 com Inteligência Artificial</span>
+          </li>
+          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+            <span className="text-primary font-bold shrink-0">|</span>
+            <span>CRM com rastreamento completo de cada lead até a consulta</span>
+          </li>
+        </ul>
         
         <button 
           onClick={openCalendly}
           className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-5 rounded-xl font-black text-lg glow-primary flex items-center justify-center gap-3 hover:opacity-90 transition-all"
         >
           <CalendarCheck size={20} />
-          Solicitar diagnóstico estratégico
+          Solicitar plano de implementação
         </button>
 
-        <p className="text-xs text-muted-foreground font-medium">
-          Implementações disponíveis apenas para clínicas de Porto Velho – RO.
+        <p className="text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
+          Vagas limitadas para clínicas de Porto Velho – RO.
         </p>
       </motion.div>
     </motion.div>

@@ -146,7 +146,7 @@ const Index: React.FC = () => {
 
                 <div className="bg-card border border-border p-6 rounded-2xl max-w-md mx-auto">
                   <p className="text-foreground text-base font-semibold leading-relaxed">
-                    Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo.
+                    Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida.
                   </p>
                 </div>
               </div>
@@ -158,6 +158,10 @@ const Index: React.FC = () => {
                 Iniciar Avaliação
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
+
+              <p className="text-primary text-xs font-bold mono-font uppercase tracking-wider">
+                Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil.
+              </p>
               
               <p className="text-muted-foreground text-sm font-medium italic">
                 "Previsibilidade não é marketing. É sistema."
@@ -235,9 +239,9 @@ const Index: React.FC = () => {
 
               <div className="space-y-2 text-center">
                 <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
-                  Diagnóstico pronto.
+                  Seu diagnóstico está pronto.
                 </h2>
-                <p className="text-muted-foreground">Onde deseja recebê-lo?</p>
+                <p className="text-muted-foreground">Vamos mostrar onde está o vazamento — e como fechar.</p>
               </div>
 
               <div className="space-y-4">
