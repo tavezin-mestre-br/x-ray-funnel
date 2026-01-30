@@ -22,27 +22,27 @@ const StatusIcon = ({ status }: { status: 'high' | 'medium' | 'low' }) => {
 // Pillar bars
 const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
   return (
-    <div className="w-full space-y-4">
+    <div className="w-full space-y-3 lg:space-y-4">
       {pillars.map((pillar, index) => (
         <motion.div
           key={pillar.name}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: index * 0.15 + 0.3 }}
-          className="space-y-2"
+          className="space-y-1.5 lg:space-y-2"
         >
           <div className="flex justify-between items-center gap-3">
             <div className="flex items-center gap-2 flex-1">
               <StatusIcon status={pillar.status} />
-              <span className="text-xs font-bold mono-font uppercase tracking-wider text-foreground">
+              <span className="text-[10px] lg:text-xs font-bold mono-font uppercase tracking-wider text-foreground">
                 {pillar.name}
               </span>
             </div>
-            <span className="text-sm font-bold mono-font text-primary">
+            <span className="text-xs lg:text-sm font-bold mono-font text-primary">
               {pillar.score}/{pillar.max}
             </span>
           </div>
-          <div className="h-2 bg-secondary rounded-full overflow-hidden">
+          <div className="h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(pillar.score / pillar.max) * 100}%` }}
@@ -53,7 +53,7 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
               }`}
             />
           </div>
-          <p className="text-[11px] text-muted-foreground font-medium">
+          <p className="text-[10px] lg:text-[11px] text-muted-foreground font-medium">
             {pillar.description}
           </p>
         </motion.div>
@@ -71,14 +71,14 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="max-w-4xl w-full py-6 sm:py-10 px-2 sm:px-4 space-y-6 sm:space-y-8"
+      className="max-w-3xl w-full py-4 sm:py-6 lg:py-8 px-2 space-y-4 sm:space-y-5 lg:space-y-6"
     >
       {/* Header */}
-      <div className="text-center space-y-2">
-        <span className="text-xs text-primary mono-font font-bold uppercase tracking-widest">
+      <div className="text-center space-y-1.5 lg:space-y-2">
+        <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
           Etapa 3 de 3 — Diagnóstico Preliminar (Porto Velho)
         </span>
-        <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden max-w-md mx-auto">
+        <div className="w-full h-1 lg:h-1.5 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
@@ -86,7 +86,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
             className="h-full bg-primary rounded-full"
           />
         </div>
-        <p className="text-muted-foreground text-sm font-medium mt-2">Diagnóstico concluído</p>
+        <p className="text-muted-foreground text-xs lg:text-sm font-medium mt-1.5">Diagnóstico concluído</p>
       </div>
 
       {/* Status Card */}
@@ -94,27 +94,28 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-card border border-border rounded-3xl p-6 sm:p-10 space-y-6"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
       >
-        <div className="flex items-start gap-4 sm:gap-6">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 bg-warning/10 border border-warning/30 text-warning rounded-2xl flex items-center justify-center shrink-0">
-            <AlertTriangle size={28} />
+        <div className="flex items-start gap-3 lg:gap-4">
+          <div className="w-10 h-10 lg:w-14 lg:h-14 bg-warning/10 border border-warning/30 text-warning rounded-xl lg:rounded-2xl flex items-center justify-center shrink-0">
+            <AlertTriangle size={20} className="lg:hidden" />
+            <AlertTriangle size={28} className="hidden lg:block" />
           </div>
-          <div className="space-y-2">
-            <span className="text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da Clínica</span>
-            <h2 className="text-xl sm:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
+          <div className="space-y-1 lg:space-y-2">
+            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da Clínica</span>
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {results.classification}
             </h2>
           </div>
         </div>
 
-        <div className="bg-secondary/50 border border-border rounded-2xl p-5">
-          <p className="text-foreground font-medium leading-relaxed">
+        <div className="bg-secondary/50 border border-border rounded-xl lg:rounded-2xl p-3 lg:p-5">
+          <p className="text-foreground font-medium leading-relaxed text-sm lg:text-base">
             {results.classificationExplanation}
           </p>
         </div>
 
-        <p className="text-muted-foreground text-sm font-medium italic border-l-2 border-primary pl-4">
+        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
           Clínicas de Porto Velho nesse cenário costumam perder faturamento por falhas de processo, não por falta de demanda.
         </p>
       </motion.div>
@@ -124,9 +125,9 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-card border border-border rounded-3xl p-6 sm:p-10 space-y-6"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
       >
-        <h3 className="text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
+        <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
           Análise por Pilar
         </h3>
         <PillarBars pillars={results.pillars} />
@@ -137,21 +138,21 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-card border border-border rounded-3xl p-6 sm:p-10 space-y-6"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
       >
-        <div className="space-y-3">
-          <span className="text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Gargalo Identificado</span>
-          <h3 className="text-lg sm:text-xl font-black text-foreground leading-tight tracking-tight font-heading">
+        <div className="space-y-2 lg:space-y-3">
+          <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Gargalo Identificado</span>
+          <h3 className="text-base sm:text-lg lg:text-xl font-black text-foreground leading-tight tracking-tight font-heading">
             {results.bottleneck}
           </h3>
-          <p className="text-muted-foreground font-medium leading-relaxed">
+          <p className="text-muted-foreground font-medium leading-relaxed text-xs lg:text-sm">
             {results.bottleneckWhy}
           </p>
         </div>
         
-        <div className="flex items-start gap-4 pt-4 border-t border-border">
-          <TrendingUp size={20} className="text-primary shrink-0 mt-0.5" />
-          <p className="text-foreground font-medium leading-relaxed text-sm">
+        <div className="flex items-start gap-3 pt-3 lg:pt-4 border-t border-border">
+          <TrendingUp size={18} className="text-primary shrink-0 mt-0.5" />
+          <p className="text-foreground font-medium leading-relaxed text-xs lg:text-sm">
             {results.impact}
           </p>
         </div>
@@ -162,20 +163,21 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4"
       >
         {/* 7 Days */}
-        <div className="bg-primary text-primary-foreground p-6 rounded-2xl space-y-4">
-          <div className="flex items-center gap-3">
-            <Zap size={20} />
+        <div className="bg-primary text-primary-foreground p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
+          <div className="flex items-center gap-2 lg:gap-3">
+            <Zap size={16} className="lg:hidden" />
+            <Zap size={20} className="hidden lg:block" />
             <div>
-              <span className="text-[10px] font-bold opacity-60 mono-font uppercase tracking-widest">7 DIAS</span>
-              <h4 className="text-base font-black">Ação Imediata</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold opacity-60 mono-font uppercase tracking-widest">7 DIAS</span>
+              <h4 className="text-sm lg:text-base font-black">Ação Imediata</h4>
             </div>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 lg:space-y-2">
             {results.recommendations.sevenDays.map((item, index) => (
-              <li key={index} className="text-sm font-medium leading-snug flex items-start gap-2">
+              <li key={index} className="text-xs lg:text-sm font-medium leading-snug flex items-start gap-2">
                 <span className="opacity-60 shrink-0">•</span>
                 <span>{item}</span>
               </li>
@@ -184,17 +186,18 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         {/* 30 Days */}
-        <div className="bg-card border border-border p-6 rounded-2xl space-y-4">
-          <div className="flex items-center gap-3">
-            <Calendar size={20} className="text-primary" />
+        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
+          <div className="flex items-center gap-2 lg:gap-3">
+            <Calendar size={16} className="text-primary lg:hidden" />
+            <Calendar size={20} className="text-primary hidden lg:block" />
             <div>
-              <span className="text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">30 DIAS</span>
-              <h4 className="text-base font-black text-foreground">Estruturação</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">30 DIAS</span>
+              <h4 className="text-sm lg:text-base font-black text-foreground">Estruturação</h4>
             </div>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 lg:space-y-2">
             {results.recommendations.thirtyDays.map((item, index) => (
-              <li key={index} className="text-sm text-foreground font-medium leading-snug flex items-start gap-2">
+              <li key={index} className="text-xs lg:text-sm text-foreground font-medium leading-snug flex items-start gap-2">
                 <span className="text-muted-foreground shrink-0">•</span>
                 <span>{item}</span>
               </li>
@@ -203,17 +206,18 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         {/* 60-90 Days */}
-        <div className="bg-card border border-border p-6 rounded-2xl space-y-4">
-          <div className="flex items-center gap-3">
-            <Layers size={20} className="text-primary" />
+        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
+          <div className="flex items-center gap-2 lg:gap-3">
+            <Layers size={16} className="text-primary lg:hidden" />
+            <Layers size={20} className="text-primary hidden lg:block" />
             <div>
-              <span className="text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">60-90 DIAS</span>
-              <h4 className="text-base font-black text-foreground">Escala com IA</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">60-90 DIAS</span>
+              <h4 className="text-sm lg:text-base font-black text-foreground">Escala com IA</h4>
             </div>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-1.5 lg:space-y-2">
             {results.recommendations.sixtyNinetyDays.map((item, index) => (
-              <li key={index} className="text-sm text-foreground font-medium leading-snug flex items-start gap-2">
+              <li key={index} className="text-xs lg:text-sm text-foreground font-medium leading-snug flex items-start gap-2">
                 <span className="text-muted-foreground shrink-0">•</span>
                 <span>{item}</span>
               </li>
@@ -227,32 +231,32 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-card border-2 border-primary rounded-3xl p-6 sm:p-10 space-y-6"
+        className="bg-card border-2 border-primary rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
       >
-        <div className="space-y-4 text-center">
-          <h3 className="text-xl sm:text-2xl font-black text-foreground tracking-tight font-heading">
+        <div className="space-y-3 text-center">
+          <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
             O que implementamos para clínicas em Porto Velho
           </h3>
         </div>
 
-        <ul className="space-y-3 max-w-lg mx-auto">
-          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+        <ul className="space-y-2 lg:space-y-3 max-w-md mx-auto">
+          <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
             <span>Criativos de alta conversão para procedimentos estéticos</span>
           </li>
-          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+          <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
             <span>Tráfego pago com leads qualificados — sem curiosos</span>
           </li>
-          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+          <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
             <span>Funis de captação e nutrição automatizados</span>
           </li>
-          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+          <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
             <span>Atendimento e agendamento 24/7 com Inteligência Artificial</span>
           </li>
-          <li className="flex items-start gap-3 text-foreground font-medium text-sm">
+          <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
             <span>CRM com rastreamento completo de cada lead até a consulta</span>
           </li>
@@ -260,13 +264,14 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         
         <button 
           onClick={openCalendly}
-          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-5 rounded-xl font-black text-lg glow-primary flex items-center justify-center gap-3 hover:opacity-90 transition-all"
+          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all"
         >
-          <CalendarCheck size={20} />
+          <CalendarCheck size={18} className="lg:hidden" />
+          <CalendarCheck size={20} className="hidden lg:block" />
           Solicitar plano de implementação
         </button>
 
-        <p className="text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
+        <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
           Vagas limitadas para clínicas de Porto Velho – RO.
         </p>
       </motion.div>
