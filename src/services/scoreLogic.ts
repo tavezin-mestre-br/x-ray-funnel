@@ -2,9 +2,9 @@ import { QUESTIONS, PILLARS } from '@/constants/questions';
 import { FinalResults, PillarScore, Badge } from '@/types/funnel';
 
 const PILLAR_DESCRIPTIONS: Record<string, string> = {
-  "Aquisição": "Capacidade de gerar leads qualificados de forma previsível",
-  "Atendimento": "Velocidade e eficiência no primeiro contato com pacientes",
-  "Processo": "Estrutura operacional para conversão e retenção"
+  "Aquisição": "Tráfego pago + criativos + funis = demanda previsível",
+  "Atendimento": "Resposta instantânea + IA = leads que viram consultas",
+  "Processo": "CRM + rastreamento = visibilidade total do funil"
 };
 
 const getPillarStatus = (score: number, max: number): 'high' | 'medium' | 'low' => {
@@ -18,25 +18,25 @@ const getClassificationData = (totalScore: number) => {
   if (totalScore < 8) {
     return {
       classification: "Estrutura crítica",
-      explanation: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento. Ações imediatas são necessárias.",
+      explanation: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa.",
       level: 1
     };
   } else if (totalScore < 16) {
     return {
       classification: "Estrutura com vazamentos",
-      explanation: "Existem oportunidades de faturamento sendo perdidas por falhas de processo, não por falta de demanda.",
+      explanation: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo.",
       level: 2
     };
   } else if (totalScore < 24) {
     return {
       classification: "Estrutura funcional",
-      explanation: "A operação funciona, mas há margem significativa para otimização e aumento de conversão.",
+      explanation: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição.",
       level: 3
     };
   } else {
     return {
       classification: "Estrutura otimizada",
-      explanation: "A clínica possui uma operação sólida. Foco em escala e automação com IA.",
+      explanation: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe.",
       level: 4
     };
   }
@@ -47,29 +47,29 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
   
   const analyses: Record<string, { bottleneck: string; why: string; impact: string; pillars: string[] }> = {
     "Aquisição": {
-      bottleneck: "Dependência de canais não escaláveis",
-      why: "A entrada de pacientes depende de indicação ou canais orgânicos sem previsibilidade.",
-      impact: "Implementar tráfego pago estruturado pode triplicar o volume de leads qualificados em 90 dias.",
+      bottleneck: "Geração de demanda inconsistente",
+      why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala.",
+      impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias.",
       pillars: ["Aquisição"]
     },
     "Atendimento": {
-      bottleneck: "Perda de oportunidades no primeiro contato",
-      why: "Tempo de resposta lento ou ausência de roteiro de qualificação reduz taxa de agendamento.",
-      impact: "Otimizar o atendimento inicial pode aumentar a conversão em até 40% sem investir mais em tráfego.",
+      bottleneck: "Leads esfriando antes do agendamento",
+      why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme.",
+      impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
-      bottleneck: "Falta de estrutura operacional",
-      why: "Ausência de processos claros gera retrabalho, faltas e perda de controle sobre a jornada do paciente.",
-      impact: "Estruturar o processo comercial reduz faltas em 60% e aumenta a previsibilidade de caixa.",
+      bottleneck: "Falta de visibilidade sobre o funil",
+      why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro.",
+      impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real.",
       pillars: ["Processo"]
     }
   };
 
   return analyses[lowest.name] || {
     bottleneck: "Vazamentos no processo de aquisição e agendamento",
-    why: "Múltiplos pontos de atrito estão impactando a conversão de leads em pacientes.",
-    impact: "Uma revisão estrutural pode recuperar faturamento que está sendo deixado na mesa.",
+    why: "Sem sistema integrado de marketing, atendimento e CRM, leads entram mas não viram consultas.",
+    impact: "Implementar tráfego + IA + CRM transforma operação em máquina previsível de faturamento.",
     pillars: pillars.filter(p => p.status === 'low').map(p => p.name)
   };
 };
@@ -80,53 +80,53 @@ const getRecommendations = (pillars: PillarScore[]) => {
   const recommendations = {
     "Aquisição": {
       sevenDays: [
-        "Definir orçamento fixo mensal para tráfego pago",
-        "Criar landing page focada no procedimento principal",
-        "Configurar pixel de rastreamento no site"
+        "Estruturar campanha de tráfego pago para o procedimento mais lucrativo",
+        "Configurar pixel e eventos de conversão no site",
+        "Definir orçamento mensal fixo para aquisição"
       ],
       thirtyDays: [
-        "Validar canal com melhor custo por lead",
-        "Implementar funil de captura com isca digital",
-        "Criar rotina de análise semanal de métricas"
+        "Testar criativos com diferentes ângulos de copy",
+        "Implementar landing page de alta conversão",
+        "Criar funil de nutrição via WhatsApp"
       ],
       sixtyNinetyDays: [
-        "Escalar investimento no canal vencedor",
-        "Automatizar triagem de leads com IA",
+        "Escalar investimento nos criativos vencedores",
+        "Automatizar qualificação de leads com IA",
         "Construir máquina previsível de geração de demanda"
       ]
     },
     "Atendimento": {
       sevenDays: [
-        "Implementar meta de resposta em menos de 5 minutos",
-        "Criar roteiro de qualificação inicial",
-        "Configurar notificações em tempo real para novos leads"
+        "Implementar resposta automática em menos de 30 segundos",
+        "Criar script de qualificação para atendentes",
+        "Configurar alertas em tempo real para novos leads"
       ],
       thirtyDays: [
-        "Treinar equipe com script de agendamento",
-        "Mapear e resolver principais objeções",
-        "Configurar cadência de follow-up automatizada"
+        "Integrar chatbot de pré-atendimento no WhatsApp",
+        "Automatizar agendamento direto na conversa",
+        "Mapear e resolver principais objeções"
       ],
       sixtyNinetyDays: [
-        "Implementar chatbot de pré-atendimento 24/7",
-        "Criar dashboard de métricas de conversão",
-        "Automatizar lembretes de consulta via WhatsApp"
+        "IA fazendo atendimento completo 24/7",
+        "Dashboard de métricas de conversão por atendente",
+        "Sistema de reativação automática de leads frios"
       ]
     },
     "Processo": {
       sevenDays: [
-        "Mapear as etapas da jornada do paciente",
-        "Documentar processo atual de agendamento",
-        "Identificar principais causas de faltas"
+        "Mapear jornada do lead: entrada → consulta → procedimento",
+        "Identificar etapa com maior perda de conversão",
+        "Documentar processo atual de agendamento"
       ],
       thirtyDays: [
-        "Implementar CRM para controle de leads",
-        "Definir KPIs claros por etapa do funil",
+        "Implementar CRM com pipeline visual de leads",
+        "Definir KPIs: taxa de resposta, agendamento e comparecimento",
         "Criar rotina de confirmação de consultas"
       ],
       sixtyNinetyDays: [
-        "Automatizar follow-up de pacientes inativos",
-        "Criar playbook de vendas replicável",
-        "Implementar sistema de reativação de leads frios"
+        "Dashboard de faturamento previsível por período",
+        "Automação de follow-up para pacientes inativos",
+        "Sistema de rastreamento da origem até o fechamento"
       ]
     }
   };
