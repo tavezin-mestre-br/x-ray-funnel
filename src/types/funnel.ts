@@ -5,7 +5,7 @@ export interface Option {
   label: string;
   value: number;
   icon?: string;
-  pillar?: 'aquisição' | 'conversão' | 'processo' | 'alavancas';
+  pillar?: 'aquisição' | 'atendimento' | 'processo';
 }
 
 export interface Question {

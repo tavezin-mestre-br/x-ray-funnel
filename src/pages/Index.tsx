@@ -5,12 +5,11 @@ import { QUESTIONS } from '@/constants/questions';
 import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
-import { CheckCircle, ArrowRight, Activity, Loader2 } from 'lucide-react';
-import { AudioManager } from '@/services/audio';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
-type Step = 'intro' | 'pre-intro' | 'funnel' | 'capture_name' | 'capture_final' | 'results';
+type Step = 'intro' | 'funnel' | 'capture_name' | 'capture_final' | 'results';
 
 const Index: React.FC = () => {
   const [step, setStep] = useState<Step>('intro');
@@ -25,45 +24,17 @@ const Index: React.FC = () => {
     badges: []
   });
 
-  const handleGoToPreIntro = () => {
-    AudioManager.startBGM();
-    setStep('pre-intro');
-  };
-
-  const handleStartRaioX = () => {
-    AudioManager.playClick();
+  const handleStartDiagnosis = () => {
     setStep('funnel');
   };
 
-  const handleResponse = (questionId: number, answer: any, timeSpent: number) => {
-    setUserData(prev => {
-      const q = QUESTIONS.find(q => q.id === questionId)!;
-      let xpGain = 10;
-      const cognitiveTypes = ['multi', 'ranking', 'allocation'];
-      xpGain += cognitiveTypes.includes(q.type) ? 4 : 2;
-      const isQuick = timeSpent < 6000;
-      if (isQuick) xpGain += 3;
-      const isTimedSuccess = q.timerSeconds && timeSpent < q.timerSeconds * 1000;
-      if (isTimedSuccess) xpGain += 4;
-      if (prev.streak >= 3) xpGain += 5;
-      const newStreak = isQuick ? prev.streak + 1 : 0;
-      const updatedResponses = { ...prev.responses, [questionId]: answer };
-      const updatedBadges = [...prev.badges];
-      
-      if (Object.keys(updatedResponses).length === 2 && !updatedBadges.includes('Explorador')) {
-        updatedBadges.push('Explorador');
-        AudioManager.playBadge();
-      }
+  const handleResponse = (questionId: number, answer: any) => {
+    setUserData(prev => ({
+      ...prev,
+      responses: { ...prev.responses, [questionId]: answer }
+    }));
 
-      return {
-        ...prev,
-        responses: updatedResponses,
-        xp: prev.xp + xpGain,
-        streak: newStreak,
-        badges: updatedBadges
-      };
-    });
-
+    // After question 3 (end of Etapa 1), capture name
     if (currentQuestionIndex === 2 && step === 'funnel') {
       setStep('capture_name');
     } else if (currentQuestionIndex < QUESTIONS.length - 1) {
@@ -76,7 +47,7 @@ const Index: React.FC = () => {
   const handleNameSubmit = (name: string) => {
     setUserData(prev => ({ ...prev, name }));
     setStep('funnel');
-    setCurrentQuestionIndex(3);
+    setCurrentQuestionIndex(3); // Continue to question 4 (Etapa 2)
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -87,7 +58,6 @@ const Index: React.FC = () => {
     const updatedUserData = { ...userData, whatsapp, email };
     setUserData(updatedUserData);
     
-    // Calculate results for saving
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
     
     try {
@@ -109,8 +79,6 @@ const Index: React.FC = () => {
       if (error) {
         console.error('Error saving lead:', error);
         toast.error('Erro ao salvar diagnóstico. Continuando...');
-      } else {
-        console.log('Lead saved successfully');
       }
     } catch (err) {
       console.error('Failed to save lead:', err);
@@ -126,208 +94,227 @@ const Index: React.FC = () => {
     return calculateResults(userData.responses, userData.badges);
   }, [step, userData.responses, userData.badges]);
 
+  // Calculate current phase for display
+  const getCurrentPhase = () => {
+    if (currentQuestionIndex < 3) return 1;
+    return 2;
+  };
+
   return (
-    <div className="min-h-screen w-full flex items-center justify-center p-4 sm:p-6 relative bg-background">
-      {/* Grain overlay */}
-      <div className="bg-grain" />
-      {/* Scanline effect */}
-      <div className="scanline" />
-
-      <AnimatePresence mode="wait">
-        {/* INTRO SCREEN */}
-        {step === 'intro' && (
-          <motion.div 
-            key="intro"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
-            className="max-w-2xl w-full text-center space-y-10 sm:space-y-12 py-6 sm:py-10"
-          >
-            <div className="space-y-6">
-              <div className="inline-block px-5 py-2 bg-primary text-primary-foreground rounded-full text-[10px] mono-font font-black tracking-[0.3em] uppercase shadow-2xl">
-                DIAGNÓSTICO DE DINHEIRO NO CAIXA
-              </div>
-              <p className="text-muted-foreground text-[10px] sm:text-xs font-bold uppercase tracking-widest mono-font px-2">
-                DESCUBRA EM POUCOS MINUTOS ONDE SUA OPERAÇÃO DEIXA DINHEIRO NA MESA HOJE.
-              </p>
-              <h1 className="text-4xl sm:text-6xl font-black text-foreground leading-[1.1] tracking-tighter px-2 font-heading">
-                Você não precisa de mais "marketing". <br/>Precisa colocar mais dinheiro no bolso.
-              </h1>
-              <p className="text-foreground text-xl sm:text-2xl font-bold leading-tight px-4 max-w-xl mx-auto">
-                Muitas empresas tentam vender mais quando o problema real é dinheiro escapando na operação. Este diagnóstico mostra onde você já poderia estar ganhando mais antes de tentar escalar vendas.
-              </p>
-              <div className="bg-secondary border border-border p-6 sm:p-8 rounded-[2.5rem] text-muted-foreground text-sm sm:text-base font-semibold leading-relaxed max-w-lg mx-auto shadow-sm">
-                Identificamos onde o dinheiro se perde entre a chegada da demanda e o fechamento — e como recuperá-lo usando marketing e IA.
-              </div>
+    <div className="min-h-screen w-full flex flex-col bg-background">
+      {/* Header */}
+      <header className="w-full py-6 px-6 border-b border-border/50">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
+          <div className="flex flex-col">
+            <span className="text-xl font-black text-foreground tracking-tight font-heading">SHEKINAH</span>
+            <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
+          </div>
+          {step === 'funnel' && (
+            <div className="text-right">
+              <span className="text-xs text-muted-foreground mono-font">Etapa {getCurrentPhase()} de 3</span>
             </div>
-            
-            <button 
-              onClick={handleGoToPreIntro}
-              className="w-full bg-primary text-primary-foreground py-7 sm:py-8 rounded-[2.2rem] font-black text-2xl sm:text-3xl hover:opacity-90 transition-all shadow-strong transform active:scale-95 group max-w-md mx-auto"
+          )}
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="flex-1 flex items-center justify-center p-4 sm:p-6">
+        <AnimatePresence mode="wait">
+          {/* INTRO SCREEN */}
+          {step === 'intro' && (
+            <motion.div 
+              key="intro"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-2xl w-full text-center space-y-10 py-6"
             >
-              Descobrir onde posso ganhar mais
-              <span className="block text-[10px] font-black opacity-40 mt-1 tracking-widest uppercase">DIAGNÓSTICO DIRETO • FOCO EM CAIXA</span>
-            </button>
-            
-            <div className="flex justify-center gap-4 sm:gap-6 text-[9px] sm:text-[10px] text-foreground font-black mono-font tracking-widest uppercase opacity-60">
-              <span>Sem Perda de Tempo</span>
-              <span>•</span>
-              <span>Foco em Resultado</span>
-            </div>
-          </motion.div>
-        )}
-
-        {/* PRE-INTRO SCREEN */}
-        {step === 'pre-intro' && (
-          <motion.div 
-            key="pre-intro"
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            className="max-w-[400px] w-full bg-card px-6 py-10 sm:px-10 sm:py-14 rounded-[2.5rem] border border-border shadow-strong space-y-8 sm:space-y-10"
-          >
-            <div className="space-y-8 text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-primary text-primary-foreground rounded-2xl sm:rounded-3xl flex items-center justify-center mx-auto shadow-xl">
-                <Activity size={32} className="opacity-90" strokeWidth={1.5} />
-              </div>
-              
-              <div className="space-y-4">
-                <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-[1.15] tracking-tight font-heading">
-                  Iniciando seu Raio-X <br className="hidden sm:block" /> de Escala 3³
-                </h2>
+              <div className="space-y-8">
+                <div className="inline-block px-5 py-2 bg-primary/10 border border-primary/30 text-primary rounded-full text-[10px] mono-font font-black tracking-[0.2em] uppercase">
+                  EXCLUSIVO PORTO VELHO – RO
+                </div>
                 
-                <p className="text-muted-foreground text-base sm:text-lg font-medium leading-relaxed max-w-[280px] mx-auto">
-                  Vamos identificar onde seu crescimento está travando e quais oportunidades geram mais resultado.
+                <h1 className="text-4xl sm:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                  Diagnóstico Estratégico<br/>
+                  <span className="text-primary glow-text">Clínicas High Ticket</span>
+                </h1>
+                
+                <p className="text-muted-foreground text-lg sm:text-xl font-medium leading-relaxed max-w-xl mx-auto">
+                  Esta avaliação é exclusiva para clínicas de Porto Velho – RO que vendem procedimentos de alto valor.
                 </p>
-                
-                <div className="pt-2">
-                  <p className="text-muted-foreground text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] mono-font leading-relaxed">
-                    Duração: ~3 minutos • Entrega:<br className="sm:hidden" /> Plano 7/30/90 dias
+
+                <div className="bg-card border border-border p-6 rounded-2xl max-w-md mx-auto">
+                  <p className="text-foreground text-base font-semibold leading-relaxed">
+                    Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo.
                   </p>
                 </div>
               </div>
-            </div>
-            
-            <div className="pt-2">
+              
               <button 
-                onClick={handleStartRaioX}
-                className="w-full bg-primary text-primary-foreground py-6 rounded-2xl font-black text-lg tracking-tight hover:opacity-90 transition-all shadow-strong group flex items-center justify-center gap-3 active:scale-[0.97]"
+                onClick={handleStartDiagnosis}
+                className="w-full max-w-md mx-auto bg-primary text-primary-foreground py-6 rounded-2xl font-black text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
-                COMEÇAR RAIO-X 3³
-                <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform opacity-70" />
+                Iniciar Avaliação
+                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={20} />
               </button>
-            </div>
-          </motion.div>
-        )}
+              
+              <p className="text-muted-foreground text-sm font-medium italic">
+                "Previsibilidade não é marketing. É sistema."
+              </p>
+            </motion.div>
+          )}
 
-        {/* NAME CAPTURE */}
-        {step === 'capture_name' && (
-          <motion.div 
-            key="capture_name"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="max-w-md w-full bg-card p-10 rounded-[3rem] border-2 border-primary shadow-strong space-y-10"
-          >
-            <div className="space-y-4">
-              <span className="text-[10px] font-black text-muted-foreground uppercase tracking-widest mono-font">Identificação do Decisor</span>
-              <h2 className="text-4xl font-black text-foreground leading-none tracking-tighter font-heading">Como posso te chamar?</h2>
-            </div>
-            
-            <input 
-              autoFocus
-              type="text"
-              placeholder="Seu nome"
-              className="w-full bg-secondary border-2 border-border p-6 rounded-2xl text-2xl focus:border-primary outline-none text-foreground font-black"
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
-                  handleNameSubmit((e.target as HTMLInputElement).value);
-                }
-              }}
-            />
-            
-            <button 
-              onClick={(e) => {
-                const input = (e.currentTarget.previousSibling as HTMLInputElement);
-                if (input.value) handleNameSubmit(input.value);
-              }}
-              className="w-full bg-primary text-primary-foreground py-6 rounded-2xl font-black text-xl shadow-xl"
+          {/* NAME CAPTURE - After Etapa 1 */}
+          {step === 'capture_name' && (
+            <motion.div 
+              key="capture_name"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              className="max-w-md w-full bg-card p-8 sm:p-10 rounded-3xl border border-border space-y-8"
             >
-              Continuar Análise
-            </button>
-          </motion.div>
-        )}
-
-        {/* FINAL CAPTURE */}
-        {step === 'capture_final' && (
-          <motion.div 
-            key="capture_final"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="max-w-md w-full bg-card p-10 rounded-[3.5rem] border-2 border-primary shadow-strong space-y-10"
-          >
-            <div className="space-y-6 text-center">
-              <div className="w-24 h-24 bg-primary text-primary-foreground rounded-[2.5rem] flex items-center justify-center mx-auto mb-4 shadow-strong transform rotate-3 relative overflow-hidden">
-                <CheckCircle size={56} />
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                    <span className="text-primary font-black text-sm">✓</span>
+                  </div>
+                  <span className="text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
+                </div>
+                <p className="text-muted-foreground text-sm">Perfil da clínica em Porto Velho registrado.</p>
               </div>
-              <h2 className="text-4xl font-black text-foreground leading-none tracking-tighter font-heading">Receber Plano de Lucro?</h2>
-            </div>
 
-            <div className="space-y-5">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-foreground uppercase mono-font tracking-widest">WhatsApp (Obrigatório)</label>
-                <input type="tel" placeholder="(00) 90000-0000" className="w-full bg-secondary border-2 border-border p-5 rounded-2xl focus:border-primary outline-none text-foreground font-black text-2xl shadow-sm" id="final-wa" />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-foreground uppercase mono-font tracking-widest">E-mail (Opcional)</label>
-                <input type="email" placeholder="seu@email.com" className="w-full bg-secondary border-2 border-border p-5 rounded-2xl focus:border-primary outline-none text-foreground font-black text-2xl shadow-sm" id="final-email" />
-              </div>
-            </div>
-
-            <button 
-              disabled={isSubmitting}
-              onClick={() => {
-                const wa = (document.getElementById('final-wa') as HTMLInputElement).value;
-                const email = (document.getElementById('final-email') as HTMLInputElement).value;
-                const isEmailValid = !email || (email.includes('@') && email.includes('.'));
+              <div className="space-y-4">
+                <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  Como podemos identificá-lo neste diagnóstico?
+                </h2>
                 
-                if (wa && isEmailValid) {
-                  AudioManager.playBadge();
-                  handleFinalSubmit(wa, email);
-                } else if (!wa) {
-                  toast.error("O WhatsApp é obrigatório.");
-                } else {
-                  toast.error("E-mail inválido.");
-                }
-              }}
-              className="w-full bg-primary text-primary-foreground py-8 rounded-[2rem] font-black text-2xl hover:opacity-90 transition-all shadow-strong group disabled:opacity-50 disabled:cursor-not-allowed"
+                <input 
+                  autoFocus
+                  type="text"
+                  placeholder="Seu nome"
+                  className="w-full bg-secondary border border-border p-5 rounded-xl text-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold transition-all"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && (e.target as HTMLInputElement).value) {
+                      handleNameSubmit((e.target as HTMLInputElement).value);
+                    }
+                  }}
+                />
+              </div>
+              
+              <button 
+                onClick={(e) => {
+                  const input = document.querySelector('input[type="text"]') as HTMLInputElement;
+                  if (input?.value) handleNameSubmit(input.value);
+                }}
+                className="w-full bg-primary text-primary-foreground py-5 rounded-xl font-black text-lg glow-primary"
+              >
+                Continuar para Etapa 2
+              </button>
+            </motion.div>
+          )}
+
+          {/* FINAL CAPTURE - After Etapa 2 */}
+          {step === 'capture_final' && (
+            <motion.div 
+              key="capture_final"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="max-w-md w-full bg-card p-8 sm:p-10 rounded-3xl border border-border space-y-8"
             >
-              {isSubmitting ? (
-                <span className="flex items-center justify-center gap-3">
-                  <Loader2 className="animate-spin" size={24} />
-                  Salvando...
-                </span>
-              ) : (
-                'Liberar meu Plano de Lucro'
-              )}
-            </button>
-          </motion.div>
-        )}
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                    <span className="text-primary font-black text-sm">✓</span>
+                  </div>
+                  <span className="text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
+                </div>
+                <p className="text-muted-foreground text-sm">Estrutura operacional mapeada.</p>
+              </div>
 
-        {/* FUNNEL */}
-        {step === 'funnel' && (
-          <Funnel 
-            question={QUESTIONS[currentQuestionIndex]} 
-            onResponse={handleResponse}
-            userData={userData}
-            currentIndex={currentQuestionIndex + 1}
-            totalSteps={QUESTIONS.length}
-          />
-        )}
+              <div className="space-y-2 text-center">
+                <h2 className="text-2xl sm:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  Diagnóstico pronto.
+                </h2>
+                <p className="text-muted-foreground">Onde deseja recebê-lo?</p>
+              </div>
 
-        {/* RESULTS */}
-        {step === 'results' && results && (
-          <ScoreDisplay results={results} userData={userData} />
-        )}
-      </AnimatePresence>
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">WhatsApp (Obrigatório)</label>
+                  <input 
+                    type="tel" 
+                    placeholder="(69) 90000-0000" 
+                    className="w-full bg-secondary border border-border p-4 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-lg transition-all" 
+                    id="final-wa" 
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">E-mail (Opcional)</label>
+                  <input 
+                    type="email" 
+                    placeholder="seu@email.com" 
+                    className="w-full bg-secondary border border-border p-4 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-lg transition-all" 
+                    id="final-email" 
+                  />
+                </div>
+              </div>
+
+              <button 
+                disabled={isSubmitting}
+                onClick={() => {
+                  const wa = (document.getElementById('final-wa') as HTMLInputElement).value;
+                  const email = (document.getElementById('final-email') as HTMLInputElement).value;
+                  const isEmailValid = !email || (email.includes('@') && email.includes('.'));
+                  
+                  if (wa && isEmailValid) {
+                    handleFinalSubmit(wa, email);
+                  } else if (!wa) {
+                    toast.error("O WhatsApp é obrigatório.");
+                  } else {
+                    toast.error("E-mail inválido.");
+                  }
+                }}
+                className="w-full bg-primary text-primary-foreground py-5 rounded-xl font-black text-lg glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-3">
+                    <Loader2 className="animate-spin" size={20} />
+                    Processando...
+                  </span>
+                ) : (
+                  'Ver Diagnóstico'
+                )}
+              </button>
+            </motion.div>
+          )}
+
+          {/* FUNNEL */}
+          {step === 'funnel' && (
+            <Funnel 
+              question={QUESTIONS[currentQuestionIndex]} 
+              onResponse={handleResponse}
+              currentIndex={currentQuestionIndex + 1}
+              totalSteps={QUESTIONS.length}
+            />
+          )}
+
+          {/* RESULTS */}
+          {step === 'results' && results && (
+            <ScoreDisplay results={results} userData={userData} />
+          )}
+        </AnimatePresence>
+      </main>
+
+      {/* Footer */}
+      <footer className="w-full py-4 px-6 border-t border-border/50">
+        <div className="max-w-4xl mx-auto text-center">
+          <span className="text-xs text-muted-foreground">
+            Shekinah | Porto Velho – RO
+          </span>
+        </div>
+      </footer>
     </div>
   );
 };
