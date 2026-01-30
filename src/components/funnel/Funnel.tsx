@@ -49,19 +49,19 @@ const Funnel: React.FC<FunnelProps> = ({
   };
 
   return (
-    <div className="max-w-2xl w-full flex flex-col items-center py-4 sm:py-8">
+    <div className="max-w-xl w-full flex flex-col items-center py-2 sm:py-4 lg:py-6">
       {/* Progress bar */}
-      <div className="w-full mb-6 sm:mb-8">
-        <div className="flex justify-between items-center mb-3">
-          <span className="text-xs text-muted-foreground mono-font uppercase tracking-wider">
+      <div className="w-full mb-4 sm:mb-5 lg:mb-6">
+        <div className="flex justify-between items-center mb-2 lg:mb-3">
+          <span className="text-[10px] lg:text-xs text-muted-foreground mono-font uppercase tracking-wider">
             Etapa {phaseInfo.phase} de 3 — {phaseInfo.name} {phaseInfo.location && `(${phaseInfo.location})`}
           </span>
-          <span className="text-xs text-muted-foreground mono-font">
+          <span className="text-[10px] lg:text-xs text-muted-foreground mono-font">
             {currentIndex}/{totalSteps}
           </span>
         </div>
         
-        <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden">
+        <div className="w-full h-1 lg:h-1.5 bg-secondary rounded-full overflow-hidden">
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: `${(currentIndex / totalSteps) * 100}%` }}
@@ -80,8 +80,8 @@ const Funnel: React.FC<FunnelProps> = ({
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
           >
-            <div className="bg-card border border-primary/30 px-8 py-4 rounded-2xl">
-              <span className="text-primary font-bold mono-font text-sm">{question.feedback}</span>
+            <div className="bg-card border border-primary/30 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl">
+              <span className="text-primary font-bold mono-font text-xs lg:text-sm">{question.feedback}</span>
             </div>
           </motion.div>
         )}
@@ -95,14 +95,14 @@ const Funnel: React.FC<FunnelProps> = ({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.4 }}
-          className="w-full bg-card border border-border p-6 sm:p-10 rounded-3xl relative"
+          className="w-full bg-card border border-border p-4 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl relative"
         >
-          <div className="space-y-2 mb-8 sm:mb-10">
-            <h2 className="text-xl sm:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
+          <div className="space-y-1.5 lg:space-y-2 mb-5 sm:mb-6 lg:mb-8">
+            <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {question.title}
             </h2>
             {question.subtitle && (
-              <p className="text-muted-foreground text-sm sm:text-base font-medium leading-relaxed">
+              <p className="text-muted-foreground text-xs sm:text-sm lg:text-base font-medium leading-relaxed">
                 {question.subtitle}
               </p>
             )}
