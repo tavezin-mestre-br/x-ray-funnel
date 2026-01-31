@@ -76,7 +76,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
         <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
-          Etapa 3 de 3 — Diagnóstico Preliminar (Porto Velho)
+          Etapa 3 de 3 — Diagnóstico Preliminar
         </span>
         <div className="w-full h-1 lg:h-1.5 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
@@ -116,7 +116,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
-          Clínicas de Porto Velho nesse cenário costumam perder faturamento por falhas de processo, não por falta de demanda.
+          Clínicas nesse cenário costumam perder faturamento por falhas de processo, não por falta de demanda.
         </p>
       </motion.div>
 
@@ -235,7 +235,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       >
         <div className="space-y-3 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que implementamos para clínicas em Porto Velho
+            O que implementamos para clínicas
           </h3>
         </div>
 
@@ -268,11 +268,15 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
-          Solicitar plano de implementação
+          Aplicar para diagnóstico estratégico
         </button>
 
+        <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
+          Avaliação individual · Processo seletivo · Sem promessa de resultados
+        </p>
+
         <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
-          Vagas limitadas para clínicas de Porto Velho – RO.
+          Implementações disponíveis para um número limitado de clínicas por região.
         </p>
       </motion.div>
     </motion.div>
