@@ -132,21 +132,21 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  EXCLUSIVO PORTO VELHO – RO
+                  AVALIAÇÃO ESTRATÉGICA
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Diagnóstico Estratégico<br/>
-                  <span className="text-primary glow-text">Clínicas High Ticket</span>
+                  Diagnóstico de Crescimento<br/>
+                  <span className="text-primary glow-text">para Clínicas</span>
                 </h1>
                 
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Esta avaliação é exclusiva para clínicas de Porto Velho – RO que vendem procedimentos de alto valor.
+                  Avaliação estratégica para clínicas que querem agenda previsível e faturamento recorrente.
                 </p>
 
                 <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto">
                   <p className="text-foreground text-sm lg:text-base font-semibold leading-relaxed">
-                    Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida.
+                    Aplicável para clínicas de qualquer região do Brasil que vendem procedimentos de alto valor.
                   </p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ const Index: React.FC = () => {
               </button>
 
               <p className="text-primary text-[10px] lg:text-xs font-bold mono-font uppercase tracking-wider">
-                Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil.
+                Atendemos clínicas em todo o Brasil com processo padronizado e implementação remota.
               </p>
               
               <p className="text-muted-foreground text-xs lg:text-sm font-medium italic">
@@ -185,7 +185,7 @@ const Index: React.FC = () => {
                   </div>
                   <span className="text-xs lg:text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
                 </div>
-                <p className="text-muted-foreground text-xs lg:text-sm">Perfil da clínica em Porto Velho registrado.</p>
+                <p className="text-muted-foreground text-xs lg:text-sm">Perfil da clínica registrado.</p>
               </div>
 
               <div className="space-y-3 lg:space-y-4">
@@ -315,7 +315,7 @@ const Index: React.FC = () => {
       <footer className="w-full py-3 lg:py-4 px-4 lg:px-6 border-t border-border/50">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-[10px] lg:text-xs text-muted-foreground">
-            Shekinah | Porto Velho – RO
+            Shekinah | Marketing · Tecnologia · IA
           </span>
         </div>
       </footer>

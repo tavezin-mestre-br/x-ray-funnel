@@ -2,12 +2,12 @@ import React from 'react';
 import { Question } from '@/types/funnel';
 
 export const QUESTIONS: Question[] = [
-  // ETAPA 1: CONTEXTO DA CLÍNICA (Porto Velho)
+  // ETAPA 1: CONTEXTO DA CLÍNICA
   {
     id: 1,
     phase: 1,
     type: 'tiles',
-    title: 'Qual o tipo da sua clínica em Porto Velho?',
+    title: 'Qual o tipo da sua clínica?',
     subtitle: 'Selecione a especialidade principal.',
     options: [
       { id: 'q1_1', label: 'Estética', value: 3 },

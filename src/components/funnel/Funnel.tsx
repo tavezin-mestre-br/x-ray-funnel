@@ -22,9 +22,9 @@ const Funnel: React.FC<FunnelProps> = ({
   // Determine which phase we're in
   const getPhaseInfo = () => {
     if (currentIndex <= 3) {
-      return { phase: 1, name: 'Contexto da Clínica', location: 'Porto Velho' };
+      return { phase: 1, name: 'Contexto da Clínica', location: '' };
     }
-    return { phase: 2, name: 'Estrutura Operacional', location: '' };
+    return { phase: 2, name: 'Diagnóstico Operacional', location: '' };
   };
 
   const phaseInfo = getPhaseInfo();
