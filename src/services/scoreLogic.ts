@@ -2,9 +2,9 @@ import { QUESTIONS, PILLARS } from '@/constants/questions';
 import { FinalResults, PillarScore, Badge } from '@/types/funnel';
 
 const PILLAR_DESCRIPTIONS: Record<string, string> = {
-  "Aquisição": "Tráfego pago + criativos + funis = demanda previsível",
-  "Atendimento": "Resposta instantânea + IA = leads que viram consultas",
-  "Processo": "CRM + rastreamento = visibilidade total do funil"
+  "Aquisição": "Tráfego pago + funis + criativos = demanda previsível de clientes",
+  "Atendimento": "Resposta instantânea + IA = leads que viram vendas",
+  "Processo": "CRM + rastreamento = visibilidade total do funil comercial"
 };
 
 const getPillarStatus = (score: number, max: number): 'high' | 'medium' | 'low' => {
@@ -18,19 +18,19 @@ const getClassificationData = (totalScore: number) => {
   if (totalScore < 8) {
     return {
       classification: "Estrutura crítica",
-      explanation: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa.",
+      explanation: "Sua empresa está operando sem sistema comercial. Cada dia sem estrutura é faturamento deixado na mesa.",
       level: 1
     };
   } else if (totalScore < 16) {
     return {
       classification: "Estrutura com vazamentos",
-      explanation: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo.",
+      explanation: "Leads estão entrando, mas não estão virando vendas. O problema não é demanda — é processo.",
       level: 2
     };
   } else if (totalScore < 24) {
     return {
       classification: "Estrutura funcional",
-      explanation: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição.",
+      explanation: "A base existe. Agora é hora de automatizar o comercial e escalar a aquisição de clientes.",
       level: 3
     };
   } else {
@@ -48,27 +48,27 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
   const analyses: Record<string, { bottleneck: string; why: string; impact: string; pillars: string[] }> = {
     "Aquisição": {
       bottleneck: "Geração de demanda inconsistente",
-      why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala.",
-      impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias.",
+      why: "Sem tráfego pago estruturado e criativos de alta conversão, sua empresa depende de indicação — que não escala.",
+      impact: "Com campanhas otimizadas e funis de captura, empresas dobram o volume de leads qualificados em 60 dias.",
       pillars: ["Aquisição"]
     },
     "Atendimento": {
-      bottleneck: "Leads esfriando antes do agendamento",
-      why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme.",
+      bottleneck: "Leads esfriando antes do fechamento",
+      why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde vendas enquanto dorme.",
       impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
-      bottleneck: "Falta de visibilidade sobre o funil",
-      why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro.",
+      bottleneck: "Falta de visibilidade sobre o funil comercial",
+      why: "Sem CRM, você não sabe quantos leads entraram, quantos avançaram e quantos fecharam. Gestão no escuro.",
       impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real.",
       pillars: ["Processo"]
     }
   };
 
   return analyses[lowest.name] || {
-    bottleneck: "Vazamentos no processo de aquisição e agendamento",
-    why: "Sem sistema integrado de marketing, atendimento e CRM, leads entram mas não viram consultas.",
+    bottleneck: "Vazamentos no processo de aquisição e conversão",
+    why: "Sem sistema integrado de marketing, atendimento e CRM, leads entram mas não viram vendas.",
     impact: "Implementar tráfego + IA + CRM transforma operação em máquina previsível de faturamento.",
     pillars: pillars.filter(p => p.status === 'low').map(p => p.name)
   };
@@ -80,9 +80,9 @@ const getRecommendations = (pillars: PillarScore[]) => {
   const recommendations = {
     "Aquisição": {
       sevenDays: [
-        "Estruturar campanha de tráfego pago para o procedimento mais lucrativo",
+        "Estruturar campanha de tráfego pago para o produto/serviço mais lucrativo",
         "Configurar pixel e eventos de conversão no site",
-        "Definir orçamento mensal fixo para aquisição"
+        "Definir orçamento mensal fixo para aquisição de clientes"
       ],
       thirtyDays: [
         "Testar criativos com diferentes ângulos de copy",
@@ -98,34 +98,34 @@ const getRecommendations = (pillars: PillarScore[]) => {
     "Atendimento": {
       sevenDays: [
         "Implementar resposta automática em menos de 30 segundos",
-        "Criar script de qualificação para atendentes",
+        "Criar script de qualificação para equipe comercial",
         "Configurar alertas em tempo real para novos leads"
       ],
       thirtyDays: [
         "Integrar chatbot de pré-atendimento no WhatsApp",
         "Automatizar agendamento direto na conversa",
-        "Mapear e resolver principais objeções"
+        "Mapear e resolver principais objeções de venda"
       ],
       sixtyNinetyDays: [
         "IA fazendo atendimento completo 24/7",
-        "Dashboard de métricas de conversão por atendente",
+        "Dashboard de métricas de conversão por vendedor",
         "Sistema de reativação automática de leads frios"
       ]
     },
     "Processo": {
       sevenDays: [
-        "Mapear jornada do lead: entrada → consulta → procedimento",
+        "Mapear jornada do lead: entrada → contato → venda",
         "Identificar etapa com maior perda de conversão",
-        "Documentar processo atual de agendamento"
+        "Documentar processo atual de vendas"
       ],
       thirtyDays: [
         "Implementar CRM com pipeline visual de leads",
-        "Definir KPIs: taxa de resposta, agendamento e comparecimento",
-        "Criar rotina de confirmação de consultas"
+        "Definir KPIs: taxa de resposta, conversão e fechamento",
+        "Criar rotina de follow-up estruturado"
       ],
       sixtyNinetyDays: [
         "Dashboard de faturamento previsível por período",
-        "Automação de follow-up para pacientes inativos",
+        "Automação de follow-up para clientes inativos",
         "Sistema de rastreamento da origem até o fechamento"
       ]
     }
@@ -175,7 +175,7 @@ export const calculateResults = (responses: Record<number, any>, badges: string[
   const bottleneckAnalysis = getBottleneckAnalysis(pillars);
   const recommendations = getRecommendations(pillars);
 
-  // Simplified badges for clinical context
+  // Simplified badges
   const earnedBadges: Badge[] = [{
     id: 'diagnostico_concluido',
     name: 'Diagnóstico Concluído',

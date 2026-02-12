@@ -2,30 +2,30 @@ import React from 'react';
 import { Question } from '@/types/funnel';
 
 export const QUESTIONS: Question[] = [
-  // ETAPA 1: CONTEXTO DA CLÍNICA
+  // ETAPA 1: CONTEXTO DA EMPRESA
   {
     id: 1,
     phase: 1,
     type: 'tiles',
-    title: 'Qual o tipo da sua clínica?',
-    subtitle: 'Selecione a especialidade principal.',
+    title: 'Qual o segmento da sua empresa?',
+    subtitle: 'Selecione o que mais se aproxima.',
     options: [
-      { id: 'q1_1', label: 'Estética', value: 3 },
-      { id: 'q1_2', label: 'Odontologia', value: 3 },
-      { id: 'q1_3', label: 'Harmonização', value: 3 },
-      { id: 'q1_4', label: 'Outra', value: 2 }
+      { id: 'q1_1', label: 'Serviços', value: 3 },
+      { id: 'q1_2', label: 'Varejo / E-commerce', value: 3 },
+      { id: 'q1_3', label: 'Saúde / Estética', value: 3 },
+      { id: 'q1_4', label: 'Outro', value: 2 }
     ]
   },
   {
     id: 2,
     phase: 1,
     type: 'tiles',
-    title: 'Qual o ticket médio do principal procedimento?',
-    subtitle: 'Valor aproximado por atendimento.',
+    title: 'Qual o ticket médio por venda ou serviço?',
+    subtitle: 'Valor aproximado por transação.',
     options: [
-      { id: 'q2_1', label: 'Até R$ 2.000', value: 1 },
-      { id: 'q2_2', label: 'R$ 3k – R$ 5k', value: 2 },
-      { id: 'q2_3', label: 'R$ 5k – R$ 10k', value: 3 },
+      { id: 'q2_1', label: 'Até R$ 500', value: 1 },
+      { id: 'q2_2', label: 'R$ 500 – R$ 2k', value: 2 },
+      { id: 'q2_3', label: 'R$ 2k – R$ 10k', value: 3 },
       { id: 'q2_4', label: 'Acima de R$ 10k', value: 4 }
     ]
   },
@@ -33,11 +33,11 @@ export const QUESTIONS: Question[] = [
     id: 3,
     phase: 1,
     type: 'tiles',
-    title: 'Principal canal de entrada de pacientes?',
+    title: 'Principal canal de entrada de clientes?',
     subtitle: 'De onde vem a maioria dos seus leads.',
     options: [
       { id: 'q3_1', label: 'WhatsApp', value: 3, pillar: 'aquisição' },
-      { id: 'q3_2', label: 'Instagram', value: 3, pillar: 'aquisição' },
+      { id: 'q3_2', label: 'Instagram / Redes', value: 3, pillar: 'aquisição' },
       { id: 'q3_3', label: 'Indicação', value: 2, pillar: 'aquisição' },
       { id: 'q3_4', label: 'Tráfego pago', value: 4, pillar: 'aquisição' },
       { id: 'q3_5', label: 'Não sei informar', value: 0, pillar: 'aquisição' }
@@ -50,7 +50,7 @@ export const QUESTIONS: Question[] = [
     phase: 2,
     type: 'single',
     title: 'Tempo médio de resposta ao lead?',
-    subtitle: 'Quando um paciente entra em contato, em quanto tempo vocês respondem.',
+    subtitle: 'Quando um potencial cliente entra em contato, em quanto tempo vocês respondem.',
     options: [
       { id: 'q4_1', label: 'Imediato', value: 4, pillar: 'atendimento' },
       { id: 'q4_2', label: 'Até 5 minutos', value: 3, pillar: 'atendimento' },
@@ -64,7 +64,7 @@ export const QUESTIONS: Question[] = [
     phase: 2,
     type: 'single',
     title: 'Existe um processo claro de qualificação?',
-    subtitle: 'Vocês têm critérios definidos para qualificar leads antes de agendar.',
+    subtitle: 'Vocês têm critérios definidos para qualificar leads antes de fechar.',
     options: [
       { id: 'q5_1', label: 'Sim, estruturado', value: 4, pillar: 'processo' },
       { id: 'q5_2', label: 'Parcial', value: 2, pillar: 'processo' },
@@ -89,8 +89,8 @@ export const QUESTIONS: Question[] = [
     id: 7,
     phase: 2,
     type: 'single',
-    title: 'Taxa aproximada de agendamento?',
-    subtitle: 'Dos leads que entram, quantos agendam consulta.',
+    title: 'Taxa aproximada de conversão?',
+    subtitle: 'Dos leads que entram, quantos efetivamente compram.',
     options: [
       { id: 'q7_1', label: 'Não sei', value: 0, pillar: 'atendimento' },
       { id: 'q7_2', label: 'Menos de 30%', value: 1, pillar: 'atendimento' },
@@ -103,8 +103,8 @@ export const QUESTIONS: Question[] = [
     id: 8,
     phase: 2,
     type: 'single',
-    title: 'Frequência de faltas na agenda?',
-    subtitle: 'Quantos pacientes faltam às consultas agendadas.',
+    title: 'Frequência de no-shows ou desistências?',
+    subtitle: 'Quantos clientes desistem ou não comparecem após agendar.',
     options: [
       { id: 'q8_1', label: 'Frequentes', value: 0, pillar: 'processo' },
       { id: 'q8_2', label: 'Ocasionalmente', value: 2, pillar: 'processo' },

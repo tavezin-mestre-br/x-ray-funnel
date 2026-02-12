@@ -102,7 +102,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
             <AlertTriangle size={28} className="hidden lg:block" />
           </div>
           <div className="space-y-1 lg:space-y-2">
-            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da Clínica</span>
+            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da Empresa</span>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {results.classification}
             </h2>
@@ -116,7 +116,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
-          Clínicas nesse cenário estão deixando dinheiro na mesa. O problema não é falta de demanda — é processo.
+          Empresas nesse cenário estão deixando dinheiro na mesa. O problema não é falta de demanda — é processo.
         </p>
       </motion.div>
 
@@ -235,29 +235,29 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       >
         <div className="space-y-3 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            Como colocamos mais dinheiro no bolso da sua clínica
+            Como colocamos mais dinheiro no bolso da sua empresa
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
-            Tráfego qualificado e metrificado. Cada real investido, rastreado até a consulta.
+            Tráfego qualificado e metrificado. Cada real investido, rastreado até a venda.
           </p>
         </div>
 
         <ul className="space-y-2 lg:space-y-3 max-w-md mx-auto">
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Tráfego pago que gera consultas reais — não curiosos</span>
+            <span>Tráfego pago que gera vendas reais — não curiosos</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Cada lead metrificado do clique até o procedimento fechado</span>
+            <span>Cada lead metrificado do clique até a venda fechada</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Funis de captação que multiplicam o retorno sobre investimento</span>
+            <span>Funis comerciais que multiplicam o retorno sobre investimento</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Agendamento automatizado 24/7 com Inteligência Artificial</span>
+            <span>Atendimento automatizado 24/7 com Inteligência Artificial</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
@@ -279,7 +279,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </p>
 
         <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
-          Implementações disponíveis para um número limitado de clínicas por região.
+          Implementações disponíveis para um número limitado de empresas por região.
         </p>
       </motion.div>
     </motion.div>
