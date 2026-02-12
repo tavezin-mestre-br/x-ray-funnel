@@ -132,21 +132,30 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  AVALIAÇÃO ESTRATÉGICA
+                  + R$ 2M GERENCIADOS EM TRÁFEGO PARA CLÍNICAS
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Diagnóstico de Crescimento<br/>
-                  <span className="text-primary glow-text">para Clínicas</span>
+                  Mais consultas. Mais procedimentos.<br/>
+                  <span className="text-primary glow-text">Mais dinheiro no seu bolso.</span>
                 </h1>
                 
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Avaliação estratégica para clínicas que querem agenda previsível e faturamento recorrente.
+                  Descubra em 3 minutos onde sua clínica está perdendo faturamento — e como multiplicar seus resultados com tráfego pago qualificado e metrificado.
                 </p>
 
-                <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto">
-                  <p className="text-foreground text-sm lg:text-base font-semibold leading-relaxed">
-                    Aplicável para clínicas de qualquer região do Brasil que vendem procedimentos de alto valor.
+                <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
+                  <p className="text-foreground text-sm lg:text-base font-black leading-relaxed">
+                    Este diagnóstico não é para todos.
+                  </p>
+                  <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
+                    Se você não está disposto a investir pelo menos <span className="text-foreground font-black">R$ 3.000/mês em tráfego</span> (fora mão de obra), este diagnóstico não é para você.
+                  </p>
+                </div>
+
+                <div className="bg-card border border-border p-3 lg:p-4 rounded-xl max-w-sm mx-auto">
+                  <p className="text-foreground text-xs lg:text-sm font-semibold leading-relaxed text-center">
+                    Para clínicas e consultórios de todo o Brasil que vendem procedimentos de alto valor e querem lotar a agenda com previsibilidade.
                   </p>
                 </div>
               </div>
@@ -155,12 +164,12 @@ const Index: React.FC = () => {
                 onClick={handleStartDiagnosis}
                 className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-lg lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
-                Iniciar Avaliação
+                Quero multiplicar meu faturamento
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
               </button>
 
-              <p className="text-primary text-[10px] lg:text-xs font-bold mono-font uppercase tracking-wider">
-                Atendemos clínicas em todo o Brasil com processo padronizado e implementação remota.
+              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
+                Vagas limitadas por região. Processo seletivo.
               </p>
               
               <p className="text-muted-foreground text-xs lg:text-sm font-medium italic">
@@ -241,7 +250,7 @@ const Index: React.FC = () => {
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
                   Seu diagnóstico está pronto.
                 </h2>
-                <p className="text-muted-foreground text-sm lg:text-base">Vamos mostrar onde está o vazamento — e como fechar.</p>
+                <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua clínica está deixando dinheiro na mesa — e como resolver.</p>
               </div>
 
               <div className="space-y-3 lg:space-y-4">

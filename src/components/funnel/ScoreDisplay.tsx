@@ -116,7 +116,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
-          Clínicas nesse cenário costumam perder faturamento por falhas de processo, não por falta de demanda.
+          Clínicas nesse cenário estão deixando dinheiro na mesa. O problema não é falta de demanda — é processo.
         </p>
       </motion.div>
 
@@ -235,30 +235,33 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       >
         <div className="space-y-3 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que implementamos para clínicas
+            Como colocamos mais dinheiro no bolso da sua clínica
           </h3>
+          <p className="text-muted-foreground text-xs lg:text-sm font-medium">
+            Tráfego qualificado e metrificado. Cada real investido, rastreado até a consulta.
+          </p>
         </div>
 
         <ul className="space-y-2 lg:space-y-3 max-w-md mx-auto">
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Criativos de alta conversão para procedimentos estéticos</span>
+            <span>Tráfego pago que gera consultas reais — não curiosos</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Tráfego pago com leads qualificados — sem curiosos</span>
+            <span>Cada lead metrificado do clique até o procedimento fechado</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Funis de captação e nutrição automatizados</span>
+            <span>Funis de captação que multiplicam o retorno sobre investimento</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Atendimento e agendamento 24/7 com Inteligência Artificial</span>
+            <span>Agendamento automatizado 24/7 com Inteligência Artificial</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>CRM com rastreamento completo de cada lead até a consulta</span>
+            <span>CRM completo: você sabe exatamente quanto cada campanha faturou</span>
           </li>
         </ul>
         
