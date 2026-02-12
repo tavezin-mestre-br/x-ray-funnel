@@ -132,16 +132,16 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/30 text-primary rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  + R$ 2M GERENCIADOS EM TRÁFEGO PARA CLÍNICAS
+                  + R$ 2M GERENCIADOS EM TRÁFEGO PARA EMPRESAS
                 </div>
                 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Mais consultas. Mais procedimentos.<br/>
+                  Mais vendas. Mais clientes.<br/>
                   <span className="text-primary glow-text">Mais dinheiro no seu bolso.</span>
                 </h1>
                 
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Descubra em 3 minutos onde sua clínica está perdendo faturamento — e como multiplicar seus resultados com tráfego pago qualificado e metrificado.
+                  Descubra em 3 minutos onde sua empresa está perdendo faturamento — e como multiplicar seus resultados com tráfego pago qualificado e metrificado.
                 </p>
 
                 <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
@@ -155,7 +155,7 @@ const Index: React.FC = () => {
 
                 <div className="bg-card border border-border p-3 lg:p-4 rounded-xl max-w-sm mx-auto">
                   <p className="text-foreground text-xs lg:text-sm font-semibold leading-relaxed text-center">
-                    Para clínicas e consultórios de todo o Brasil que vendem procedimentos de alto valor e querem lotar a agenda com previsibilidade.
+                    Para empresários de todo o Brasil que querem vender mais com previsibilidade e escala.
                   </p>
                 </div>
               </div>
@@ -194,7 +194,7 @@ const Index: React.FC = () => {
                   </div>
                   <span className="text-xs lg:text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
                 </div>
-                <p className="text-muted-foreground text-xs lg:text-sm">Perfil da clínica registrado.</p>
+                <p className="text-muted-foreground text-xs lg:text-sm">Perfil da empresa registrado.</p>
               </div>
 
               <div className="space-y-3 lg:space-y-4">
@@ -250,7 +250,7 @@ const Index: React.FC = () => {
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
                   Seu diagnóstico está pronto.
                 </h2>
-                <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua clínica está deixando dinheiro na mesa — e como resolver.</p>
+                <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua empresa está deixando dinheiro na mesa — e como resolver.</p>
               </div>
 
               <div className="space-y-3 lg:space-y-4">
