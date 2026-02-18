@@ -11,15 +11,14 @@ import {
   CheckCircle,
   XCircle
 } from 'lucide-react';
+import Testimonial, { getTestimonialForStep } from './Testimonial';
 
-// Status icon component
 const StatusIcon = ({ status }: { status: 'high' | 'medium' | 'low' }) => {
   if (status === 'high') return <CheckCircle size={16} className="text-success" />;
   if (status === 'medium') return <AlertTriangle size={16} className="text-warning" />;
   return <XCircle size={16} className="text-destructive" />;
 };
 
-// Pillar bars
 const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
   return (
     <div className="w-full space-y-3 lg:space-y-4">
@@ -42,7 +41,7 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
               {pillar.score}/{pillar.max}
             </span>
           </div>
-          <div className="h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden">
+          <div className="h-2 lg:h-2.5 bg-secondary rounded-full overflow-hidden">
             <motion.div
               initial={{ width: 0 }}
               animate={{ width: `${(pillar.score / pillar.max) * 100}%` }}
@@ -78,7 +77,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
           Etapa 3 de 3 — Diagnóstico Preliminar
         </span>
-        <div className="w-full h-1 lg:h-1.5 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
+        <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
@@ -94,7 +93,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <div className="flex items-start gap-3 lg:gap-4">
           <div className="w-10 h-10 lg:w-14 lg:h-14 bg-warning/10 border border-warning/30 text-warning rounded-xl lg:rounded-2xl flex items-center justify-center shrink-0">
@@ -120,12 +119,15 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </p>
       </motion.div>
 
+      {/* Testimonial */}
+      <Testimonial data={getTestimonialForStep(3)} />
+
       {/* Pillars */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
           Análise por Pilar
@@ -138,7 +140,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <div className="space-y-2 lg:space-y-3">
           <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Gargalo Identificado</span>
@@ -158,6 +160,9 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
       </motion.div>
 
+      {/* Another testimonial */}
+      <Testimonial data={getTestimonialForStep(4)} />
+
       {/* Recommendations */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -165,7 +170,6 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         transition={{ delay: 0.5 }}
         className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4"
       >
-        {/* 7 Days */}
         <div className="bg-primary text-primary-foreground p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
           <div className="flex items-center gap-2 lg:gap-3">
             <Zap size={16} className="lg:hidden" />
@@ -185,8 +189,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
           </ul>
         </div>
 
-        {/* 30 Days */}
-        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
+        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4 shadow-soft">
           <div className="flex items-center gap-2 lg:gap-3">
             <Calendar size={16} className="text-primary lg:hidden" />
             <Calendar size={20} className="text-primary hidden lg:block" />
@@ -205,8 +208,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
           </ul>
         </div>
 
-        {/* 60-90 Days */}
-        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
+        <div className="bg-card border border-border p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4 shadow-soft">
           <div className="flex items-center gap-2 lg:gap-3">
             <Layers size={16} className="text-primary lg:hidden" />
             <Layers size={20} className="text-primary hidden lg:block" />
@@ -231,7 +233,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="bg-card border-2 border-primary rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5"
+        className="bg-card border-2 border-primary rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <div className="space-y-3 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">

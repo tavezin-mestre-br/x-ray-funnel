@@ -6,7 +6,53 @@
 
 @layer base {
   :root {
-    /* Dark Premium Theme - Shekinah */
+    /* Light Clean Theme - Default */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+
+    --primary: 160 84% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 92%;
+    --muted-foreground: 0 0% 42%;
+
+    --accent: 160 84% 36%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 89%;
+    --input: 0 0% 89%;
+    --ring: 160 84% 36%;
+
+    --radius: 0.5rem;
+
+    /* Brand Colors */
+    --tech-green: 160 84% 36%;
+    --tech-glow: 160 84% 46%;
+    
+    /* Status Colors */
+    --success: 142 76% 36%;
+    --warning: 38 92% 50%;
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(0 0% 0% / 0.06);
+    --shadow-medium: 0 8px 30px -8px hsl(0 0% 0% / 0.1);
+    --shadow-strong: 0 20px 50px -15px hsl(0 0% 0% / 0.15);
+    --shadow-glow: 0 0 20px hsl(160 84% 36% / 0.12);
+  }
+
+  .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 96%;
 
@@ -35,17 +81,9 @@
     --input: 0 0% 15%;
     --ring: 160 84% 39%;
 
-    --radius: 0.5rem;
-
-    /* Shekinah Brand Colors */
     --tech-green: 160 84% 39%;
     --tech-glow: 160 84% 50%;
-    
-    /* Status Colors */
-    --success: 142 76% 36%;
-    --warning: 38 92% 50%;
 
-    /* Shadows with glow */
     --shadow-soft: 0 10px 40px -10px hsl(160 84% 39% / 0.15);
     --shadow-medium: 0 20px 50px -15px hsl(160 84% 39% / 0.2);
     --shadow-strong: 0 30px 60px -15px hsl(0 0% 0% / 0.5);
@@ -78,7 +116,6 @@
 }
 
 @layer components {
-  /* Custom Scrollbar */
   .custom-scrollbar::-webkit-scrollbar {
     width: 4px;
   }
@@ -90,29 +127,25 @@
     border-radius: 10px;
   }
 
-  /* Premium Card */
   .card-premium {
     @apply bg-card rounded-[2.5rem] sm:rounded-[3rem] border border-border;
     box-shadow: var(--shadow-medium);
   }
 
-  /* Glassmorphism Dark */
   .glass {
     @apply bg-card/80 backdrop-blur-md border border-border/50;
   }
 
-  /* Tech Glow Effect */
   .glow-primary {
-    box-shadow: 0 0 20px hsl(var(--primary) / 0.3), 0 0 40px hsl(var(--primary) / 0.1);
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.2), 0 0 40px hsl(var(--primary) / 0.08);
   }
 
   .glow-text {
-    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
+    color: hsl(var(--primary));
   }
 }
 
 @layer utilities {
-  /* Animations */
   @keyframes fade-in {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -124,8 +157,8 @@
   }
 
   @keyframes pulse-glow {
-    0%, 100% { box-shadow: 0 0 12px hsl(var(--primary) / 0.4); }
-    50% { box-shadow: 0 0 24px hsl(var(--primary) / 0.6); }
+    0%, 100% { box-shadow: 0 0 12px hsl(var(--primary) / 0.3); }
+    50% { box-shadow: 0 0 24px hsl(var(--primary) / 0.5); }
   }
 
   @keyframes subtle-pulse {
