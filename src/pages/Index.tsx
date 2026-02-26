@@ -155,7 +155,7 @@ const Index: React.FC = () => {
                 </h1>
 
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Responda 8 perguntas. Vamos te mostrar exatamente onde está o gargalo — e como a Shekinah vai agir na sua empresa.
+                  Responda 8 perguntas. Vamos te mostrar exatamente onde está o gargalo e como a Shekinah vai agir na sua empresa.
                 </p>
 
                 {/* Social proof badges */}
