@@ -75,7 +75,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
         <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
-          Etapa 3 de 3 — Diagnóstico Preliminar
+          Etapa 3 de 3 · Diagnóstico Preliminar
         </span>
         <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
@@ -247,7 +247,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         <ul className="space-y-2 lg:space-y-3 max-w-md mx-auto">
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Tráfego pago que gera vendas reais — não curiosos</span>
+            <span>Tráfego pago que gera vendas reais, não curiosos</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>

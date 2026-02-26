@@ -25,9 +25,9 @@ export const QUESTIONS: Question[] = [
     emotionalHook: 'Entendido. Isso muda nosso plano de ação.',
     feedback: 'Perfil registrado.',
     options: [
-      { id: 'q2_1', label: 'Contratei agência de tráfego — não deu resultado', value: 2, pillar: 'aquisição', painPoint: 'agencia_frustrada' },
-      { id: 'q2_2', label: 'Tentei organizar o comercial sozinho — não escalou', value: 1, pillar: 'processo', painPoint: 'diy_falhou' },
-      { id: 'q2_3', label: 'Coloquei gente no WhatsApp — perco lead fora do horário', value: 2, pillar: 'atendimento', painPoint: 'whatsapp_manual' },
+      { id: 'q2_1', label: 'Contratei agência de tráfego e não deu resultado', value: 2, pillar: 'aquisição', painPoint: 'agencia_frustrada' },
+      { id: 'q2_2', label: 'Tentei organizar o comercial sozinho e não escalou', value: 1, pillar: 'processo', painPoint: 'diy_falhou' },
+      { id: 'q2_3', label: 'Coloquei gente no WhatsApp e perco lead fora do horário', value: 2, pillar: 'atendimento', painPoint: 'whatsapp_manual' },
       { id: 'q2_4', label: 'Ainda não tentei nada estruturado', value: 0, painPoint: 'zero_estrutura' }
     ]
   },
@@ -41,7 +41,7 @@ export const QUESTIONS: Question[] = [
     feedback: 'Urgência mapeada.',
     options: [
       { id: 'q3_1', label: 'Mudaria completamente meu faturamento', value: 4 },
-      { id: 'q3_2', label: 'Seria um alívio enorme — preciso urgente', value: 3 },
+      { id: 'q3_2', label: 'Seria um alívio enorme. Preciso urgente', value: 3 },
       { id: 'q3_3', label: 'Ajudaria bastante, mas consigo esperar', value: 2 },
       { id: 'q3_4', label: 'Não consigo mensurar o impacto ainda', value: 1 }
     ]
@@ -86,7 +86,7 @@ export const QUESTIONS: Question[] = [
       { id: 'q6_1', label: 'Respondo eu mesmo, quando consigo', value: 1, pillar: 'atendimento' },
       { id: 'q6_2', label: 'Tenho alguém, mas demora pra responder', value: 2, pillar: 'atendimento' },
       { id: 'q6_3', label: 'Resposta automática + humano depois', value: 3, pillar: 'atendimento' },
-      { id: 'q6_4', label: 'É caótico — cada dia é diferente', value: 0, pillar: 'atendimento' }
+      { id: 'q6_4', label: 'É caótico, cada dia é diferente', value: 0, pillar: 'atendimento' }
     ]
   },
   {
@@ -97,10 +97,10 @@ export const QUESTIONS: Question[] = [
     subtitle: 'Aproximado já serve. Queremos dimensionar a operação.',
     feedback: 'Volume registrado.',
     options: [
-      { id: 'q7_1', label: 'Menos de 30', value: 1, pillar: 'aquisição' },
-      { id: 'q7_2', label: '30 a 100', value: 2, pillar: 'aquisição' },
-      { id: 'q7_3', label: '100 a 300', value: 3, pillar: 'aquisição' },
-      { id: 'q7_4', label: 'Mais de 300', value: 4, pillar: 'aquisição' }
+      { id: 'q7_1', label: 'Menos de 100', value: 1, pillar: 'aquisição' },
+      { id: 'q7_2', label: '100 a 300', value: 2, pillar: 'aquisição' },
+      { id: 'q7_3', label: '300 a 500', value: 3, pillar: 'aquisição' },
+      { id: 'q7_4', label: 'Mais de 500', value: 4, pillar: 'aquisição' }
     ]
   },
   {

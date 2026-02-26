@@ -11,7 +11,7 @@ export interface TestimonialData {
 
 const TESTIMONIALS: TestimonialData[] = [
   {
-    quote: "Já tinha gasto R$ 80 mil com 2 agências e não sabia se voltava 1 real. A Shekinah montou tudo em 3 semanas — no primeiro mês eu já sabia quanto cada campanha faturou.",
+    quote: "Já tinha gasto R$ 80 mil com 2 agências e não sabia se voltava 1 real. A Shekinah montou tudo em 3 semanas. No primeiro mês eu já sabia quanto cada campanha faturou.",
     name: "Ricardo Almeida",
     company: "RA Consultoria",
     result: "ROI rastreado desde o dia 1"

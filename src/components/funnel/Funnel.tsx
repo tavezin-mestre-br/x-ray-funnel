@@ -56,7 +56,7 @@ const Funnel: React.FC<FunnelProps> = ({
       <div className="w-full">
         <div className="flex justify-between items-center mb-2 lg:mb-3">
           <span className="text-[10px] lg:text-xs text-muted-foreground mono-font uppercase tracking-wider">
-            Etapa {phaseInfo.phase} de 2 — {phaseInfo.name}
+            Etapa {phaseInfo.phase} de 2 · {phaseInfo.name}
           </span>
           <span className="text-[10px] lg:text-xs text-muted-foreground mono-font">
             {currentIndex}/{totalSteps}
