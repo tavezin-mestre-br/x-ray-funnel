@@ -86,7 +86,7 @@ export const QUESTIONS: Question[] = [
       { id: 'q6_1', label: 'Respondo eu mesmo, quando consigo', value: 1, pillar: 'atendimento' },
       { id: 'q6_2', label: 'Tenho alguém, mas demora pra responder', value: 2, pillar: 'atendimento' },
       { id: 'q6_3', label: 'Resposta automática + humano depois', value: 3, pillar: 'atendimento' },
-      { id: 'q6_4', label: 'É caótico — cada dia é diferente', value: 0, pillar: 'atendimento' }
+      { id: 'q6_4', label: 'É caótico, cada dia é diferente', value: 0, pillar: 'atendimento' }
     ]
   },
   {
