@@ -25,9 +25,9 @@ export const QUESTIONS: Question[] = [
     emotionalHook: 'Entendido. Isso muda nosso plano de ação.',
     feedback: 'Perfil registrado.',
     options: [
-      { id: 'q2_1', label: 'Contratei agência de tráfego — não deu resultado', value: 2, pillar: 'aquisição', painPoint: 'agencia_frustrada' },
-      { id: 'q2_2', label: 'Tentei organizar o comercial sozinho — não escalou', value: 1, pillar: 'processo', painPoint: 'diy_falhou' },
-      { id: 'q2_3', label: 'Coloquei gente no WhatsApp — perco lead fora do horário', value: 2, pillar: 'atendimento', painPoint: 'whatsapp_manual' },
+      { id: 'q2_1', label: 'Contratei agência de tráfego e não deu resultado', value: 2, pillar: 'aquisição', painPoint: 'agencia_frustrada' },
+      { id: 'q2_2', label: 'Tentei organizar o comercial sozinho e não escalou', value: 1, pillar: 'processo', painPoint: 'diy_falhou' },
+      { id: 'q2_3', label: 'Coloquei gente no WhatsApp e perco lead fora do horário', value: 2, pillar: 'atendimento', painPoint: 'whatsapp_manual' },
       { id: 'q2_4', label: 'Ainda não tentei nada estruturado', value: 0, painPoint: 'zero_estrutura' }
     ]
   },
