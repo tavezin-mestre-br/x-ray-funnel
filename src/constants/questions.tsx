@@ -41,7 +41,7 @@ export const QUESTIONS: Question[] = [
     feedback: 'Urgência mapeada.',
     options: [
       { id: 'q3_1', label: 'Mudaria completamente meu faturamento', value: 4 },
-      { id: 'q3_2', label: 'Seria um alívio enorme — preciso urgente', value: 3 },
+      { id: 'q3_2', label: 'Seria um alívio enorme. Preciso urgente', value: 3 },
       { id: 'q3_3', label: 'Ajudaria bastante, mas consigo esperar', value: 2 },
       { id: 'q3_4', label: 'Não consigo mensurar o impacto ainda', value: 1 }
     ]
