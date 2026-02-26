@@ -132,7 +132,7 @@ const Index: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-3 sm:p-4 lg:p-6">
+      <main className="flex-1 flex items-start sm:items-center justify-center p-3 sm:p-4 lg:p-6 pt-4 sm:pt-4">
         <AnimatePresence mode="wait">
           {/* INTRO SCREEN */}
           {step === 'intro' && (
