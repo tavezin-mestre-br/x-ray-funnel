@@ -11,34 +11,34 @@ export interface TestimonialData {
 
 const TESTIMONIALS: TestimonialData[] = [
   {
-    quote: "Em 45 dias saímos de 12 para 47 agendamentos por semana. O tráfego pago finalmente fez sentido.",
+    quote: "Já tinha gasto R$ 80 mil com 2 agências e não sabia se voltava 1 real. A Shekinah montou tudo em 3 semanas — no primeiro mês eu já sabia quanto cada campanha faturou.",
     name: "Ricardo Almeida",
     company: "RA Consultoria",
-    result: "+290% em agendamentos"
+    result: "ROI rastreado desde o dia 1"
   },
   {
-    quote: "Antes gastava R$ 5 mil em anúncio e não sabia o que voltava. Hoje cada centavo é rastreado até a venda.",
+    quote: "O que me convenceu foi a velocidade. Em 7 dias já tinha IA respondendo no WhatsApp. Em 30 dias, o comercial inteiro estava rodando.",
     name: "Fernanda Costa",
     company: "Studio FC Estética",
-    result: "ROI de 4.2x no 2º mês"
+    result: "Implementação em 30 dias"
   },
   {
-    quote: "O diagnóstico mostrou exatamente onde estávamos perdendo dinheiro. Implementamos em 30 dias e o faturamento dobrou.",
+    quote: "Antes eu perdia lead de madrugada. Hoje a IA responde em 15 segundos, qualifica e agenda sozinha. Conversão subiu 40% sem contratar ninguém.",
     name: "Carlos Mendes",
     company: "Mendes & Associados",
-    result: "+108% de faturamento"
+    result: "+40% de conversão"
   },
   {
-    quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade.",
+    quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
     name: "Ana Beatriz",
     company: "AB Arquitetura",
-    result: "-52% no custo por lead"
+    result: "Faturamento previsível"
   },
   {
-    quote: "A automação do WhatsApp sozinha já paga o investimento. Respondemos em 15 segundos, 24 horas por dia.",
+    quote: "Eu achava que precisava de mais vendedores. Na verdade precisava de processo. A Shekinah implementou a máquina comercial e o faturamento dobrou em 60 dias.",
     name: "Thiago Oliveira",
-    company: "TO Odontologia",
-    result: "Resposta em 15s, 24/7"
+    company: "TO Premium Services",
+    result: "+108% em 60 dias"
   },
 ];
 

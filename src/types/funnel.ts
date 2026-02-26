@@ -6,6 +6,7 @@ export interface Option {
   value: number;
   icon?: string;
   pillar?: 'aquisição' | 'atendimento' | 'processo';
+  painPoint?: string;
 }
 
 export interface Question {
@@ -17,6 +18,7 @@ export interface Question {
   options: Option[];
   timerSeconds?: number;
   feedback?: string;
+  emotionalHook?: string;
 }
 
 export interface Badge {
@@ -34,6 +36,9 @@ export interface UserData {
   xp: number;
   streak: number;
   badges: string[];
+  expectation?: string;
+  painProfile?: string;
+  previousAttempt?: string;
 }
 
 export interface PillarScore {

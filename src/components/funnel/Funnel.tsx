@@ -21,10 +21,10 @@ const Funnel: React.FC<FunnelProps> = ({
   const startTime = useRef(Date.now());
 
   const getPhaseInfo = () => {
-    if (currentIndex <= 3) {
-      return { phase: 1, name: 'Contexto da Empresa' };
+    if (currentIndex <= 4) {
+      return { phase: 1, name: 'Sua Realidade' };
     }
-    return { phase: 2, name: 'Diagnóstico Operacional' };
+    return { phase: 2, name: 'Onde Vamos Agir' };
   };
 
   const phaseInfo = getPhaseInfo();
@@ -56,7 +56,7 @@ const Funnel: React.FC<FunnelProps> = ({
       <div className="w-full">
         <div className="flex justify-between items-center mb-2 lg:mb-3">
           <span className="text-[10px] lg:text-xs text-muted-foreground mono-font uppercase tracking-wider">
-            Etapa {phaseInfo.phase} de 3 — {phaseInfo.name}
+            Etapa {phaseInfo.phase} de 2 — {phaseInfo.name}
           </span>
           <span className="text-[10px] lg:text-xs text-muted-foreground mono-font">
             {currentIndex}/{totalSteps}

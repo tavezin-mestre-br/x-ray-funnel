@@ -115,7 +115,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         </div>
 
         <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
-          Empresas nesse cenário estão deixando dinheiro na mesa. O problema não é falta de demanda — é processo.
+          Já mapeamos o cenário. Sabemos onde está o problema. Agora é implementar.
         </p>
       </motion.div>
 
@@ -175,8 +175,8 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
             <Zap size={16} className="lg:hidden" />
             <Zap size={20} className="hidden lg:block" />
             <div>
-              <span className="text-[9px] lg:text-[10px] font-bold opacity-60 mono-font uppercase tracking-widest">7 DIAS</span>
-              <h4 className="text-sm lg:text-base font-black">Ação Imediata</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold opacity-60 mono-font uppercase tracking-widest">SEMANA 1</span>
+              <h4 className="text-sm lg:text-base font-black">Implementação Imediata</h4>
             </div>
           </div>
           <ul className="space-y-1.5 lg:space-y-2">
@@ -194,8 +194,8 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
             <Calendar size={16} className="text-primary lg:hidden" />
             <Calendar size={20} className="text-primary hidden lg:block" />
             <div>
-              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">30 DIAS</span>
-              <h4 className="text-sm lg:text-base font-black text-foreground">Estruturação</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">SEMANA 2-3</span>
+              <h4 className="text-sm lg:text-base font-black text-foreground">Estruturação Completa</h4>
             </div>
           </div>
           <ul className="space-y-1.5 lg:space-y-2">
@@ -213,8 +213,8 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
             <Layers size={16} className="text-primary lg:hidden" />
             <Layers size={20} className="text-primary hidden lg:block" />
             <div>
-              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">60-90 DIAS</span>
-              <h4 className="text-sm lg:text-base font-black text-foreground">Escala com IA</h4>
+              <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">SEMANA 3-4</span>
+              <h4 className="text-sm lg:text-base font-black text-foreground">Máquina Rodando</h4>
             </div>
           </div>
           <ul className="space-y-1.5 lg:space-y-2">
@@ -273,15 +273,15 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
-          Aplicar para diagnóstico estratégico
+          Agendar minha implementação →
         </button>
 
         <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
-          Avaliação individual · Processo seletivo · Sem promessa de resultados
+          Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
         </p>
 
         <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
-          Implementações disponíveis para um número limitado de empresas por região.
+          Implementamos para um número limitado de empresas por vez para garantir resultado.
         </p>
       </motion.div>
     </motion.div>

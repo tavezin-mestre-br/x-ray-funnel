@@ -42,7 +42,7 @@ const Index: React.FC = () => {
       responses: { ...prev.responses, [questionId]: answer }
     }));
 
-    if (currentQuestionIndex === 2 && step === 'funnel') {
+    if (currentQuestionIndex === 3 && step === 'funnel') {
       setStep('capture_company');
     } else if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
     }
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
-    setCurrentQuestionIndex(3);
+    setCurrentQuestionIndex(4);
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -109,7 +109,7 @@ const Index: React.FC = () => {
   }, [step, userData.responses, userData.badges]);
 
   const getCurrentPhase = () => {
-    if (currentQuestionIndex < 3) return 1;
+    if (currentQuestionIndex < 4) return 1;
     return 2;
   };
 
@@ -124,7 +124,7 @@ const Index: React.FC = () => {
           </div>
           <div className="flex items-center gap-3">
             {step === 'funnel' && (
-              <span className="text-xs text-muted-foreground mono-font">Etapa {getCurrentPhase()} de 3</span>
+              <span className="text-xs text-muted-foreground mono-font">Etapa {getCurrentPhase()} de 2</span>
             )}
             <ThemeToggle />
           </div>
@@ -146,16 +146,16 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/20 text-primary rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  + R$ 2M GERENCIADOS EM TRÁFEGO PARA EMPRESAS
+                  IMPLEMENTAÇÃO DE MÁQUINA COMERCIAL COM IA
                 </div>
-                
+
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Mais vendas. Mais clientes.<br/>
-                  <span className="text-primary">Mais dinheiro no seu bolso.</span>
+                  Sua empresa tem um problema comercial.<br/>
+                  <span className="text-primary">Nós resolvemos em 30 dias.</span>
                 </h1>
-                
+
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Descubra em 3 minutos onde sua empresa está perdendo faturamento — e como multiplicar seus resultados com tráfego pago qualificado e metrificado.
+                  Responda 8 perguntas. Vamos te mostrar exatamente onde está o gargalo — e como a Shekinah vai agir na sua empresa.
                 </p>
 
                 {/* Social proof badges */}
@@ -170,16 +170,16 @@ const Index: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-primary" />
-                    <span className="text-xs font-semibold text-foreground">+200 empresas avaliadas</span>
+                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
                   </div>
                 </div>
 
                 <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
                   <p className="text-foreground text-sm lg:text-base font-black leading-relaxed">
-                    Este diagnóstico não é para todos.
+                    Este diagnóstico é para empresários sérios.
                   </p>
                   <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
-                    Se você não está disposto a investir pelo menos <span className="text-foreground font-black">R$ 3.000/mês em tráfego</span> (fora mão de obra), este diagnóstico não é para você.
+                    Se você <span className="text-foreground font-black">fatura menos de R$ 30 mil/mês</span>, ainda não é o momento certo para a nossa solução.
                   </p>
                 </div>
               </div>
@@ -188,7 +188,7 @@ const Index: React.FC = () => {
                 onClick={handleStartDiagnosis}
                 className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-lg lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
-                Quero multiplicar meu faturamento
+                Quero resolver meu comercial agora
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
               </button>
 
@@ -196,7 +196,7 @@ const Index: React.FC = () => {
               <Testimonial data={getTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
               <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
-                Vagas limitadas por região. Processo seletivo.
+                Atendemos um número limitado de empresas por vez para garantir resultado.
               </p>
             </motion.div>
           )}
@@ -223,7 +223,7 @@ const Index: React.FC = () => {
 
                 <div className="space-y-1.5 lg:space-y-2">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
-                    Sobre você e sua empresa
+                    Para personalizar seu plano de ação
                   </h2>
                   <p className="text-muted-foreground text-xs lg:text-sm">Precisamos de alguns dados para personalizar o diagnóstico.</p>
                 </div>
@@ -248,17 +248,6 @@ const Index: React.FC = () => {
                       placeholder="Ex: Studio Bella"
                       value={companyData.companyName}
                       onChange={(e) => setCompanyData(prev => ({ ...prev, companyName: e.target.value }))}
-                      className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base transition-all"
-                    />
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Instagram da Empresa</label>
-                    <input 
-                      type="text"
-                      placeholder="@suaempresa"
-                      value={companyData.instagram}
-                      onChange={(e) => setCompanyData(prev => ({ ...prev, instagram: e.target.value }))}
                       className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base transition-all"
                     />
                   </div>
@@ -292,7 +281,7 @@ const Index: React.FC = () => {
                   onClick={handleCompanySubmit}
                   className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary"
                 >
-                  Continuar para Etapa 2
+                  Ver onde vamos agir →
                 </button>
               </div>
 
@@ -323,7 +312,7 @@ const Index: React.FC = () => {
 
                 <div className="space-y-1.5 lg:space-y-2 text-center">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
-                    Seu diagnóstico está pronto.
+                    Seu plano de ação está pronto.
                   </h2>
                   <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua empresa está deixando dinheiro na mesa — e como resolver.</p>
                 </div>
