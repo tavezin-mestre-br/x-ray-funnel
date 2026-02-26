@@ -63,9 +63,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 5,
     phase: 2,
-    type: 'tiles',
+    type: 'multi',
     title: 'Hoje, de onde vêm os seus clientes?',
-    subtitle: 'Queremos saber o que está funcionando — e o que não está.',
+    subtitle: 'Selecione todas que se aplicam.',
     feedback: 'Canal mapeado.',
     options: [
       { id: 'q5_1', label: 'WhatsApp orgânico', value: 2, pillar: 'aquisição' },

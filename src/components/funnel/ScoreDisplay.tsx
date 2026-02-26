@@ -269,7 +269,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         
         <button 
           onClick={openCalendly}
-          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all"
+          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-3.5 sm:py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all min-h-[48px]"
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
