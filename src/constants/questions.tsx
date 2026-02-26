@@ -49,9 +49,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 4,
     phase: 1,
-    type: 'tiles',
+    type: 'multi',
     title: 'O que você espera de uma empresa como a Shekinah?',
-    subtitle: 'Sem resposta errada. Queremos saber o que mais importa pra você.',
+    subtitle: 'Selecione todas que se aplicam.',
     emotionalHook: 'É exatamente isso que entregamos. Vamos continuar.',
     options: [
       { id: 'q4_1', label: 'Resolver rápido, sem enrolação', value: 3, painPoint: 'quer_velocidade' },
@@ -63,9 +63,9 @@ export const QUESTIONS: Question[] = [
   {
     id: 5,
     phase: 2,
-    type: 'tiles',
+    type: 'multi',
     title: 'Hoje, de onde vêm os seus clientes?',
-    subtitle: 'Queremos saber o que está funcionando — e o que não está.',
+    subtitle: 'Selecione todas que se aplicam.',
     feedback: 'Canal mapeado.',
     options: [
       { id: 'q5_1', label: 'WhatsApp orgânico', value: 2, pillar: 'aquisição' },

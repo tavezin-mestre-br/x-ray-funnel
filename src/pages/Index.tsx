@@ -132,7 +132,7 @@ const Index: React.FC = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center p-3 sm:p-4 lg:p-6">
+      <main className="flex-1 flex items-start sm:items-center justify-center p-3 sm:p-4 lg:p-6 pt-4 sm:pt-4">
         <AnimatePresence mode="wait">
           {/* INTRO SCREEN */}
           {step === 'intro' && (
@@ -256,9 +256,9 @@ const Index: React.FC = () => {
                     <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Faturamento Mensal *</label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { label: 'Até R$ 30k', value: 'ate-30k' },
-                        { label: 'R$ 30k – 100k', value: '30k-100k' },
-                        { label: 'R$ 100k – 500k', value: '100k-500k' },
+                        { label: 'Menos de R$ 100k', value: 'menos-100k' },
+                        { label: 'R$ 100k – R$ 300k', value: '100k-300k' },
+                        { label: 'R$ 300k – R$ 500k', value: '300k-500k' },
                         { label: 'Acima de R$ 500k', value: 'acima-500k' },
                       ].map((opt) => (
                         <button

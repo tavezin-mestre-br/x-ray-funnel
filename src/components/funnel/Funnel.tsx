@@ -51,7 +51,7 @@ const Funnel: React.FC<FunnelProps> = ({
   };
 
   return (
-    <div className="max-w-xl w-full flex flex-col items-center py-2 sm:py-4 lg:py-6 gap-4">
+    <div className="max-w-xl w-full flex flex-col items-center pt-1 sm:py-4 lg:py-6 gap-3 sm:gap-4">
       {/* Progress bar */}
       <div className="w-full">
         <div className="flex justify-between items-center mb-2 lg:mb-3">

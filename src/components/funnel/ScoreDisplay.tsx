@@ -70,7 +70,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="max-w-3xl w-full py-4 sm:py-6 lg:py-8 px-2 space-y-4 sm:space-y-5 lg:space-y-6"
+      className="max-w-3xl w-full py-2 sm:py-6 lg:py-8 px-1 sm:px-2 space-y-3 sm:space-y-5 lg:space-y-6"
     >
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
@@ -168,7 +168,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4"
+        className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4"
       >
         <div className="bg-primary text-primary-foreground p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
           <div className="flex items-center gap-2 lg:gap-3">
@@ -269,7 +269,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         
         <button 
           onClick={openCalendly}
-          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all"
+          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-3.5 sm:py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all min-h-[48px]"
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
