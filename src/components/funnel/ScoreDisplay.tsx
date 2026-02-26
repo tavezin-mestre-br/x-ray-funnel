@@ -70,7 +70,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
     <motion.div 
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="max-w-3xl w-full py-4 sm:py-6 lg:py-8 px-2 space-y-4 sm:space-y-5 lg:space-y-6"
+      className="max-w-3xl w-full py-2 sm:py-6 lg:py-8 px-1 sm:px-2 space-y-3 sm:space-y-5 lg:space-y-6"
     >
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
