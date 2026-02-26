@@ -168,7 +168,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="grid grid-cols-1 md:grid-cols-3 gap-3 lg:gap-4"
+        className="grid grid-cols-1 md:grid-cols-3 gap-2 sm:gap-3 lg:gap-4"
       >
         <div className="bg-primary text-primary-foreground p-4 lg:p-5 rounded-xl lg:rounded-2xl space-y-3 lg:space-y-4">
           <div className="flex items-center gap-2 lg:gap-3">
