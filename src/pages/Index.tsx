@@ -314,7 +314,7 @@ const Index: React.FC = () => {
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
                     Seu plano de ação está pronto.
                   </h2>
-                  <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua empresa está deixando dinheiro na mesa — e como resolver.</p>
+                  <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua empresa está deixando dinheiro na mesa e como resolver.</p>
                 </div>
 
                 <div className="space-y-3 lg:space-y-4">

@@ -247,7 +247,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
         <ul className="space-y-2 lg:space-y-3 max-w-md mx-auto">
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
-            <span>Tráfego pago que gera vendas reais — não curiosos</span>
+            <span>Tráfego pago que gera vendas reais, não curiosos</span>
           </li>
           <li className="flex items-start gap-2 lg:gap-3 text-foreground font-medium text-xs lg:text-sm">
             <span className="text-primary font-bold shrink-0">|</span>
