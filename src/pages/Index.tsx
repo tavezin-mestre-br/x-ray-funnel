@@ -68,6 +68,8 @@ const Index: React.FC = () => {
       toast.error("Preencha todos os campos obrigatórios.");
       return;
     }
+    const eventId = generateEventId();
+    trackCompleteRegistration(eventId);
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
     setCurrentQuestionIndex(4);
