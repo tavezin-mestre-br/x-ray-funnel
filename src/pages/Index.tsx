@@ -186,7 +186,7 @@ const Index: React.FC = () => {
               
               <button 
                 onClick={handleStartDiagnosis}
-                className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-lg lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
+                className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
                 Iniciar meu diagnóstico
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
