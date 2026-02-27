@@ -243,16 +243,6 @@ const ScoreDisplay: React.FC<{
             Agendar minha implementação →
           </button>
 
-          <a
-            href="https://wa.me/5569992286633"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full max-w-sm mx-auto flex items-center justify-center gap-2 py-3 rounded-xl border border-border text-foreground font-bold text-sm hover:bg-secondary/50 transition-all"
-          >
-            <MessageCircle size={16} />
-            Falar no WhatsApp
-          </a>
-
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
             Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
