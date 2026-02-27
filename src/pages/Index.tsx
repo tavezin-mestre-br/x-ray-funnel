@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
 
-type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results';
+type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
 
 const Index: React.FC = () => {
   const [step, setStep] = useState<Step>('intro');
