@@ -133,7 +133,8 @@ const Index: React.FC = () => {
             <img src={logoS} alt="Shekinah" className="h-7 w-auto" />
             <div className="flex flex-col">
               <span className="text-lg lg:text-xl font-black text-foreground tracking-tight font-heading">SHEKINAH</span>
-            <span className="text-[9px] lg:text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
+              <span className="text-[9px] lg:text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             {step === 'funnel' && (
