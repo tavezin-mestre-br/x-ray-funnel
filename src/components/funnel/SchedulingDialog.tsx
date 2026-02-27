@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { UserData } from '@/types/funnel';
-import { trackSchedule } from '@/services/metaPixel';
+import { trackSchedule, generateEventId, getFbCookies } from '@/services/metaPixel';
 
 const TIME_SLOTS = [
   '08:00', '09:00', '10:00', '11:00', '12:00',
@@ -47,6 +47,9 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
     if (!selectedDate || !selectedTime) return;
 
     setIsSubmitting(true);
+    const eventId = generateEventId();
+    const { fbp, fbc } = getFbCookies();
+
     try {
       const { error } = await supabase.from('bookings').insert({
         lead_id: leadId || null,
@@ -58,10 +61,10 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
 
       if (error) throw error;
 
-      // Track Meta Pixel conversion
-      trackSchedule();
+      // Dispara no Pixel do navegador COM event_id
+      trackSchedule(eventId);
 
-      // Notify n8n webhook
+      // Notifica n8n + CAPI com event_id e cookies
       supabase.functions.invoke('notify-booking', {
         body: {
           lead_id: leadId || null,
@@ -69,6 +72,10 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
           phone: userData.whatsapp,
           scheduled_date: format(selectedDate, 'yyyy-MM-dd'),
           scheduled_time: selectedTime,
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          source_url: window.location.href,
         }
       }).catch(err => console.error('notify-booking error:', err));
 

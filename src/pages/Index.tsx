@@ -6,7 +6,7 @@ import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
 import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
-import { trackLead } from '@/services/metaPixel';
+import { trackLead, trackViewContent, trackCompleteRegistration, generateEventId, getFbCookies, updateUserData } from '@/services/metaPixel';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
@@ -43,6 +43,8 @@ const Index: React.FC = () => {
   };
 
   const handleStartDiagnosis = () => {
+    const eventId = generateEventId();
+    trackViewContent(eventId);
     setStep('funnel');
   };
 
@@ -66,6 +68,8 @@ const Index: React.FC = () => {
       toast.error("Preencha todos os campos obrigatórios.");
       return;
     }
+    const eventId = generateEventId();
+    trackCompleteRegistration(eventId);
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
     setCurrentQuestionIndex(4);
@@ -79,7 +83,12 @@ const Index: React.FC = () => {
     const updatedUserData = { ...userData, whatsapp, email };
     setUserData(updatedUserData);
     
+    // Advanced Matching — envia dados do usuário pro pixel
+    updateUserData({ phone: whatsapp, email, firstName: updatedUserData.name?.split(' ')[0] });
+    
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
+    const eventId = generateEventId();
+    const { fbp, fbc } = getFbCookies();
     
     // Transform responses from IDs to readable labels
     const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
@@ -112,7 +121,12 @@ const Index: React.FC = () => {
           bottleneck: resultsToSave.bottleneck,
           badges: resultsToSave.earnedBadges.map(b => b.name),
           recommendations: resultsToSave.recommendations,
-          classification: resultsToSave.classification
+          classification: resultsToSave.classification,
+          // Dados para CAPI com deduplicação
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          source_url: window.location.href,
         }
       });
       
@@ -120,7 +134,8 @@ const Index: React.FC = () => {
         console.error('Error saving lead:', error);
         toast.error('Erro ao salvar diagnóstico. Continuando...');
       } else {
-        trackLead();
+        // Dispara no Pixel do navegador COM o mesmo event_id
+        trackLead(eventId);
       }
     } catch (err) {
       console.error('Failed to save lead:', err);
