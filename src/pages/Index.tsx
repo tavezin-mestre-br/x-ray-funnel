@@ -14,6 +14,11 @@ import Header from '@/components/Header';
 
 type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
 
+const normalizePhone = (raw: string): string => {
+  const digits = raw.replace(/\D/g, '');
+  return `+${digits.startsWith('55') ? digits : '55' + digits}`;
+};
+
 const Index: React.FC = () => {
   const [step, setStep] = useState<Step>('intro');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -35,6 +40,9 @@ const Index: React.FC = () => {
   });
   const [bookedDate, setBookedDate] = useState('');
   const [bookedTime, setBookedTime] = useState('');
+  const [leadId, setLeadId] = useState<string | undefined>();
+  const [whatsappInput, setWhatsappInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
 
   const handleBookingConfirmed = (date: string, time: string) => {
     setBookedDate(date);
@@ -80,11 +88,12 @@ const Index: React.FC = () => {
   const handleFinalSubmit = async (whatsapp: string, email: string) => {
     setIsSubmitting(true);
     
-    const updatedUserData = { ...userData, whatsapp, email };
+    const normalizedPhone = normalizePhone(whatsapp);
+    const updatedUserData = { ...userData, whatsapp: normalizedPhone, email };
     setUserData(updatedUserData);
     
     // Advanced Matching — envia dados do usuário pro pixel
-    updateUserData({ phone: whatsapp, email, firstName: updatedUserData.name?.split(' ')[0] });
+    updateUserData({ phone: normalizedPhone, email, firstName: updatedUserData.name?.split(' ')[0] });
     
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
     const eventId = generateEventId();
@@ -107,10 +116,10 @@ const Index: React.FC = () => {
     }, {} as Record<string, { question: string; answer: string | string[] }>);
 
     try {
-      const { error } = await supabase.functions.invoke('save-lead', {
+      const { data, error } = await supabase.functions.invoke('save-lead', {
         body: {
           name: updatedUserData.name,
-          phone: whatsapp,
+          phone: normalizedPhone,
           email: email || null,
           company_name: companyData.companyName,
           monthly_revenue: companyData.monthlyRevenue,
@@ -122,7 +131,6 @@ const Index: React.FC = () => {
           badges: resultsToSave.earnedBadges.map(b => b.name),
           recommendations: resultsToSave.recommendations,
           classification: resultsToSave.classification,
-          // Dados para CAPI com deduplicação
           event_id: eventId,
           fbp: fbp || null,
           fbc: fbc || null,
@@ -134,7 +142,7 @@ const Index: React.FC = () => {
         console.error('Error saving lead:', error);
         toast.error('Erro ao salvar diagnóstico. Continuando...');
       } else {
-        // Dispara no Pixel do navegador COM o mesmo event_id
+        if (data?.lead_id) setLeadId(data.lead_id);
         trackLead(eventId);
       }
     } catch (err) {
@@ -380,17 +388,22 @@ const Index: React.FC = () => {
                     <input 
                       type="tel" 
                       placeholder="(69) 90000-0000" 
-                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
-                       id="final-wa" 
+                      value={whatsappInput}
+                      onChange={(e) => setWhatsappInput(e.target.value)}
+                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
                     />
+                    <p className="text-[10px] lg:text-xs text-muted-foreground">
+                      Usaremos esse número para enviar seu diagnóstico e confirmar seu horário.
+                    </p>
                   </div>
                   <div className="space-y-1.5 lg:space-y-2">
                     <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">E-mail (Opcional)</label>
                     <input 
                       type="email" 
                       placeholder="seu@email.com" 
-                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
-                       id="final-email" 
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
                     />
                   </div>
                 </div>
@@ -398,16 +411,15 @@ const Index: React.FC = () => {
                 <button 
                   disabled={isSubmitting}
                   onClick={() => {
-                    const wa = (document.getElementById('final-wa') as HTMLInputElement).value;
-                    const email = (document.getElementById('final-email') as HTMLInputElement).value;
-                    const isEmailValid = !email || (email.includes('@') && email.includes('.'));
+                    const waDigits = whatsappInput.replace(/\D/g, '');
+                    const isEmailValid = !emailInput || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
                     
-                    if (wa && isEmailValid) {
-                      handleFinalSubmit(wa, email);
-                    } else if (!wa) {
-                      toast.error("O WhatsApp é obrigatório.");
-                    } else {
+                    if (waDigits.length < 10) {
+                      toast.error("Informe um WhatsApp válido.");
+                    } else if (!isEmailValid) {
                       toast.error("E-mail inválido.");
+                    } else {
+                      handleFinalSubmit(whatsappInput, emailInput);
                     }
                   }}
                   className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
@@ -444,12 +456,13 @@ const Index: React.FC = () => {
               }}
               currentIndex={currentQuestionIndex + 1}
               totalSteps={QUESTIONS.length}
+              previousAnswer={userData.responses[QUESTIONS[currentQuestionIndex].id]}
             />
           )}
 
           {/* RESULTS */}
           {step === 'results' && results && (
-            <ScoreDisplay results={results} userData={userData} onBookingConfirmed={handleBookingConfirmed} />
+            <ScoreDisplay results={results} userData={userData} leadId={leadId} onBookingConfirmed={handleBookingConfirmed} />
           )}
 
           {/* BOOKING CONFIRMED */}
@@ -473,7 +486,7 @@ const Index: React.FC = () => {
 
               <div className="space-y-2">
                 <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading">
-                  Reunião Agendada!
+                  Horário reservado com sucesso
                 </h2>
                 <p className="text-base lg:text-lg text-muted-foreground font-medium">
                   {bookedDate} às {bookedTime}
@@ -482,21 +495,21 @@ const Index: React.FC = () => {
 
               <div className="bg-card border border-border rounded-2xl p-5 lg:p-6 space-y-3">
                 <p className="text-sm lg:text-base text-foreground font-medium leading-relaxed">
-                  Entraremos em contato pelo WhatsApp para confirmar os detalhes da sua reunião de implementação.
+                  Nossa equipe vai confirmar os detalhes pelo WhatsApp.
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  Prepare-se: vamos analisar juntos o diagnóstico e montar seu plano de ação personalizado.
+                  Prepare-se: vamos analisar seu diagnóstico e orientar os próximos passos.
                 </p>
               </div>
 
               <a
-                href={`https://wa.me/5569992286633?text=${encodeURIComponent('Olá! Acabei de agendar minha reunião de implementação.')}`}
+                href="https://wa.me/5569992286633"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full max-w-sm mx-auto bg-[hsl(142,71%,45%)] hover:bg-[hsl(142,71%,40%)] text-white py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-lg flex items-center justify-center gap-3 transition-all shadow-lg"
               >
                 <MessageCircle size={20} />
-                Falar pelo WhatsApp
+                Falar no WhatsApp
               </a>
 
               <p className="text-[10px] lg:text-xs text-muted-foreground font-medium">

@@ -34,14 +34,22 @@ const getAttemptLabel = (attemptId: string | undefined): string => {
   return labels[attemptId || ''] || 'Tentativas anteriores não trouxeram resultado previsível';
 };
 
-const getExpectationLabel = (expectationId: string | undefined): string => {
+const getExpectationLabel = (answer: string | string[] | undefined): string => {
   const labels: Record<string, string> = {
-    'q4_1': 'velocidade na implementação, resolver rápido e sem enrolação',
-    'q4_2': 'transparência total, entender cada número e cada resultado',
-    'q4_3': 'automação completa, estrutura que funcione 24h sem depender de você',
-    'q4_4': 'previsibilidade, clientes novos de forma consistente todo mês',
+    'q4_1': 'velocidade na implementação',
+    'q4_2': 'transparência total',
+    'q4_3': 'automação completa',
+    'q4_4': 'previsibilidade',
   };
-  return labels[expectationId || ''] || 'resultado concreto e mensurável';
+
+  if (Array.isArray(answer)) {
+    const mapped = answer.slice(0, 3).map(id => labels[id]).filter(Boolean);
+    if (mapped.length === 0) return 'resultado concreto e mensurável';
+    if (mapped.length === 1) return mapped[0];
+    return mapped.slice(0, -1).join(', ') + ' e ' + mapped[mapped.length - 1];
+  }
+
+  return labels[answer || ''] || 'resultado concreto e mensurável';
 };
 
 const getClassificationData = (totalScore: number) => {
@@ -159,10 +167,14 @@ export const calculateResults = (responses: Record<number, any>, badges: string[
     const answer = responses[q.id];
     if (answer === undefined) return;
 
-    const opt = q.options.find(o => o.id === answer);
-    if (opt?.pillar) {
-      rawScores[opt.pillar] += opt.value;
-    }
+    // Handle both single answers and multi-select arrays
+    const answerIds = Array.isArray(answer) ? answer : [answer];
+    answerIds.forEach((ansId: string) => {
+      const opt = q.options.find(o => o.id === ansId);
+      if (opt?.pillar) {
+        rawScores[opt.pillar] += opt.value;
+      }
+    });
   });
 
   const maxes = { aquisição: 13, atendimento: 6, processo: 13 };

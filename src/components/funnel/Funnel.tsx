@@ -11,6 +11,7 @@ interface FunnelProps {
   onBack?: () => void;
   currentIndex: number;
   totalSteps: number;
+  previousAnswer?: any;
 }
 
 const Funnel: React.FC<FunnelProps> = ({ 

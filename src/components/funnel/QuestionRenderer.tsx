@@ -6,10 +6,13 @@ import { ChevronRight, Check } from 'lucide-react';
 interface Props {
   question: Question;
   onAnswer: (answer: any) => void;
+  previousAnswer?: any;
 }
 
-const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer }) => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(
+    Array.isArray(previousAnswer) ? previousAnswer : []
+  );
 
   const container = {
     hidden: { opacity: 0 },
