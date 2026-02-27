@@ -31,6 +31,14 @@ const Index: React.FC = () => {
     monthlyRevenue: '',
     contactName: ''
   });
+  const [bookedDate, setBookedDate] = useState('');
+  const [bookedTime, setBookedTime] = useState('');
+
+  const handleBookingConfirmed = (date: string, time: string) => {
+    setBookedDate(date);
+    setBookedTime(time);
+    setStep('booking_confirmed');
+  };
 
   const handleStartDiagnosis = () => {
     setStep('funnel');
