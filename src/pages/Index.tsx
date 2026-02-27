@@ -43,6 +43,8 @@ const Index: React.FC = () => {
   };
 
   const handleStartDiagnosis = () => {
+    const eventId = generateEventId();
+    trackViewContent(eventId);
     setStep('funnel');
   };
 
