@@ -179,7 +179,7 @@ const Index: React.FC = () => {
                     <span className="text-xs font-semibold text-foreground">Dados protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <BarChart3 size={14} className="text-primary" />
+                    <BarChart3 size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
