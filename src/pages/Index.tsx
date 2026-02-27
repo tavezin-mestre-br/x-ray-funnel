@@ -89,6 +89,7 @@ const Index: React.FC = () => {
           company_name: companyData.companyName,
           instagram: companyData.instagram,
           monthly_revenue: companyData.monthlyRevenue,
+          traffic_investment: companyData.trafficInvestment,
           answers: updatedUserData.responses,
           score_total: resultsToSave.totalScore,
           pillars: resultsToSave.pillars.reduce((acc, p) => ({ ...acc, [p.name]: p.score }), {}),
