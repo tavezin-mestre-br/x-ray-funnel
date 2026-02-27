@@ -1,122 +1,219 @@
 
 
-## Correcoes Cirurgicas do Funil — 7 Itens
-
-### 1. Corrigir calculo do score para perguntas multi
-**Arquivo:** `src/services/scoreLogic.ts`
-
-**Problema:** Linha 162 faz `q.options.find(o => o.id === answer)` — para arrays (multi), isso nunca encontra match. Score fica zero para perguntas 4 e 5.
-
-**Correcao:**
-- Quando `answer` for array, iterar cada item e somar os valores/pilares de cada opcao selecionada
-- Para a personalizacao (linha 192, `getExpectationLabel`), refatorar para aceitar array: pegar labels dos 2-3 primeiros itens e juntar com "e" (ex: "velocidade e transparencia")
-
-**Diff estimado:** ~20 linhas alteradas em `scoreLogic.ts`
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
 ---
 
-### 2. Capturar e armazenar lead_id retornado pelo save-lead
-**Arquivos:** `src/pages/Index.tsx`, `src/components/funnel/ScoreDisplay.tsx`, `src/components/funnel/SchedulingDialog.tsx`
+## Objetivo
 
-**Correcao:**
-- Em `Index.tsx`: adicionar estado `const [leadId, setLeadId] = useState<string | undefined>()`
-- No `handleFinalSubmit`, capturar `data` do invoke: `const { data, error } = await supabase.functions.invoke(...)` e fazer `if (data?.lead_id) setLeadId(data.lead_id)`
-- Passar `leadId` para `ScoreDisplay` como prop
-- `ScoreDisplay` repassa `leadId` para `SchedulingDialog`
-
-**Diff estimado:** ~10 linhas
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
 ---
 
-### 3. Corrigir captura de WhatsApp com inputs controlados
-**Arquivo:** `src/pages/Index.tsx`
+## Arquivos a Modificar (Apenas Copy)
 
-**Correcao:**
-- Adicionar estados `whatsappInput` e `emailInput` no componente
-- Substituir os inputs com `id="final-wa"` e `id="final-email"` por inputs controlados com `value` e `onChange`
-- Remover `document.getElementById`
-- Criar funcao `normalizePhone`: remover nao-digitos, adicionar `55` se nao comecar com `55`, prefixar com `+`
-- Validacao: WhatsApp obrigatorio com minimo 10 digitos apos limpeza; email opcional mas valida formato basico
-- Adicionar microfrase abaixo do campo: "Usaremos esse numero para enviar seu diagnostico e confirmar seu horario."
-- Desabilitar botao enquanto `isSubmitting`
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-**Diff estimado:** ~30 linhas
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
+
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
 ---
 
-### 4. Botao direto para WhatsApp da Shekinah
-**Arquivo:** `src/components/funnel/ScoreDisplay.tsx`, `src/pages/Index.tsx`
+## Mudanças Detalhadas
 
-**Correcao:**
-- No `ScoreDisplay`, adicionar botao secundario abaixo do CTA de agendamento:
-  ```text
-  <a href="https://wa.me/5569992286633" target="_blank" rel="noopener noreferrer">
-    Falar no WhatsApp
-  </a>
-  ```
-- Sem `?text=`, sem mensagem predefinida
-- Estilo: variante outline/secundaria, discreto, usando classes existentes
-- Na tela `booking_confirmed` em `Index.tsx`: o link ja existe mas tem `?text=...` — remover o parametro `text` para ficar limpo
+### Tela de Intro (Index.tsx)
 
-**Diff estimado:** ~15 linhas
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
 
 ---
 
-### 5. Mover CTA para cima na tela de resultado
-**Arquivo:** `src/components/funnel/ScoreDisplay.tsx`
+### Tela de Captura Final (Index.tsx)
 
-**Correcao — reordenar blocos:**
-1. Header ("Seu diagnostico esta pronto" — substituir "Etapa 3 de 3 . Diagnostico Preliminar")
-2. Status Card (classificacao)
-3. Bottleneck (gargalo identificado)
-4. **CTA principal + botao WhatsApp** (movido para ca)
-5. Analise por Pilar
-6. Timeline de implementacao
-7. Testimonial
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
 
-Tambem: encurtar/ajustar textos para serem mais diretos. Trocar o header "Etapa 3 de 3 . Diagnostico Preliminar" por "Seu diagnostico esta pronto".
-
-**Diff estimado:** reordenacao de blocos JSX, ~10 linhas de texto
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
 
 ---
 
-### 6. Preservar respostas multi ao voltar
-**Arquivos:** `src/components/funnel/Funnel.tsx`, `src/components/funnel/QuestionRenderer.tsx`
+### Tela de Resultados (ScoreDisplay.tsx)
 
-**Problema:** `QuestionRenderer` inicializa `selectedItems` como `[]` sempre. Ao voltar, as selecoes somem.
+**Reformular CTA Section:**
 
-**Correcao:**
-- `Funnel.tsx`: passar `userData.responses[question.id]` como prop `currentAnswer` para `QuestionRenderer` (precisa receber responses de Index — ja disponivel via `handleResponse`)
-- Alternativa mais simples: passar a resposta salva diretamente. Em `Index.tsx`, o `Funnel` ja recebe a question. Adicionar prop `previousAnswer` ao `Funnel` com `userData.responses[QUESTIONS[currentQuestionIndex].id]`
-- `Funnel.tsx`: repassar para `QuestionRenderer` como `previousAnswer`
-- `QuestionRenderer`: inicializar `selectedItems` com `previousAnswer` quando for array, usando `useEffect` que roda quando `question.id` muda
+**Atual:**
+```text
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
+```
 
-**Diff estimado:** ~15 linhas entre os 3 arquivos
+**Novo:**
+```text
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
+```
 
 ---
 
-### 7. Ajustar textos da tela de booking confirmado
-**Arquivo:** `src/pages/Index.tsx`
+### Classificações (scoreLogic.ts)
 
-**Correcao:**
-- Titulo: "Horario reservado com sucesso" (em vez de "Reuniao Agendada!")
-- Subtitulo: "Nossa equipe vai confirmar os detalhes pelo WhatsApp."
-- Texto adicional: "Prepare-se: vamos analisar seu diagnostico e orientar os proximos passos."
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
 
-**Diff estimado:** ~5 linhas
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
 
 ---
 
-### Resumo de arquivos tocados
+### Bottlenecks (scoreLogic.ts)
 
-| Arquivo | Alteracoes |
-|---------|-----------|
-| `src/services/scoreLogic.ts` | Score multi, personalizacao multi |
-| `src/pages/Index.tsx` | leadId state, inputs controlados, normalizePhone, previousAnswer prop, textos booking, remover ?text do WA |
-| `src/components/funnel/ScoreDisplay.tsx` | leadId prop, reordenar blocos, botao WA, trocar header |
-| `src/components/funnel/SchedulingDialog.tsx` | Receber leadId via prop (ja suportado) |
-| `src/components/funnel/Funnel.tsx` | Repassar previousAnswer |
-| `src/components/funnel/QuestionRenderer.tsx` | Inicializar selectedItems com previousAnswer |
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
 
-Nenhuma dependencia nova. Nenhuma alteracao de banco. Nenhuma alteracao de edge functions.
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 

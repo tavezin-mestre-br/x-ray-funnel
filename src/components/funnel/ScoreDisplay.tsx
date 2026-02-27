@@ -15,7 +15,8 @@ import {
   Bot,
   Workflow,
   Gauge,
-  Megaphone
+  Megaphone,
+  MessageCircle
 } from 'lucide-react';
 import Testimonial, { getTestimonialForStep } from './Testimonial';
 
@@ -90,7 +91,6 @@ const TimelineStep: React.FC<{
     transition={{ delay }}
     className="flex gap-3 lg:gap-4"
   >
-    {/* Timeline connector */}
     <div className="flex flex-col items-center">
       <div className={`w-8 h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center shrink-0 text-sm lg:text-base font-black ${
         number === 1 ? 'bg-primary text-primary-foreground' : 'bg-secondary text-foreground border border-border'
@@ -101,8 +101,7 @@ const TimelineStep: React.FC<{
         <div className="w-px flex-1 bg-border my-1" />
       )}
     </div>
-    {/* Content */}
-    <div className={`pb-5 lg:pb-6 ${isLast ? '' : ''}`}>
+    <div className={`pb-5 lg:pb-6`}>
       <span className="text-[9px] lg:text-[10px] font-bold text-muted-foreground mono-font uppercase tracking-widest">
         {period}
       </span>
@@ -119,7 +118,12 @@ const TimelineStep: React.FC<{
   </motion.div>
 );
 
-const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBookingConfirmed: (date: string, time: string) => void }> = ({ results, userData, onBookingConfirmed }) => {
+const ScoreDisplay: React.FC<{ 
+  results: FinalResults; 
+  userData: UserData; 
+  leadId?: string;
+  onBookingConfirmed: (date: string, time: string) => void;
+}> = ({ results, userData, leadId, onBookingConfirmed }) => {
   const [showScheduling, setShowScheduling] = useState(false);
 
   return (
@@ -131,7 +135,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
         <span className="text-[10px] lg:text-xs text-foreground mono-font font-bold uppercase tracking-widest">
-          Etapa 3 de 3 · Diagnóstico Preliminar
+          Seu diagnóstico está pronto
         </span>
         <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
@@ -141,7 +145,6 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             className="h-full bg-foreground rounded-full"
           />
         </div>
-        <p className="text-muted-foreground text-xs lg:text-sm font-medium mt-1.5">Diagnóstico concluído</p>
       </div>
 
       {/* Status Card */}
@@ -169,30 +172,13 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             {results.classificationExplanation}
           </p>
         </div>
-
-        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-foreground pl-3 lg:pl-4">
-          Já mapeamos o cenário. Sabemos onde está o problema. Agora é implementar.
-        </p>
-      </motion.div>
-
-      {/* Pillars */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
-      >
-        <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Análise por Pilar
-        </h3>
-        <PillarBars pillars={results.pillars} />
       </motion.div>
 
       {/* Bottleneck */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
+        transition={{ delay: 0.3 }}
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <div className="space-y-2 lg:space-y-3">
@@ -213,56 +199,11 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
         </div>
       </motion.div>
 
-      {/* Method Timeline */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.5 }}
-        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
-      >
-        <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Como implementamos na sua empresa
-        </h3>
-
-        <div>
-          <TimelineStep
-            number={1}
-            period="Semana 1"
-            title="Diagnóstico e Implementação Rápida"
-            items={results.recommendations.sevenDays}
-            delay={0.55}
-          />
-          <TimelineStep
-            number={2}
-            period="Semana 2-3"
-            title="Estruturação Completa"
-            items={results.recommendations.thirtyDays}
-            delay={0.65}
-          />
-          <TimelineStep
-            number={3}
-            period="Semana 3-4"
-            title="Máquina Comercial Rodando"
-            items={results.recommendations.sixtyNinetyDays}
-            isLast
-            delay={0.75}
-          />
-        </div>
-      </motion.div>
-
-      {/* Testimonial (single, subtle) */}
-      <Testimonial data={{
-        name: "Clemir Junio",
-        company: "Artfacas Brasil",
-        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
-        result: "Faturamento previsível"
-      }} />
-
       {/* CTA */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7 }}
+        transition={{ delay: 0.4 }}
         className="bg-card border-2 border-primary rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-5 lg:space-y-6 shadow-soft"
       >
         <div className="space-y-2 text-center">
@@ -281,7 +222,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
               key={item.title}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.75 + index * 0.05 }}
+              transition={{ delay: 0.45 + index * 0.05 }}
               className="flex items-start gap-2.5 lg:gap-3 p-2.5 lg:p-3 rounded-xl bg-secondary/40"
             >
               <item.icon size={16} className="text-foreground shrink-0 mt-0.5" />
@@ -303,6 +244,16 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             Agendar minha implementação →
           </button>
 
+          <a
+            href="https://wa.me/5569992286633"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full max-w-sm mx-auto flex items-center justify-center gap-2 py-3 rounded-xl border border-border text-foreground font-bold text-sm hover:bg-secondary/50 transition-all"
+          >
+            <MessageCircle size={16} />
+            Falar no WhatsApp
+          </a>
+
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
             Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
@@ -313,10 +264,69 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
         </div>
       </motion.div>
 
+      {/* Pillars */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
+      >
+        <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
+          Análise por Pilar
+        </h3>
+        <PillarBars pillars={results.pillars} />
+      </motion.div>
+
+      {/* Method Timeline */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.6 }}
+        className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
+      >
+        <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
+          Como implementamos na sua empresa
+        </h3>
+
+        <div>
+          <TimelineStep
+            number={1}
+            period="Semana 1"
+            title="Diagnóstico e Implementação Rápida"
+            items={results.recommendations.sevenDays}
+            delay={0.65}
+          />
+          <TimelineStep
+            number={2}
+            period="Semana 2-3"
+            title="Estruturação Completa"
+            items={results.recommendations.thirtyDays}
+            delay={0.75}
+          />
+          <TimelineStep
+            number={3}
+            period="Semana 3-4"
+            title="Máquina Comercial Rodando"
+            items={results.recommendations.sixtyNinetyDays}
+            isLast
+            delay={0.85}
+          />
+        </div>
+      </motion.div>
+
+      {/* Testimonial */}
+      <Testimonial data={{
+        name: "Clemir Junio",
+        company: "Artfacas Brasil",
+        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+        result: "Faturamento previsível"
+      }} />
+
       <SchedulingDialog
         open={showScheduling}
         onOpenChange={setShowScheduling}
         userData={userData}
+        leadId={leadId}
         onBookingConfirmed={(date, time) => {
           setShowScheduling(false);
           onBookingConfirmed(date, time);

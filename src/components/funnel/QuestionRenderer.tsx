@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import { ChevronRight, Check } from 'lucide-react';
@@ -6,10 +6,17 @@ import { ChevronRight, Check } from 'lucide-react';
 interface Props {
   question: Question;
   onAnswer: (answer: any) => void;
+  previousAnswer?: any;
 }
 
-const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
-  const [selectedItems, setSelectedItems] = useState<string[]>([]);
+const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer }) => {
+  const [selectedItems, setSelectedItems] = useState<string[]>(
+    Array.isArray(previousAnswer) ? previousAnswer : []
+  );
+
+  useEffect(() => {
+    setSelectedItems(Array.isArray(previousAnswer) ? previousAnswer : []);
+  }, [question.id]);
 
   const container = {
     hidden: { opacity: 0 },

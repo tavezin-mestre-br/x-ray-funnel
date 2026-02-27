@@ -11,6 +11,7 @@ interface FunnelProps {
   onBack?: () => void;
   currentIndex: number;
   totalSteps: number;
+  previousAnswer?: any;
 }
 
 const Funnel: React.FC<FunnelProps> = ({ 
@@ -18,7 +19,8 @@ const Funnel: React.FC<FunnelProps> = ({
   onResponse, 
   onBack,
   currentIndex, 
-  totalSteps 
+  totalSteps,
+  previousAnswer
 }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const startTime = useRef(Date.now());
@@ -129,7 +131,8 @@ const Funnel: React.FC<FunnelProps> = ({
 
           <QuestionRenderer 
             question={question} 
-            onAnswer={handleAnswer} 
+            onAnswer={handleAnswer}
+            previousAnswer={previousAnswer}
           />
         </motion.div>
       </AnimatePresence>
