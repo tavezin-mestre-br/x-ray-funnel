@@ -135,7 +135,7 @@ const Index: React.FC = () => {
               <span className="text-[9px] lg:text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
             </div>
           </div>
-          <img src={logoShekinah} alt="" className="w-5 h-5 pointer-events-none absolute left-1/2 -translate-x-1/2" />
+          <img src={logoShekinah} alt="" className="w-5 h-5 pointer-events-none absolute left-1/2 -translate-x-1/2 -translate-y-[5px]" />
           <div className="flex items-center gap-3">
             {step === 'funnel' && (
               <span className="text-xs text-muted-foreground mono-font">Etapa {getCurrentPhase()} de 2</span>
