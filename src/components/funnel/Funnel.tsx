@@ -16,6 +16,7 @@ interface FunnelProps {
 const Funnel: React.FC<FunnelProps> = ({ 
   question, 
   onResponse, 
+  onBack,
   currentIndex, 
   totalSteps 
 }) => {
