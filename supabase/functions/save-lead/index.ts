@@ -9,6 +9,10 @@ interface LeadPayload {
   name: string
   phone: string
   email?: string
+  company_name?: string
+  instagram?: string
+  monthly_revenue?: string
+  traffic_investment?: string
   answers: Record<string, string>
   score_total: number
   pillars: Record<string, number>
