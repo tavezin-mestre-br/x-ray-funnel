@@ -125,8 +125,8 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300">
-      {/* Header */}
+    <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300 relative">
+      <img src={logoShekinah} alt="" className="absolute top-5 left-1/2 -translate-x-1/2 w-7 h-7 opacity-20 pointer-events-none z-10" />
       <header className="w-full py-4 lg:py-5 px-4 lg:px-6 border-b border-border/50">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="flex flex-col">
