@@ -16,7 +16,6 @@ import {
   Workflow,
   Gauge,
   Megaphone,
-  MessageCircle
 } from 'lucide-react';
 import Testimonial, { getTestimonialForStep } from './Testimonial';
 
@@ -244,16 +243,6 @@ const ScoreDisplay: React.FC<{
             Agendar minha implementação →
           </button>
 
-          <a
-            href="https://wa.me/5569992286633"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full max-w-sm mx-auto flex items-center justify-center gap-2 py-3 rounded-xl border border-border text-foreground font-bold text-sm hover:bg-secondary/50 transition-all"
-          >
-            <MessageCircle size={16} />
-            Falar no WhatsApp
-          </a>
-
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
             Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
@@ -321,6 +310,23 @@ const ScoreDisplay: React.FC<{
         quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
         result: "Faturamento previsível"
       }} />
+
+      {/* Bottom CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+        className="text-center pt-2 pb-4"
+      >
+        <button 
+          onClick={() => setShowScheduling(true)}
+          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-3.5 sm:py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all min-h-[48px]"
+        >
+          <CalendarCheck size={18} className="lg:hidden" />
+          <CalendarCheck size={20} className="hidden lg:block" />
+          Agendar minha implementação →
+        </button>
+      </motion.div>
 
       <SchedulingDialog
         open={showScheduling}
