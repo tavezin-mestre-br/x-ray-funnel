@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { UserData } from '@/types/funnel';
+import { trackSchedule } from '@/services/metaPixel';
 
 const TIME_SLOTS = [
   '08:00', '09:00', '10:00', '11:00', '12:00',
