@@ -286,6 +286,33 @@ const Index: React.FC = () => {
                       ))}
                     </div>
                   </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Investimento em Tráfego Pago *</label>
+                    <p className="text-muted-foreground text-[10px] lg:text-xs">Quanto investe (ou já investiu) por mês?</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { label: 'Nunca investi', value: 'nunca' },
+                        { label: 'Menos de R$ 3k', value: 'menos-3k' },
+                        { label: 'R$ 3k – R$ 5k', value: '3k-5k' },
+                        { label: 'R$ 5k – R$ 10k', value: '5k-10k' },
+                        { label: 'R$ 10k – R$ 30k', value: '10k-30k' },
+                        { label: 'Acima de R$ 30k', value: 'acima-30k' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => setCompanyData(prev => ({ ...prev, trafficInvestment: opt.value }))}
+                          className={`p-3 rounded-lg border text-sm font-bold transition-all ${
+                            companyData.trafficInvestment === opt.value
+                              ? 'bg-primary text-primary-foreground border-primary'
+                              : 'bg-secondary border-border text-foreground hover:border-primary/50'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
                 
                 <button 
