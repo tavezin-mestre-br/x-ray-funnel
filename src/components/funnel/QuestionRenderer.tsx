@@ -62,7 +62,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
                     {isSelected && <Check size={12} className="text-primary-foreground" />}
                   </div>
                   <span className={`font-bold text-sm sm:text-base transition-colors ${
-                    isSelected ? 'text-primary' : 'text-foreground'
+                    isSelected ? 'text-foreground' : 'text-foreground'
                   }`}>
                     {opt.label}
                   </span>
