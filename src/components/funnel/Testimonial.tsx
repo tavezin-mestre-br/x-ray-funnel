@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
 
 export interface TestimonialData {
   quote: string;
@@ -52,19 +51,18 @@ const Testimonial: React.FC<{ data: TestimonialData; className?: string }> = ({ 
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className={`bg-card border border-border rounded-xl p-4 lg:p-5 space-y-3 ${className}`}
+      className={`bg-muted/30 border border-border/50 rounded-xl p-3 lg:p-4 space-y-2 ${className}`}
     >
-      <Quote size={16} className="text-primary/40" />
-      <p className="text-foreground text-sm lg:text-base font-medium leading-relaxed italic">
+      <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed italic">
         "{data.quote}"
       </p>
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="text-foreground text-xs lg:text-sm font-bold">{data.name}</p>
-          <p className="text-muted-foreground text-[10px] lg:text-xs">{data.company}</p>
+          <p className="text-foreground text-[11px] lg:text-xs font-bold">{data.name}</p>
+          <p className="text-muted-foreground text-[9px] lg:text-[10px]">{data.company}</p>
         </div>
         {data.result && (
-          <span className="text-[10px] lg:text-xs font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full whitespace-nowrap">
+          <span className="text-[9px] lg:text-[10px] font-bold text-primary/80 bg-primary/5 px-2 py-0.5 rounded-full whitespace-nowrap">
             {data.result}
           </span>
         )}
