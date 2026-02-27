@@ -183,7 +183,7 @@ const Index: React.FC = () => {
                     <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Users size={14} className="text-primary" />
+                    <Users size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
                   </div>
                 </div>
