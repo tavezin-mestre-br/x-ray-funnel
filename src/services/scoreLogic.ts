@@ -29,7 +29,7 @@ const getAttemptLabel = (attemptId: string | undefined): string => {
     'q2_1': 'Você já investiu em agência de tráfego sem resultado mensurável',
     'q2_2': 'Você tentou estruturar o comercial sozinho, mas não escalou',
     'q2_3': 'Você colocou atendimento humano no WhatsApp, mas perde lead fora do horário',
-    'q2_4': 'Você ainda não tentou nada estruturado — e isso é uma vantagem, porque vamos implementar do zero, sem vícios',
+    'q2_4': 'Você ainda não tentou nada estruturado. Isso é uma vantagem, porque vamos implementar do zero, com a estrutura certa desde o início',
   };
   return labels[attemptId || ''] || 'Tentativas anteriores não trouxeram resultado previsível';
 };
