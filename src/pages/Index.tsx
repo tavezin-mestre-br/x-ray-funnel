@@ -6,6 +6,7 @@ import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
 import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
+import { trackLead } from '@/services/metaPixel';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
