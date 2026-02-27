@@ -317,6 +317,10 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
         open={showScheduling}
         onOpenChange={setShowScheduling}
         userData={userData}
+        onBookingConfirmed={(date, time) => {
+          setShowScheduling(false);
+          onBookingConfirmed(date, time);
+        }}
       />
     </motion.div>
   );
