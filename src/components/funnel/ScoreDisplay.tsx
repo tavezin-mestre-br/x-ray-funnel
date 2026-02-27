@@ -312,6 +312,12 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
           </p>
         </div>
       </motion.div>
+
+      <SchedulingDialog
+        open={showScheduling}
+        onOpenChange={setShowScheduling}
+        userData={userData}
+      />
     </motion.div>
   );
 };
