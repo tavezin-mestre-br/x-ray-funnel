@@ -100,7 +100,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => onAnswer(opt.id)}
-              className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-center group"
+              className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-center group"
             >
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">
                 {opt.label}
