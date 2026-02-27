@@ -14,6 +14,36 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookings: {
+        Row: {
+          created_at: string
+          id: string
+          lead_id: string | null
+          name: string
+          phone: string
+          scheduled_date: string
+          scheduled_time: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          name: string
+          phone: string
+          scheduled_date: string
+          scheduled_time: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          name?: string
+          phone?: string
+          scheduled_date?: string
+          scheduled_time?: string
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           answers: Json
