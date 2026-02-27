@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import { ChevronRight, Check } from 'lucide-react';
