@@ -29,6 +29,7 @@ const Index: React.FC = () => {
     companyName: '',
     instagram: '',
     monthlyRevenue: '',
+    trafficInvestment: '',
     contactName: ''
   });
   const [bookedDate, setBookedDate] = useState('');
