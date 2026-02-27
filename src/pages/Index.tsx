@@ -5,13 +5,13 @@ import { QUESTIONS } from '@/constants/questions';
 import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
-import { ArrowRight, Loader2, Shield, BarChart3, Users } from 'lucide-react';
+import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
 
-type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results';
+type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
 
 const Index: React.FC = () => {
   const [step, setStep] = useState<Step>('intro');
@@ -31,6 +31,14 @@ const Index: React.FC = () => {
     monthlyRevenue: '',
     contactName: ''
   });
+  const [bookedDate, setBookedDate] = useState('');
+  const [bookedTime, setBookedTime] = useState('');
+
+  const handleBookingConfirmed = (date: string, time: string) => {
+    setBookedDate(date);
+    setBookedTime(time);
+    setStep('booking_confirmed');
+  };
 
   const handleStartDiagnosis = () => {
     setStep('funnel');
@@ -104,7 +112,7 @@ const Index: React.FC = () => {
   };
 
   const results = useMemo(() => {
-    if (step !== 'results') return null;
+    if (step !== 'results' && step !== 'booking_confirmed') return null;
     return calculateResults(userData.responses, userData.badges);
   }, [step, userData.responses, userData.badges]);
 
@@ -383,7 +391,60 @@ const Index: React.FC = () => {
 
           {/* RESULTS */}
           {step === 'results' && results && (
-            <ScoreDisplay results={results} userData={userData} />
+            <ScoreDisplay results={results} userData={userData} onBookingConfirmed={handleBookingConfirmed} />
+          )}
+
+          {/* BOOKING CONFIRMED */}
+          {step === 'booking_confirmed' && (
+            <motion.div
+              key="booking_confirmed"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-sm lg:max-w-md w-full text-center space-y-6 lg:space-y-8 py-8"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+                className="w-20 h-20 lg:w-24 lg:h-24 bg-success/10 border-2 border-success/30 rounded-full flex items-center justify-center mx-auto"
+              >
+                <Check size={40} className="text-success lg:hidden" />
+                <Check size={48} className="hidden lg:block text-success" />
+              </motion.div>
+
+              <div className="space-y-2">
+                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading">
+                  Reunião Agendada!
+                </h2>
+                <p className="text-base lg:text-lg text-muted-foreground font-medium">
+                  {bookedDate} às {bookedTime}
+                </p>
+              </div>
+
+              <div className="bg-card border border-border rounded-2xl p-5 lg:p-6 space-y-3">
+                <p className="text-sm lg:text-base text-foreground font-medium leading-relaxed">
+                  Entraremos em contato pelo WhatsApp para confirmar os detalhes da sua reunião de implementação.
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Prepare-se: vamos analisar juntos o diagnóstico e montar seu plano de ação personalizado.
+                </p>
+              </div>
+
+              <a
+                href={`https://wa.me/5569992286633?text=${encodeURIComponent('Olá! Acabei de agendar minha reunião de implementação.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-sm mx-auto bg-[hsl(142,71%,45%)] hover:bg-[hsl(142,71%,40%)] text-white py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-lg flex items-center justify-center gap-3 transition-all shadow-lg"
+              >
+                <MessageCircle size={20} />
+                Falar pelo WhatsApp
+              </a>
+
+              <p className="text-[10px] lg:text-xs text-muted-foreground font-medium">
+                Shekinah | Marketing · Tecnologia · IA
+              </p>
+            </motion.div>
           )}
         </AnimatePresence>
       </main>

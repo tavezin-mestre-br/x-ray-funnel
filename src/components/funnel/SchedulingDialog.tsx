@@ -26,6 +26,7 @@ interface SchedulingDialogProps {
   onOpenChange: (open: boolean) => void;
   userData: UserData;
   leadId?: string;
+  onBookingConfirmed?: (date: string, time: string) => void;
 }
 
 const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
@@ -33,11 +34,11 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
   onOpenChange,
   userData,
   leadId,
+  onBookingConfirmed,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
 
   const isSunday = (date: Date) => date.getDay() === 0;
 
@@ -56,11 +57,15 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
 
       if (error) throw error;
 
-      setConfirmed(true);
-      toast({
-        title: '✅ Reunião agendada!',
-        description: `${format(selectedDate, "dd 'de' MMMM", { locale: ptBR })} às ${selectedTime}`,
-      });
+      const formattedDate = format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
+      if (onBookingConfirmed) {
+        onBookingConfirmed(formattedDate, selectedTime);
+      } else {
+        toast({
+          title: '✅ Reunião agendada!',
+          description: `${formattedDate} às ${selectedTime}`,
+        });
+      }
     } catch {
       toast({
         title: 'Erro ao agendar',
@@ -76,7 +81,6 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
     if (!value) {
       setSelectedDate(undefined);
       setSelectedTime(null);
-      setConfirmed(false);
     }
     onOpenChange(value);
   };
@@ -91,29 +95,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
           </DialogTitle>
         </DialogHeader>
 
-        <AnimatePresence mode="wait">
-          {confirmed ? (
-            <motion.div
-              key="confirmed"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="py-8 text-center space-y-4"
-            >
-              <div className="w-16 h-16 bg-success/10 border border-success/30 rounded-full flex items-center justify-center mx-auto">
-                <Check size={32} className="text-success" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-lg font-black text-foreground font-heading">Reunião Confirmada!</h3>
-                <p className="text-sm text-muted-foreground font-medium">
-                  {selectedDate && format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })} às {selectedTime}
-                </p>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Entraremos em contato pelo WhatsApp para confirmar os detalhes.
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
+        <motion.div
               key="form"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -200,8 +182,6 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
                 )}
               </AnimatePresence>
             </motion.div>
-          )}
-        </AnimatePresence>
       </DialogContent>
     </Dialog>
   );
