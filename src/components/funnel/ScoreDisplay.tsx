@@ -170,7 +170,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
           </p>
         </div>
 
-        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
+        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-foreground pl-3 lg:pl-4">
           Já mapeamos o cenário. Sabemos onde está o problema. Agora é implementar.
         </p>
       </motion.div>
