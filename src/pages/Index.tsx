@@ -281,8 +281,8 @@ const Index: React.FC = () => {
                           onClick={() => setCompanyData(prev => ({ ...prev, monthlyRevenue: opt.value }))}
                           className={`p-3 rounded-lg border text-sm font-bold transition-all ${
                             companyData.monthlyRevenue === opt.value
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'bg-secondary border-border text-foreground hover:border-primary/50'
+                              ? 'bg-foreground text-background border-foreground'
+                              : 'bg-secondary border-border text-foreground hover:border-foreground/30'
                           }`}
                         >
                           {opt.label}
