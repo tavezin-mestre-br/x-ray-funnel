@@ -61,7 +61,7 @@ const Index: React.FC = () => {
   };
 
   const handleCompanySubmit = () => {
-    if (!companyData.contactName || !companyData.companyName || !companyData.monthlyRevenue) {
+    if (!companyData.contactName || !companyData.companyName || !companyData.monthlyRevenue || !companyData.trafficInvestment) {
       toast.error("Preencha todos os campos obrigatórios.");
       return;
     }
