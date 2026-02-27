@@ -19,7 +19,8 @@ const Funnel: React.FC<FunnelProps> = ({
   onResponse, 
   onBack,
   currentIndex, 
-  totalSteps 
+  totalSteps,
+  previousAnswer
 }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const startTime = useRef(Date.now());
