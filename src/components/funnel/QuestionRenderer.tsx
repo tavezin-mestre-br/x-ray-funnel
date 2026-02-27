@@ -56,8 +56,8 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
                 >
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
                     isSelected
-                      ? 'bg-primary border-primary'
-                      : 'border-muted-foreground/30'
+                       ? 'bg-foreground border-foreground'
+                       : 'border-muted-foreground/30'
                   }`}>
                     {isSelected && <Check size={12} className="text-primary-foreground" />}
                   </div>
