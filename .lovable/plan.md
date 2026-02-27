@@ -1,102 +1,219 @@
 
 
-## Pixel Meta (1396348278959400) + 2 Webhooks n8n (sem auth)
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
-### Resumo
+---
 
-Implementar rastreamento duplo: Meta Pixel + n8n webhooks para dois momentos do funil:
-- **Lead** (diagnostico completo) -> Pixel Lead + webhook NEW_LEAD
-- **Agendamento** (reuniao confirmada) -> Pixel Schedule + webhook NEW_BOOKING
+## Objetivo
 
-Os webhooks funcionam sem autenticacao. Voce cria os dois webhooks POST no n8n e depois configura as URLs como secrets.
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-### Arquivos a criar
+---
 
-#### 1. `src/services/metaPixel.ts` (novo)
-Helper com duas funcoes:
-- `trackLead()` -> `fbq('track', 'Lead')` (evento padrao)
-- `trackSchedule()` -> `fbq('trackCustom', 'Schedule')` (conversao personalizada)
-- Ambas verificam se `fbq` existe antes de chamar
+## Arquivos a Modificar (Apenas Copy)
 
-#### 2. `supabase/functions/notify-booking/index.ts` (novo)
-Edge function que:
-- Recebe POST com dados do booking (name, phone, scheduled_date, scheduled_time, lead_id)
-- Le `N8N_WEBHOOK_BOOKING_URL` dos secrets
-- Envia POST para o webhook com `event: "NEW_BOOKING"`
-- Sem autenticacao (verify_jwt = false, sem check de token)
-- Retorna sucesso mesmo se webhook falhar
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-### Arquivos a modificar
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
 
-#### 3. `index.html`
-Adicionar script do Meta Pixel no `<head>` com:
-- `fbq('init', '1396348278959400')`
-- `fbq('track', 'PageView')`
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
-#### 4. `supabase/functions/save-lead/index.ts`
-Trocar `N8N_WEBHOOK_URL` por `N8N_WEBHOOK_LEAD_URL` (linhas 89-90)
+---
 
-#### 5. `supabase/config.toml`
-Adicionar:
+## Mudanças Detalhadas
+
+### Tela de Intro (Index.tsx)
+
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
 ```text
-[functions.notify-booking]
-verify_jwt = false
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
 ```
 
-#### 6. `src/pages/Index.tsx`
-No `handleFinalSubmit`, apos save-lead bem-sucedido (antes do finally), chamar `trackLead()`:
+**Novo:**
 ```text
-import { trackLead } from '@/services/metaPixel';
-// dentro do try, apos verificar que nao houve erro:
-trackLead();
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
 ```
 
-#### 7. `src/components/funnel/SchedulingDialog.tsx`
-No `handleConfirm`, apos booking salvo com sucesso:
-- Chamar `trackSchedule()`
-- Invocar `supabase.functions.invoke('notify-booking', { body: {...} })`
+---
 
-### Secrets a configurar (depois de criar os webhooks no n8n)
+### Classificações (scoreLogic.ts)
 
-| Secret | Descricao |
-|--------|-----------|
-| `N8N_WEBHOOK_LEAD_URL` | URL do webhook POST do Fluxo 1 (leads) |
-| `N8N_WEBHOOK_BOOKING_URL` | URL do webhook POST do Fluxo 2 (agendamentos) |
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
 
-Voce cria os dois fluxos no n8n com trigger "Webhook" em POST, copia as URLs e traz aqui para configurar.
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
 
-### Payload enviado para cada webhook
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
 
-**NEW_LEAD (Fluxo 1):**
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
 ```text
-{
-  event: "NEW_LEAD",
-  lead_id: "uuid",
-  name, phone, email, company_name,
-  monthly_revenue, traffic_investment,
-  answers, score_total, pillars,
-  bottleneck, badges, recommendations, classification
-}
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
 ```
 
-**NEW_BOOKING (Fluxo 2):**
+**Atendimento:**
 ```text
-{
-  event: "NEW_BOOKING",
-  lead_id: "uuid",
-  name, phone,
-  scheduled_date: "2026-03-01",
-  scheduled_time: "14:00"
-}
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
 ```
 
-### Ordem de implementacao
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
 
-1. Adicionar Pixel no index.html + criar helper metaPixel.ts
-2. Criar edge function notify-booking
-3. Atualizar save-lead (renomear variavel do webhook)
-4. Atualizar config.toml
-5. Integrar tracking no frontend (Index.tsx + SchedulingDialog.tsx)
-6. Deploy das edge functions
-7. Configurar secrets quando voce trouxer as URLs
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 

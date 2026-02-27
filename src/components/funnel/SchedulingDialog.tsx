@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { UserData } from '@/types/funnel';
+import { trackSchedule } from '@/services/metaPixel';
 
 const TIME_SLOTS = [
   '08:00', '09:00', '10:00', '11:00', '12:00',
@@ -56,6 +57,20 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
       });
 
       if (error) throw error;
+
+      // Track Meta Pixel conversion
+      trackSchedule();
+
+      // Notify n8n webhook
+      supabase.functions.invoke('notify-booking', {
+        body: {
+          lead_id: leadId || null,
+          name: userData.name,
+          phone: userData.whatsapp,
+          scheduled_date: format(selectedDate, 'yyyy-MM-dd'),
+          scheduled_time: selectedTime,
+        }
+      }).catch(err => console.error('notify-booking error:', err));
 
       const formattedDate = format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
       if (onBookingConfirmed) {
