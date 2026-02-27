@@ -303,14 +303,6 @@ const ScoreDisplay: React.FC<{
         </div>
       </motion.div>
 
-      {/* Testimonial */}
-      <Testimonial data={{
-        name: "Clemir Junio",
-        company: "Artfacas Brasil",
-        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
-        result: "Faturamento previsível"
-      }} />
-
       {/* Bottom CTA */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -327,6 +319,14 @@ const ScoreDisplay: React.FC<{
           Agendar minha implementação →
         </button>
       </motion.div>
+
+      {/* Testimonial */}
+      <Testimonial data={{
+        name: "Clemir Junio",
+        company: "Artfacas Brasil",
+        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+        result: "Faturamento previsível"
+      }} />
 
       <SchedulingDialog
         open={showScheduling}
