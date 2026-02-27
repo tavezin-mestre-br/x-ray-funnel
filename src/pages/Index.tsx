@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
+import logoShekinah from '@/assets/logo-shekinah.png';
 
 type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
 
@@ -124,7 +125,8 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300">
+    <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300 relative">
+      <img src={logoShekinah} alt="" className="absolute top-5 left-1/2 -translate-x-1/2 w-7 h-7 opacity-20 pointer-events-none z-10" />
       {/* Header */}
       <header className="w-full py-4 lg:py-5 px-4 lg:px-6 border-b border-border/50">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
