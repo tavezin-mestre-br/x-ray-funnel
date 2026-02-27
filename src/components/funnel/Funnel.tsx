@@ -131,7 +131,8 @@ const Funnel: React.FC<FunnelProps> = ({
 
           <QuestionRenderer 
             question={question} 
-            onAnswer={handleAnswer} 
+            onAnswer={handleAnswer}
+            previousAnswer={previousAnswer}
           />
         </motion.div>
       </AnimatePresence>
