@@ -311,6 +311,23 @@ const ScoreDisplay: React.FC<{
         result: "Faturamento previsível"
       }} />
 
+      {/* Bottom CTA */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.9 }}
+        className="text-center pt-2 pb-4"
+      >
+        <button 
+          onClick={() => setShowScheduling(true)}
+          className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-3.5 sm:py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all min-h-[48px]"
+        >
+          <CalendarCheck size={18} className="lg:hidden" />
+          <CalendarCheck size={20} className="hidden lg:block" />
+          Agendar minha implementação →
+        </button>
+      </motion.div>
+
       <SchedulingDialog
         open={showScheduling}
         onOpenChange={setShowScheduling}
