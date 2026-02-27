@@ -43,7 +43,7 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
                 {pillar.name}
               </span>
             </div>
-            <span className="text-xs lg:text-sm font-bold mono-font text-primary">
+            <span className="text-xs lg:text-sm font-bold mono-font text-foreground">
               {pillar.score}/{pillar.max}
             </span>
           </div>
