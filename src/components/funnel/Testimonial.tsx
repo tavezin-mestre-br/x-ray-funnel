@@ -18,25 +18,25 @@ const TESTIMONIALS: TestimonialData[] = [
   {
     quote: "O que me convenceu foi a velocidade. Em 7 dias já tinha IA respondendo no WhatsApp. Em 30 dias, o comercial inteiro estava rodando.",
     name: "Fernanda Costa",
-    company: "Studio FC Estética",
+    company: "Clínica Essence",
     result: "Implementação em 30 dias"
   },
   {
     quote: "Antes eu perdia lead de madrugada. Hoje a IA responde em 15 segundos, qualifica e agenda sozinha. Conversão subiu 40% sem contratar ninguém.",
     name: "Carlos Mendes",
-    company: "Mendes & Associados",
+    company: "Praxis Consultoria",
     result: "+40% de conversão"
   },
   {
-    quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+    quote: "Antes eu não sabia de onde vinham os clientes. Hoje tenho dashboard com cada lead rastreado, do clique até o fechamento. Isso mudou minha gestão.",
     name: "Ana Beatriz",
-    company: "AB Arquitetura",
+    company: "Vértice Arquitetura",
     result: "Faturamento previsível"
   },
   {
     quote: "Eu achava que precisava de mais vendedores. Na verdade precisava de processo. A Shekinah implementou a máquina comercial e o faturamento dobrou em 60 dias.",
     name: "Thiago Oliveira",
-    company: "TO Premium Services",
+    company: "Orien Serviços",
     result: "+108% em 60 dias"
   },
 ];
