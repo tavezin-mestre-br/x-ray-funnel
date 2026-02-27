@@ -251,7 +251,7 @@ const Index: React.FC = () => {
                       placeholder="Ex: João Silva"
                       value={companyData.contactName}
                       onChange={(e) => setCompanyData(prev => ({ ...prev, contactName: e.target.value }))}
-                      className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base transition-all"
+                     className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base transition-all"
                     />
                   </div>
 
