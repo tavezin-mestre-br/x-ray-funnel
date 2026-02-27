@@ -128,6 +128,9 @@ const Index: React.FC = () => {
     <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300">
       {/* Header */}
       <header className="w-full py-4 lg:py-5 px-4 lg:px-6 border-b border-border/50">
+        <div className="flex justify-center mb-2">
+          <img src={logoS} alt="Shekinah" className="w-7 h-7 object-contain dark:invert" />
+        </div>
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="flex flex-col">
             <span className="text-lg lg:text-xl font-black text-foreground tracking-tight font-heading">SHEKINAH</span>
