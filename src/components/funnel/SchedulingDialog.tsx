@@ -81,7 +81,6 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
     if (!value) {
       setSelectedDate(undefined);
       setSelectedTime(null);
-      setConfirmed(false);
     }
     onOpenChange(value);
   };
