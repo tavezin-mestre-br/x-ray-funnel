@@ -43,7 +43,7 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
                 {pillar.name}
               </span>
             </div>
-            <span className="text-xs lg:text-sm font-bold mono-font text-primary">
+            <span className="text-xs lg:text-sm font-bold mono-font text-foreground">
               {pillar.score}/{pillar.max}
             </span>
           </div>
@@ -110,7 +110,7 @@ const TimelineStep: React.FC<{
       <ul className="mt-2 space-y-1.5">
         {items.map((item, i) => (
           <li key={i} className="text-[11px] lg:text-xs text-muted-foreground font-medium leading-snug flex items-start gap-1.5">
-            <span className="text-primary shrink-0 mt-px">•</span>
+            <span className="text-muted-foreground shrink-0 mt-px">•</span>
             <span>{item}</span>
           </li>
         ))}
@@ -130,7 +130,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
     >
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
-        <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
+        <span className="text-[10px] lg:text-xs text-foreground mono-font font-bold uppercase tracking-widest">
           Etapa 3 de 3 · Diagnóstico Preliminar
         </span>
         <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
@@ -138,7 +138,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
             transition={{ duration: 1 }}
-            className="h-full bg-primary rounded-full"
+            className="h-full bg-foreground rounded-full"
           />
         </div>
         <p className="text-muted-foreground text-xs lg:text-sm font-medium mt-1.5">Diagnóstico concluído</p>
@@ -170,7 +170,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
           </p>
         </div>
 
-        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-primary pl-3 lg:pl-4">
+        <p className="text-muted-foreground text-xs lg:text-sm font-medium italic border-l-2 border-foreground pl-3 lg:pl-4">
           Já mapeamos o cenário. Sabemos onde está o problema. Agora é implementar.
         </p>
       </motion.div>
@@ -206,7 +206,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
         </div>
         
         <div className="flex items-start gap-3 pt-3 lg:pt-4 border-t border-border">
-          <TrendingUp size={18} className="text-primary shrink-0 mt-0.5" />
+          <TrendingUp size={18} className="text-foreground shrink-0 mt-0.5" />
           <p className="text-foreground font-medium leading-relaxed text-xs lg:text-sm">
             {results.impact}
           </p>
@@ -284,7 +284,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
               transition={{ delay: 0.75 + index * 0.05 }}
               className="flex items-start gap-2.5 lg:gap-3 p-2.5 lg:p-3 rounded-xl bg-secondary/40"
             >
-              <item.icon size={16} className="text-primary shrink-0 mt-0.5" />
+              <item.icon size={16} className="text-foreground shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs lg:text-sm font-bold text-foreground leading-tight">{item.title}</p>
                 <p className="text-[10px] lg:text-xs text-muted-foreground font-medium mt-0.5">{item.subtitle}</p>
@@ -307,7 +307,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
 
-          <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
+          <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
             Implementamos para um número limitado de empresas por vez para garantir resultado.
           </p>
         </div>

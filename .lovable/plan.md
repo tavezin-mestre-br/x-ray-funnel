@@ -1,63 +1,219 @@
 
 
-## Reduzir o verde e adotar estetica preto e branco
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
-O verde (primary) esta sendo usado em muitos lugares. A ideia e manter o verde apenas em botoes de acao principais e algumas headlines estrategicas, tornando o resto preto e branco puro.
+---
 
-### Onde o verde sera removido
+## Objetivo
 
-**1. `src/index.css` - Ajustar CSS variables**
-- `--ring`: mudar de verde para cinza neutro (foco dos inputs fica neutro)
-- `--accent`: mudar de verde para cinza (accent nao sera verde)
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-**2. `src/pages/Index.tsx` - Tela intro e capturas**
-- Badge "IMPLEMENTACAO DE MAQUINA COMERCIAL COM IA": remover `bg-primary/10 border-primary/20 text-primary`, usar cinza/preto (`bg-foreground text-background` ou `bg-secondary border-border text-foreground`)
-- Headline "Nos resolvemos em 30 dias": MANTER verde (headline estrategica)
-- Icones dos social proof badges (Shield, BarChart3, Users): mudar de `text-primary` para `text-foreground`
-- Botao "Iniciar meu diagnostico": MANTER verde (botao CTA principal)
-- Etapa concluida badge (checkmark e texto): mudar de `bg-primary/10 border-primary/20 text-primary` para `bg-foreground/5 border-foreground/20 text-foreground`
-- Inputs focus: border e ring virao neutros via CSS
-- Botoes de selecao (faturamento, trafego) selecionados: mudar de `bg-primary` para `bg-foreground text-background` (preto no light, branco no dark)
-- Hover dos botoes de selecao: mudar `hover:border-primary/50` para `hover:border-foreground/30`
-- Botao "Ver onde vamos agir": MANTER verde
-- Botao final submit: MANTER verde
+---
 
-**3. `src/components/funnel/Funnel.tsx` - Barra de progresso e feedback**
-- Barra de progresso: mudar de `bg-primary` para `bg-foreground`
-- Feedback overlay border: mudar de `border-primary/20` para `border-border`
-- Texto do feedback: mudar de `text-primary` para `text-foreground`
+## Arquivos a Modificar (Apenas Copy)
 
-**4. `src/components/funnel/QuestionRenderer.tsx` - Opcoes de resposta**
-- Multi-select: selecionado muda de `bg-primary/10 border-primary` para `bg-foreground/5 border-foreground`
-- Checkbox selecionado: mudar de `bg-primary border-primary` para `bg-foreground border-foreground`
-- Texto selecionado: mudar de `text-primary` para `text-foreground`
-- Botao "Confirmar": MANTER verde (e um CTA)
-- Tiles hover: mudar `hover:border-primary hover:bg-primary/5` para `hover:border-foreground hover:bg-foreground/5`
-- Texto hover tiles: mudar `group-hover:text-primary` para `group-hover:text-foreground`
-- Single options hover: mesma logica dos tiles
-- Chevron hover: mudar `group-hover:text-primary` para `group-hover:text-foreground`
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-**5. `src/components/funnel/ScoreDisplay.tsx` - Tela de resultados**
-- Texto "Etapa 3 de 3": mudar de `text-primary` para `text-foreground`
-- Score dos pilares: mudar de `text-primary` para `text-foreground`
-- Barra de progresso 100%: mudar de `bg-primary` para `bg-foreground`
-- Bullet points: mudar de `text-primary` para `text-muted-foreground`
-- TrendingUp icon: mudar de `text-primary` para `text-foreground`
-- Border-l do quote: mudar de `border-primary` para `border-foreground`
-- Icones deliverables: mudar de `text-primary` para `text-foreground`
-- CTA card border: MANTER `border-primary` (destaque do CTA)
-- Botao "Agendar": MANTER verde
-- Texto limitado: mudar de `text-primary` para `text-foreground`
-- Timeline step 1: MANTER verde (destaque visual unico)
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
 
-### Resumo da regra
-- **Verde APENAS em**: botoes CTA principais, headline "Nos resolvemos em 30 dias", primeiro step da timeline
-- **Todo o resto**: preto, branco e cinza
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
-### Arquivos modificados
-1. `src/index.css` (2 variaveis)
-2. `src/pages/Index.tsx` (~8 trechos)
-3. `src/components/funnel/Funnel.tsx` (~3 trechos)
-4. `src/components/funnel/QuestionRenderer.tsx` (~10 trechos)
-5. `src/components/funnel/ScoreDisplay.tsx` (~8 trechos)
+---
+
+## Mudanças Detalhadas
+
+### Tela de Intro (Index.tsx)
+
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
+```text
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
+```
+
+**Novo:**
+```text
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
+```
+
+---
+
+### Classificações (scoreLogic.ts)
+
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
+
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 

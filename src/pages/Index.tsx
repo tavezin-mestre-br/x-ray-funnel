@@ -159,7 +159,7 @@ const Index: React.FC = () => {
               className="max-w-xl w-full text-center space-y-6 lg:space-y-8 py-4"
             >
               <div className="space-y-5 lg:space-y-6">
-                <div className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/20 text-primary rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
+                <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
                   IMPLEMENTAÇÃO DE MÁQUINA COMERCIAL COM IA
                 </div>
 
@@ -175,15 +175,15 @@ const Index: React.FC = () => {
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Shield size={14} className="text-primary" />
+                    <Shield size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Dados protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <BarChart3 size={14} className="text-primary" />
+                    <BarChart3 size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Users size={14} className="text-primary" />
+                    <Users size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
                   </div>
                 </div>
@@ -227,10 +227,10 @@ const Index: React.FC = () => {
               <div className="bg-card p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl border border-border space-y-5 lg:space-y-6">
                 <div className="space-y-2 lg:space-y-3">
                   <div className="flex items-center gap-2 lg:gap-3">
-                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-black text-xs lg:text-sm">✓</span>
+                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-foreground/5 border border-foreground/20 flex items-center justify-center">
+                       <span className="text-foreground font-black text-xs lg:text-sm">✓</span>
                     </div>
-                    <span className="text-xs lg:text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
+                     <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
                   </div>
                   <p className="text-muted-foreground text-xs lg:text-sm">Perfil da empresa registrado.</p>
                 </div>
@@ -251,7 +251,7 @@ const Index: React.FC = () => {
                       placeholder="Ex: João Silva"
                       value={companyData.contactName}
                       onChange={(e) => setCompanyData(prev => ({ ...prev, contactName: e.target.value }))}
-                      className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base transition-all"
+                     className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base transition-all"
                     />
                   </div>
 
@@ -262,7 +262,7 @@ const Index: React.FC = () => {
                       placeholder="Ex: Studio Bella"
                       value={companyData.companyName}
                       onChange={(e) => setCompanyData(prev => ({ ...prev, companyName: e.target.value }))}
-                      className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base transition-all"
+                     className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base transition-all"
                     />
                   </div>
 
@@ -281,8 +281,8 @@ const Index: React.FC = () => {
                           onClick={() => setCompanyData(prev => ({ ...prev, monthlyRevenue: opt.value }))}
                           className={`p-3 rounded-lg border text-sm font-bold transition-all ${
                             companyData.monthlyRevenue === opt.value
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'bg-secondary border-border text-foreground hover:border-primary/50'
+                              ? 'bg-foreground text-background border-foreground'
+                              : 'bg-secondary border-border text-foreground hover:border-foreground/30'
                           }`}
                         >
                           {opt.label}
@@ -308,8 +308,8 @@ const Index: React.FC = () => {
                           onClick={() => setCompanyData(prev => ({ ...prev, trafficInvestment: opt.value }))}
                           className={`p-3 rounded-lg border text-sm font-bold transition-all ${
                             companyData.trafficInvestment === opt.value
-                              ? 'bg-primary text-primary-foreground border-primary'
-                              : 'bg-secondary border-border text-foreground hover:border-primary/50'
+                              ? 'bg-foreground text-background border-foreground'
+                              : 'bg-secondary border-border text-foreground hover:border-foreground/30'
                           }`}
                         >
                           {opt.label}
@@ -344,10 +344,10 @@ const Index: React.FC = () => {
               <div className="bg-card p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl border border-border space-y-5 lg:space-y-6">
                 <div className="space-y-2 lg:space-y-3">
                   <div className="flex items-center gap-2 lg:gap-3">
-                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-black text-xs lg:text-sm">✓</span>
-                    </div>
-                    <span className="text-xs lg:text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
+                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-foreground/5 border border-foreground/20 flex items-center justify-center">
+                       <span className="text-foreground font-black text-xs lg:text-sm">✓</span>
+                     </div>
+                     <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
                   </div>
                   <p className="text-muted-foreground text-xs lg:text-sm">Estrutura operacional mapeada.</p>
                 </div>
@@ -365,8 +365,8 @@ const Index: React.FC = () => {
                     <input 
                       type="tel" 
                       placeholder="(69) 90000-0000" 
-                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
-                      id="final-wa" 
+                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
+                       id="final-wa" 
                     />
                   </div>
                   <div className="space-y-1.5 lg:space-y-2">
@@ -374,8 +374,8 @@ const Index: React.FC = () => {
                     <input 
                       type="email" 
                       placeholder="seu@email.com" 
-                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
-                      id="final-email" 
+                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
+                       id="final-email" 
                     />
                   </div>
                 </div>

@@ -50,19 +50,19 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
                   onClick={() => toggleMultiItem(opt.id)}
                   className={`flex items-center gap-3 p-4 sm:p-5 border rounded-xl transition-all text-left group ${
                     isSelected
-                      ? 'bg-primary/10 border-primary'
-                      : 'bg-secondary border-border hover:border-primary/50'
+                       ? 'bg-foreground/5 border-foreground'
+                       : 'bg-secondary border-border hover:border-foreground/30'
                   }`}
                 >
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
                     isSelected
-                      ? 'bg-primary border-primary'
-                      : 'border-muted-foreground/30'
+                       ? 'bg-foreground border-foreground'
+                       : 'border-muted-foreground/30'
                   }`}>
                     {isSelected && <Check size={12} className="text-primary-foreground" />}
                   </div>
                   <span className={`font-bold text-sm sm:text-base transition-colors ${
-                    isSelected ? 'text-primary' : 'text-foreground'
+                    isSelected ? 'text-foreground' : 'text-foreground'
                   }`}>
                     {opt.label}
                   </span>
@@ -100,9 +100,9 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => onAnswer(opt.id)}
-              className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-center group"
+              className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-center group"
             >
-              <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">
+              <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">
                 {opt.label}
               </span>
             </motion.button>
@@ -118,12 +118,12 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
               key={opt.id}
               variants={item}
               onClick={() => onAnswer(opt.id)}
-              className="w-full flex items-center justify-between p-4 sm:p-5 bg-secondary border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group"
+              className="w-full flex items-center justify-between p-4 sm:p-5 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-left group"
             >
-              <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">
+              <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">
                 {opt.label}
               </span>
-              <ChevronRight className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" size={18} />
+              <ChevronRight className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" size={18} />
             </motion.button>
           ))}
         </motion.div>
