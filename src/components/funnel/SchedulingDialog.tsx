@@ -95,29 +95,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
           </DialogTitle>
         </DialogHeader>
 
-        <AnimatePresence mode="wait">
-          {confirmed ? (
-            <motion.div
-              key="confirmed"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="py-8 text-center space-y-4"
-            >
-              <div className="w-16 h-16 bg-success/10 border border-success/30 rounded-full flex items-center justify-center mx-auto">
-                <Check size={32} className="text-success" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-lg font-black text-foreground font-heading">Reunião Confirmada!</h3>
-                <p className="text-sm text-muted-foreground font-medium">
-                  {selectedDate && format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR })} às {selectedTime}
-                </p>
-              </div>
-              <p className="text-xs text-muted-foreground">
-                Entraremos em contato pelo WhatsApp para confirmar os detalhes.
-              </p>
-            </motion.div>
-          ) : (
-            <motion.div
+        <motion.div
               key="form"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
