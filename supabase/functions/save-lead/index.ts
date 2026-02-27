@@ -63,6 +63,9 @@ Deno.serve(async (req) => {
         name: payload.name,
         phone: payload.phone,
         email: payload.email || null,
+        company_name: payload.company_name || null,
+        monthly_revenue: payload.monthly_revenue || null,
+        traffic_investment: payload.traffic_investment || null,
         answers: payload.answers,
         score_total: payload.score_total,
         pillars: payload.pillars,
@@ -70,7 +73,6 @@ Deno.serve(async (req) => {
         badges: payload.badges,
         recommendations: payload.recommendations,
         classification: payload.classification,
-        traffic_investment: payload.traffic_investment || null,
       })
       .select()
       .single()

@@ -87,7 +87,6 @@ const Index: React.FC = () => {
           phone: whatsapp,
           email: email || null,
           company_name: companyData.companyName,
-          instagram: companyData.instagram,
           monthly_revenue: companyData.monthlyRevenue,
           traffic_investment: companyData.trafficInvestment,
           answers: updatedUserData.responses,

@@ -1,61 +1,219 @@
 
 
-## Salvar todos os dados do lead no banco de dados
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
-### Problema
+---
 
-Dois campos preenchidos pelo lead (Nome da Empresa e Faturamento Mensal) estao sendo perdidos: o frontend envia para a edge function, mas a tabela `leads` nao tem as colunas e a edge function nao inclui no INSERT.
+## Objetivo
 
-### O que sera feito
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-#### 1. Adicionar colunas na tabela `leads` (migracao SQL)
+---
 
-```sql
-ALTER TABLE public.leads
-  ADD COLUMN company_name text,
-  ADD COLUMN monthly_revenue text;
+## Arquivos a Modificar (Apenas Copy)
+
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
+
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
+
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
+
+---
+
+## Mudanças Detalhadas
+
+### Tela de Intro (Index.tsx)
+
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
+```text
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
 ```
 
-Ambas nullable para nao quebrar registros existentes.
+**Novo:**
+```text
+O que implementamos para clínicas em Porto Velho
 
-Nota: O campo `instagram` nao sera adicionado pois nao e coletado no formulario. Se quiser coletar no futuro, basta adicionar.
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
 
-#### 2. Atualizar a edge function `save-lead`
+[Solicitar plano de implementação]
 
-Adicionar `company_name` e `monthly_revenue` no `.insert()`:
-
-```typescript
-.insert({
-  name: payload.name,
-  phone: payload.phone,
-  email: payload.email || null,
-  company_name: payload.company_name || null,    // NOVO
-  monthly_revenue: payload.monthly_revenue || null, // NOVO
-  traffic_investment: payload.traffic_investment || null,
-  answers: payload.answers,
-  score_total: payload.score_total,
-  pillars: payload.pillars,
-  bottleneck: payload.bottleneck,
-  badges: payload.badges,
-  recommendations: payload.recommendations,
-  classification: payload.classification,
-})
+Vagas limitadas para clínicas de Porto Velho – RO.
 ```
 
-#### 3. Remover `instagram` do payload enviado pelo frontend (limpeza)
+---
 
-No `Index.tsx`, remover a linha `instagram: companyData.instagram` do body do `save-lead` ja que o campo nao e coletado.
+### Classificações (scoreLogic.ts)
 
-### Resultado
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
 
-Todos os dados preenchidos pelo lead serao salvos:
-- Nome, WhatsApp, Email
-- Nome da Empresa, Faturamento Mensal, Investimento em Trafego
-- 8 respostas do diagnostico (JSONB)
-- Score, pilares, gargalo, badges, recomendacoes, classificacao
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
 
-### Arquivos afetados
-- Nova migracao SQL (2 colunas)
-- `supabase/functions/save-lead/index.ts` (2 campos no INSERT)
-- `src/pages/Index.tsx` (remover instagram do body)
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 
