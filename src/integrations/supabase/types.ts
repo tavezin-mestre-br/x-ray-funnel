@@ -50,9 +50,11 @@ export type Database = {
           badges: Json | null
           bottleneck: string | null
           classification: string | null
+          company_name: string | null
           created_at: string
           email: string | null
           id: string
+          monthly_revenue: string | null
           name: string
           phone: string
           pillars: Json
@@ -66,9 +68,11 @@ export type Database = {
           badges?: Json | null
           bottleneck?: string | null
           classification?: string | null
+          company_name?: string | null
           created_at?: string
           email?: string | null
           id?: string
+          monthly_revenue?: string | null
           name: string
           phone: string
           pillars?: Json
@@ -82,9 +86,11 @@ export type Database = {
           badges?: Json | null
           bottleneck?: string | null
           classification?: string | null
+          company_name?: string | null
           created_at?: string
           email?: string | null
           id?: string
+          monthly_revenue?: string | null
           name?: string
           phone?: string
           pillars?: Json
