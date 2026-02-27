@@ -129,10 +129,12 @@ const Index: React.FC = () => {
       {/* Header */}
       <header className="w-full py-4 lg:py-5 px-4 lg:px-6 border-b border-border/50">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
-          <div className="flex flex-col items-center">
+          <div className="flex items-center gap-2">
             <img src={logoShekinah} alt="" className="w-5 h-5 pointer-events-none" />
-            <span className="text-lg lg:text-xl font-black text-foreground tracking-tight font-heading">SHEKINAH</span>
-            <span className="text-[9px] lg:text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
+            <div className="flex flex-col">
+              <span className="text-lg lg:text-xl font-black text-foreground tracking-tight font-heading">SHEKINAH</span>
+              <span className="text-[9px] lg:text-[10px] text-muted-foreground font-medium tracking-widest uppercase">Marketing · Tecnologia · IA</span>
+            </div>
           </div>
           <div className="flex items-center gap-3">
             {step === 'funnel' && (
