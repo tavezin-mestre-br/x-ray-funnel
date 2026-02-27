@@ -295,7 +295,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
 
         <div className="border-t border-border pt-4 lg:pt-5 space-y-3 lg:space-y-4">
           <button 
-            onClick={openCalendly}
+            onClick={() => setShowScheduling(true)}
             className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-3.5 sm:py-4 lg:py-5 rounded-xl font-black text-base lg:text-lg glow-primary flex items-center justify-center gap-2 lg:gap-3 hover:opacity-90 transition-all min-h-[48px]"
           >
             <CalendarCheck size={18} className="lg:hidden" />
