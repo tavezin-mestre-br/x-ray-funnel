@@ -98,7 +98,7 @@ export const QUESTIONS: Question[] = [
     feedback: 'Volume registrado.',
     options: [
       { id: 'q7_1', label: 'Menos de 100', value: 1, pillar: 'aquisição' },
-      { id: 'q7_2', label: '100 a 300', value: 2, pillar: 'aquisição' },
+      { id: 'q7_2', label: '100 a 500', value: 2, pillar: 'aquisição' },
       { id: 'q7_3', label: '300 a 500', value: 3, pillar: 'aquisição' },
       { id: 'q7_4', label: 'Mais de 500', value: 4, pillar: 'aquisição' }
     ]
