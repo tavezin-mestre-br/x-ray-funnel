@@ -344,10 +344,10 @@ const Index: React.FC = () => {
               <div className="bg-card p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl border border-border space-y-5 lg:space-y-6">
                 <div className="space-y-2 lg:space-y-3">
                   <div className="flex items-center gap-2 lg:gap-3">
-                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-black text-xs lg:text-sm">✓</span>
-                    </div>
-                    <span className="text-xs lg:text-sm text-primary font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
+                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-foreground/5 border border-foreground/20 flex items-center justify-center">
+                       <span className="text-foreground font-black text-xs lg:text-sm">✓</span>
+                     </div>
+                     <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
                   </div>
                   <p className="text-muted-foreground text-xs lg:text-sm">Estrutura operacional mapeada.</p>
                 </div>
