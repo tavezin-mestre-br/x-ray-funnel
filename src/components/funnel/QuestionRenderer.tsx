@@ -123,7 +123,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">
                 {opt.label}
               </span>
-              <ChevronRight className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" size={18} />
+              <ChevronRight className="text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" size={18} />
             </motion.button>
           ))}
         </motion.div>

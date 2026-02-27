@@ -374,8 +374,8 @@ const Index: React.FC = () => {
                     <input 
                       type="email" 
                       placeholder="seu@email.com" 
-                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
-                      id="final-email" 
+                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
+                       id="final-email" 
                     />
                   </div>
                 </div>

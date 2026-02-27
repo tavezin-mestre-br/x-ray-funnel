@@ -99,8 +99,8 @@ const Funnel: React.FC<FunnelProps> = ({
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
           >
-            <div className="bg-card border border-primary/20 px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl shadow-medium">
-              <span className="text-primary font-bold mono-font text-xs lg:text-sm">{question.feedback}</span>
+             <div className="bg-card border border-border px-6 py-3 lg:px-8 lg:py-4 rounded-xl lg:rounded-2xl shadow-medium">
+               <span className="text-foreground font-bold mono-font text-xs lg:text-sm">{question.feedback}</span>
             </div>
           </motion.div>
         )}

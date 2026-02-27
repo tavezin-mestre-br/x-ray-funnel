@@ -307,7 +307,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
 
-          <p className="text-[10px] lg:text-xs text-primary font-bold mono-font uppercase tracking-wider text-center">
+          <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
             Implementamos para um número limitado de empresas por vez para garantir resultado.
           </p>
         </div>
