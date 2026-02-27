@@ -70,6 +70,7 @@ Deno.serve(async (req) => {
         badges: payload.badges,
         recommendations: payload.recommendations,
         classification: payload.classification,
+        traffic_investment: payload.traffic_investment || null,
       })
       .select()
       .single()
