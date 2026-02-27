@@ -206,7 +206,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
         </div>
         
         <div className="flex items-start gap-3 pt-3 lg:pt-4 border-t border-border">
-          <TrendingUp size={18} className="text-primary shrink-0 mt-0.5" />
+          <TrendingUp size={18} className="text-foreground shrink-0 mt-0.5" />
           <p className="text-foreground font-medium leading-relaxed text-xs lg:text-sm">
             {results.impact}
           </p>
