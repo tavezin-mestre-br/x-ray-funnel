@@ -9,6 +9,10 @@ interface LeadPayload {
   name: string
   phone: string
   email?: string
+  company_name?: string
+  instagram?: string
+  monthly_revenue?: string
+  traffic_investment?: string
   answers: Record<string, string>
   score_total: number
   pillars: Record<string, number>
@@ -66,6 +70,7 @@ Deno.serve(async (req) => {
         badges: payload.badges,
         recommendations: payload.recommendations,
         classification: payload.classification,
+        traffic_investment: payload.traffic_investment || null,
       })
       .select()
       .single()

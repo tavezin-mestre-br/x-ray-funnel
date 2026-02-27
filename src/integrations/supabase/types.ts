@@ -58,6 +58,7 @@ export type Database = {
           pillars: Json
           recommendations: Json | null
           score_total: number
+          traffic_investment: string | null
           updated_at: string
         }
         Insert: {
@@ -73,6 +74,7 @@ export type Database = {
           pillars?: Json
           recommendations?: Json | null
           score_total?: number
+          traffic_investment?: string | null
           updated_at?: string
         }
         Update: {
@@ -88,6 +90,7 @@ export type Database = {
           pillars?: Json
           recommendations?: Json | null
           score_total?: number
+          traffic_investment?: string | null
           updated_at?: string
         }
         Relationships: []
