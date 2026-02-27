@@ -10,6 +10,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
+import logoS from '@/assets/logo-s.png';
 
 type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
 
