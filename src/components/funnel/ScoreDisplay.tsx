@@ -252,7 +252,12 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
       </motion.div>
 
       {/* Testimonial (single, subtle) */}
-      <Testimonial data={getTestimonialForStep(3)} />
+      <Testimonial data={{
+        name: "Clemir Junio",
+        company: "Artfacas Brasil",
+        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+        result: "Faturamento previsível"
+      }} />
 
       {/* CTA */}
       <motion.div 
