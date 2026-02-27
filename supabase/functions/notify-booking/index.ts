@@ -1,8 +1,41 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
+}
+
+async function hashStr(str: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str.trim().toLowerCase()))
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function sendMetaConversion(eventName: string, userData: { name?: string; phone?: string; email?: string }, customData?: Record<string, unknown>) {
+  const token = Deno.env.get('META_CONVERSIONS_TOKEN')
+  if (!token) { console.log('META_CONVERSIONS_TOKEN not set, skipping CAPI'); return }
+
+  try {
+    const payload = {
+      data: [{
+        event_name: eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        action_source: 'website',
+        event_source_url: 'https://shknh.lovable.app',
+        user_data: {
+          ph: userData.phone ? [await hashStr(userData.phone)] : undefined,
+          em: userData.email ? [await hashStr(userData.email)] : undefined,
+          fn: userData.name ? [await hashStr(userData.name.split(' ')[0])] : undefined,
+        },
+        custom_data: customData,
+      }],
+    }
+
+    const res = await fetch(
+      `https://graph.facebook.com/v21.0/1396348278959400/events?access_token=${token}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+    )
+    console.log('Meta CAPI response:', res.status, await res.text())
+  } catch (e) {
+    console.error('Meta CAPI error:', e)
+  }
 }
 
 Deno.serve(async (req) => {
@@ -21,20 +54,16 @@ Deno.serve(async (req) => {
     const payload = await req.json()
     console.log('Received booking notification payload:', JSON.stringify(payload))
 
+    // n8n webhook
     const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_BOOKING_URL')
-
     if (n8nWebhookUrl) {
       try {
         console.log('Triggering n8n booking webhook...')
         const webhookResponse = await fetch(n8nWebhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event: 'NEW_BOOKING',
-            ...payload,
-          }),
+          body: JSON.stringify({ event: 'NEW_BOOKING', ...payload }),
         })
-
         if (!webhookResponse.ok) {
           console.error('n8n booking webhook failed:', await webhookResponse.text())
         } else {
@@ -46,6 +75,13 @@ Deno.serve(async (req) => {
     } else {
       console.log('N8N_WEBHOOK_BOOKING_URL not configured, skipping webhook')
     }
+
+    // Meta Conversions API
+    await sendMetaConversion('Schedule', { name: payload.name, phone: payload.phone }, {
+      scheduled_date: payload.scheduled_date,
+      scheduled_time: payload.scheduled_time,
+      lead_id: payload.lead_id,
+    })
 
     return new Response(JSON.stringify({ success: true }), {
       status: 200,

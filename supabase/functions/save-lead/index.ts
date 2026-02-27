@@ -5,6 +5,41 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
+async function hashStr(str: string): Promise<string> {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str.trim().toLowerCase()))
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function sendMetaConversion(eventName: string, userData: { name?: string; phone?: string; email?: string }, customData?: Record<string, unknown>) {
+  const token = Deno.env.get('META_CONVERSIONS_TOKEN')
+  if (!token) { console.log('META_CONVERSIONS_TOKEN not set, skipping CAPI'); return }
+
+  try {
+    const payload = {
+      data: [{
+        event_name: eventName,
+        event_time: Math.floor(Date.now() / 1000),
+        action_source: 'website',
+        event_source_url: 'https://shknh.lovable.app',
+        user_data: {
+          ph: userData.phone ? [await hashStr(userData.phone)] : undefined,
+          em: userData.email ? [await hashStr(userData.email)] : undefined,
+          fn: userData.name ? [await hashStr(userData.name.split(' ')[0])] : undefined,
+        },
+        custom_data: customData,
+      }],
+    }
+
+    const res = await fetch(
+      `https://graph.facebook.com/v21.0/1396348278959400/events?access_token=${token}`,
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+    )
+    console.log('Meta CAPI response:', res.status, await res.text())
+  } catch (e) {
+    console.error('Meta CAPI error:', e)
+  }
+}
+
 interface LeadPayload {
   name: string
   phone: string
@@ -27,7 +62,6 @@ interface LeadPayload {
 }
 
 Deno.serve(async (req) => {
-  // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     return new Response(null, { headers: corsHeaders })
   }
@@ -43,7 +77,6 @@ Deno.serve(async (req) => {
     const payload: LeadPayload = await req.json()
     console.log('Received lead payload:', JSON.stringify(payload))
 
-    // Validate required fields
     if (!payload.name || !payload.phone) {
       return new Response(JSON.stringify({ error: 'Name and phone are required' }), {
         status: 400,
@@ -51,12 +84,10 @@ Deno.serve(async (req) => {
       })
     }
 
-    // Initialize Supabase client with service role
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
     const supabase = createClient(supabaseUrl, supabaseServiceKey)
 
-    // Save lead to database
     const { data: lead, error: dbError } = await supabase
       .from('leads')
       .insert({
@@ -87,22 +118,16 @@ Deno.serve(async (req) => {
 
     console.log('Lead saved successfully:', lead.id)
 
-    // Trigger n8n webhook if configured
+    // n8n webhook
     const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_LEAD_URL')
-
     if (n8nWebhookUrl) {
       try {
         console.log('Triggering n8n webhook...')
         const webhookResponse = await fetch(n8nWebhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            event: 'NEW_LEAD',
-            lead_id: lead.id,
-            ...payload,
-          }),
+          body: JSON.stringify({ event: 'NEW_LEAD', lead_id: lead.id, ...payload }),
         })
-
         if (!webhookResponse.ok) {
           console.error('n8n webhook failed:', await webhookResponse.text())
         } else {
@@ -110,11 +135,17 @@ Deno.serve(async (req) => {
         }
       } catch (webhookError) {
         console.error('n8n webhook error:', webhookError)
-        // Don't fail the request if webhook fails
       }
     } else {
-      console.log('N8N_WEBHOOK_URL not configured, skipping webhook')
+      console.log('N8N_WEBHOOK_LEAD_URL not configured, skipping webhook')
     }
+
+    // Meta Conversions API
+    await sendMetaConversion('Lead', { name: payload.name, phone: payload.phone, email: payload.email }, {
+      score_total: payload.score_total,
+      classification: payload.classification,
+      bottleneck: payload.bottleneck,
+    })
 
     return new Response(JSON.stringify({ success: true, lead_id: lead.id }), {
       status: 201,
