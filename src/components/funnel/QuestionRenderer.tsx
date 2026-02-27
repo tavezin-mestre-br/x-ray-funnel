@@ -50,8 +50,8 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
                   onClick={() => toggleMultiItem(opt.id)}
                   className={`flex items-center gap-3 p-4 sm:p-5 border rounded-xl transition-all text-left group ${
                     isSelected
-                      ? 'bg-primary/10 border-primary'
-                      : 'bg-secondary border-border hover:border-primary/50'
+                       ? 'bg-foreground/5 border-foreground'
+                       : 'bg-secondary border-border hover:border-foreground/30'
                   }`}
                 >
                   <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center shrink-0 transition-all ${
