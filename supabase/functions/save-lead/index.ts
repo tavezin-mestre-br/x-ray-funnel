@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version',
 }
 
 async function hashStr(str: string): Promise<string> {
@@ -10,25 +10,42 @@ async function hashStr(str: string): Promise<string> {
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('')
 }
 
-async function sendMetaConversion(eventName: string, userData: { name?: string; phone?: string; email?: string }, customData?: Record<string, unknown>) {
+async function sendMetaConversion(
+  eventName: string,
+  userData: { name?: string; phone?: string; email?: string },
+  customData?: Record<string, unknown>,
+  eventId?: string,
+  fbp?: string,
+  fbc?: string,
+  sourceUrl?: string
+) {
   const token = Deno.env.get('META_CONVERSIONS_TOKEN')
   if (!token) { console.log('META_CONVERSIONS_TOKEN not set, skipping CAPI'); return }
 
   try {
-    const payload = {
-      data: [{
-        event_name: eventName,
-        event_time: Math.floor(Date.now() / 1000),
-        action_source: 'website',
-        event_source_url: 'https://shknh.lovable.app',
-        user_data: {
-          ph: userData.phone ? [await hashStr(userData.phone)] : undefined,
-          em: userData.email ? [await hashStr(userData.email)] : undefined,
-          fn: userData.name ? [await hashStr(userData.name.split(' ')[0])] : undefined,
-        },
-        custom_data: customData,
-      }],
+    const userDataPayload: Record<string, unknown> = {
+      ph: userData.phone ? [await hashStr(userData.phone.replace(/\D/g, ''))] : undefined,
+      em: userData.email ? [await hashStr(userData.email.toLowerCase().trim())] : undefined,
+      fn: userData.name ? [await hashStr(userData.name.split(' ')[0].toLowerCase().trim())] : undefined,
     }
+
+    // Cookies do navegador para melhorar match quality
+    if (fbp) userDataPayload.fbp = fbp
+    if (fbc) userDataPayload.fbc = fbc
+
+    const eventData: Record<string, unknown> = {
+      event_name: eventName,
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: 'website',
+      event_source_url: sourceUrl || 'https://shkinh.online',
+      user_data: userDataPayload,
+      custom_data: customData,
+    }
+
+    // Deduplicação
+    if (eventId) eventData.event_id = eventId
+
+    const payload = { data: [eventData] }
 
     const res = await fetch(
       `https://graph.facebook.com/v21.0/1396348278959400/events?access_token=${token}`,
@@ -59,6 +76,10 @@ interface LeadPayload {
     sixtyNinetyDays: string[]
   }
   classification: string
+  event_id?: string
+  fbp?: string
+  fbc?: string
+  source_url?: string
 }
 
 Deno.serve(async (req) => {
@@ -141,11 +162,15 @@ Deno.serve(async (req) => {
     }
 
     // Meta Conversions API
-    await sendMetaConversion('Lead', { name: payload.name, phone: payload.phone, email: payload.email }, {
-      score_total: payload.score_total,
-      classification: payload.classification,
-      bottleneck: payload.bottleneck,
-    })
+    await sendMetaConversion(
+      'Lead',
+      { name: payload.name, phone: payload.phone, email: payload.email },
+      { score_total: payload.score_total, classification: payload.classification, bottleneck: payload.bottleneck },
+      payload.event_id,
+      payload.fbp,
+      payload.fbc,
+      payload.source_url
+    )
 
     return new Response(JSON.stringify({ success: true, lead_id: lead.id }), {
       status: 201,
