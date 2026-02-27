@@ -119,7 +119,7 @@ const TimelineStep: React.FC<{
   </motion.div>
 );
 
-const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({ results, userData }) => {
+const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBookingConfirmed: (date: string, time: string) => void }> = ({ results, userData, onBookingConfirmed }) => {
   const [showScheduling, setShowScheduling] = useState(false);
 
   return (
