@@ -120,9 +120,7 @@ const TimelineStep: React.FC<{
 );
 
 const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({ results, userData }) => {
-  const openCalendly = () => {
-    window.open('https://calendly.com/seu-link', '_blank');
-  };
+  const [showScheduling, setShowScheduling] = useState(false);
 
   return (
     <motion.div 
