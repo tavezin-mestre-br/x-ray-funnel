@@ -36,7 +36,7 @@ const TESTIMONIALS: TestimonialData[] = [
   {
     quote: "Eu achava que precisava de mais vendedores. Na verdade precisava de processo. A Shekinah implementou a máquina comercial e o faturamento dobrou em 60 dias.",
     name: "Thiago Oliveira",
-    company: "TO Premium Services",
+    company: "Orien Serviços",
     result: "+108% em 60 dias"
   },
 ];
