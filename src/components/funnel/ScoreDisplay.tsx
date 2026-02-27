@@ -284,7 +284,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
               transition={{ delay: 0.75 + index * 0.05 }}
               className="flex items-start gap-2.5 lg:gap-3 p-2.5 lg:p-3 rounded-xl bg-secondary/40"
             >
-              <item.icon size={16} className="text-primary shrink-0 mt-0.5" />
+              <item.icon size={16} className="text-foreground shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs lg:text-sm font-bold text-foreground leading-tight">{item.title}</p>
                 <p className="text-[10px] lg:text-xs text-muted-foreground font-medium mt-0.5">{item.subtitle}</p>
