@@ -26,6 +26,7 @@ interface SchedulingDialogProps {
   onOpenChange: (open: boolean) => void;
   userData: UserData;
   leadId?: string;
+  onBookingConfirmed?: (date: string, time: string) => void;
 }
 
 const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
