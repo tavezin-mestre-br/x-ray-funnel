@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
+import { ChevronLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import QuestionRenderer from './QuestionRenderer';
@@ -7,6 +8,7 @@ import Testimonial, { getTestimonialForStep } from './Testimonial';
 interface FunnelProps {
   question: Question;
   onResponse: (questionId: number, answer: any) => void;
+  onBack?: () => void;
   currentIndex: number;
   totalSteps: number;
 }
@@ -14,6 +16,7 @@ interface FunnelProps {
 const Funnel: React.FC<FunnelProps> = ({ 
   question, 
   onResponse, 
+  onBack,
   currentIndex, 
   totalSteps 
 }) => {
@@ -55,9 +58,23 @@ const Funnel: React.FC<FunnelProps> = ({
       {/* Progress bar */}
       <div className="w-full">
         <div className="flex justify-between items-center mb-2 lg:mb-3">
-          <span className="text-[10px] lg:text-xs text-muted-foreground mono-font uppercase tracking-wider">
-            Etapa {phaseInfo.phase} de 2 · {phaseInfo.name}
-          </span>
+          <div className="flex items-center gap-2">
+            {onBack && currentIndex > 0 && (
+              <button
+                onClick={onBack}
+                className="flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Voltar"
+              >
+                <ChevronLeft size={16} />
+                <span className="text-[10px] lg:text-xs mono-font font-bold uppercase tracking-wider">Voltar</span>
+              </button>
+            )}
+            {!(onBack && currentIndex > 0) && (
+              <span className="text-[10px] lg:text-xs text-muted-foreground mono-font uppercase tracking-wider">
+                Etapa {phaseInfo.phase} de 2 · {phaseInfo.name}
+              </span>
+            )}
+          </div>
           <span className="text-[10px] lg:text-xs text-muted-foreground mono-font">
             {currentIndex}/{totalSteps}
           </span>

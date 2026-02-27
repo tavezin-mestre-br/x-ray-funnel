@@ -414,6 +414,15 @@ const Index: React.FC = () => {
             <Funnel 
               question={QUESTIONS[currentQuestionIndex]} 
               onResponse={handleResponse}
+              onBack={() => {
+                if (currentQuestionIndex === 4) {
+                  setStep('capture_company');
+                } else if (currentQuestionIndex === 0) {
+                  setStep('intro');
+                } else {
+                  setCurrentQuestionIndex(prev => prev - 1);
+                }
+              }}
               currentIndex={currentQuestionIndex + 1}
               totalSteps={QUESTIONS.length}
             />
