@@ -1,68 +1,219 @@
 
 
-## Enviar respostas com texto legivel (labels) no banco e webhooks
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
-### Problema atual
+---
 
-Hoje, as respostas sao salvas como IDs de opcao (ex: `"q1_1"`, `"q2_3"`, `["q4_1", "q4_3"]`). Isso nao permite entender o que o lead realmente respondeu sem consultar o codigo.
+## Objetivo
 
-### Solucao
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-Transformar o campo `answers` antes de enviar para o backend, mapeando cada resposta ao texto visivel (label) da opcao escolhida. O formato final sera:
+---
 
+## Arquivos a Modificar (Apenas Copy)
+
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
+
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
+
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
+
+---
+
+## Mudanças Detalhadas
+
+### Tela de Intro (Index.tsx)
+
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
 ```text
-{
-  "1": {
-    "question": "Qual a maior dor da sua empresa hoje?",
-    "answer": "Leads entram, mas não viram venda"
-  },
-  "2": {
-    "question": "O que você já tentou para resolver isso?",
-    "answer": "Contratei agência de tráfego e não deu resultado"
-  },
-  "4": {
-    "question": "O que você espera de uma empresa como a Shekinah?",
-    "answer": ["Resolver rápido, sem enrolação", "Estrutura que funcione 24h sem depender de mim"]
-  }
-}
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
 ```
 
-### Arquivo a modificar
-
-**`src/pages/Index.tsx`** - Na funcao `handleFinalSubmit`, antes de chamar `save-lead`:
-
-1. Importar `QUESTIONS` (ja importado)
-2. Criar uma funcao que percorre `userData.responses` e para cada questionId:
-   - Encontra a pergunta correspondente em `QUESTIONS`
-   - Se a resposta for um array (multi-select), mapeia cada ID para o label da opcao
-   - Se for um unico ID (single/tiles), encontra o label da opcao
-   - Retorna um objeto com `question` (titulo) e `answer` (label ou array de labels)
-3. Enviar esse objeto transformado no campo `answers` em vez do `userData.responses` original
-
-### Detalhes tecnicos
-
+**Novo:**
 ```text
-// Funcao de transformacao (dentro de handleFinalSubmit)
-const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
-  const question = QUESTIONS.find(q => q.id === Number(qId));
-  if (!question) return acc;
+O que implementamos para clínicas em Porto Velho
 
-  let formattedAnswer: string | string[];
-  if (Array.isArray(answer)) {
-    formattedAnswer = answer.map(optId => question.options.find(o => o.id === optId)?.label || optId);
-  } else {
-    formattedAnswer = question.options.find(o => o.id === answer)?.label || answer;
-  }
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
 
-  acc[qId] = { question: question.title, answer: formattedAnswer };
-  return acc;
-}, {} as Record<string, { question: string; answer: string | string[] }>);
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
 ```
 
-Depois substituir `answers: updatedUserData.responses` por `answers: formattedAnswers` na chamada do `save-lead`.
+---
 
-### Impacto
+### Classificações (scoreLogic.ts)
 
-- O banco de dados recebe as respostas legiveis (campo `answers` JSONB - sem mudanca de schema)
-- O webhook do n8n recebe as mesmas respostas legiveis automaticamente (ja repassa o campo `answers`)
-- Nenhuma mudanca necessaria no backend ou edge functions
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
+
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
+

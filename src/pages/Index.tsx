@@ -81,6 +81,22 @@ const Index: React.FC = () => {
     
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
     
+    // Transform responses from IDs to readable labels
+    const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
+      const question = QUESTIONS.find(q => q.id === Number(qId));
+      if (!question) return acc;
+
+      let formattedAnswer: string | string[];
+      if (Array.isArray(answer)) {
+        formattedAnswer = answer.map((optId: string) => question.options.find(o => o.id === optId)?.label || optId);
+      } else {
+        formattedAnswer = question.options.find(o => o.id === answer)?.label || answer;
+      }
+
+      acc[qId] = { question: question.title, answer: formattedAnswer };
+      return acc;
+    }, {} as Record<string, { question: string; answer: string | string[] }>);
+
     try {
       const { error } = await supabase.functions.invoke('save-lead', {
         body: {
@@ -90,7 +106,7 @@ const Index: React.FC = () => {
           company_name: companyData.companyName,
           monthly_revenue: companyData.monthlyRevenue,
           traffic_investment: companyData.trafficInvestment,
-          answers: updatedUserData.responses,
+          answers: formattedAnswers,
           score_total: resultsToSave.totalScore,
           pillars: resultsToSave.pillars.reduce((acc, p) => ({ ...acc, [p.name]: p.score }), {}),
           bottleneck: resultsToSave.bottleneck,
