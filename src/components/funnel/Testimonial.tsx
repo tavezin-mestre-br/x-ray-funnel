@@ -24,7 +24,7 @@ const TESTIMONIALS: TestimonialData[] = [
   {
     quote: "Antes eu perdia lead de madrugada. Hoje a IA responde em 15 segundos, qualifica e agenda sozinha. Conversão subiu 40% sem contratar ninguém.",
     name: "Carlos Mendes",
-    company: "Mendes & Associados",
+    company: "Praxis Consultoria",
     result: "+40% de conversão"
   },
   {
