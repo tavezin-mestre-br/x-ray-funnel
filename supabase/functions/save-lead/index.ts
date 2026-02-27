@@ -88,8 +88,7 @@ Deno.serve(async (req) => {
     console.log('Lead saved successfully:', lead.id)
 
     // Trigger n8n webhook if configured
-    const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_URL')
-    const n8nSecret = Deno.env.get('N8N_SECRET')
+    const n8nWebhookUrl = Deno.env.get('N8N_WEBHOOK_LEAD_URL')
 
     if (n8nWebhookUrl) {
       try {
