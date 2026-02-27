@@ -175,7 +175,7 @@ const Index: React.FC = () => {
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Shield size={14} className="text-primary" />
+                    <Shield size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Dados protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
