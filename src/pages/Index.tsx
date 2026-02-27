@@ -5,7 +5,7 @@ import { QUESTIONS } from '@/constants/questions';
 import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
-import { ArrowRight, Loader2, Shield, BarChart3, Users } from 'lucide-react';
+import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
