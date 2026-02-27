@@ -18,7 +18,7 @@ const TESTIMONIALS: TestimonialData[] = [
   {
     quote: "O que me convenceu foi a velocidade. Em 7 dias já tinha IA respondendo no WhatsApp. Em 30 dias, o comercial inteiro estava rodando.",
     name: "Fernanda Costa",
-    company: "Studio FC Estética",
+    company: "Clínica Essence",
     result: "Implementação em 30 dias"
   },
   {
