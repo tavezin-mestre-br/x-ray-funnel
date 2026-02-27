@@ -9,6 +9,7 @@ import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } f
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import ThemeToggle from '@/components/ThemeToggle';
+import logoS from '@/assets/logo-s.png';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
 
 type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
