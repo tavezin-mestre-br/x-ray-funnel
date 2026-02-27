@@ -103,6 +103,8 @@ const Index: React.FC = () => {
       if (error) {
         console.error('Error saving lead:', error);
         toast.error('Erro ao salvar diagnóstico. Continuando...');
+      } else {
+        trackLead();
       }
     } catch (err) {
       console.error('Failed to save lead:', err);
