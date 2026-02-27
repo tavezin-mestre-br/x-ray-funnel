@@ -1,219 +1,64 @@
 
 
-# Plano: Otimização de Copy para Shekinah
-## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
+## Refatoracao Completa do Meta Pixel para Event Match Quality Maximo
 
----
+### Resumo
 
-## Objetivo
+Refatorar toda a implementacao do Meta Pixel e CAPI para maximizar o Event Match Quality, adicionando deduplicacao via `event_id`, cookies `_fbp`/`_fbc`, Advanced Matching, novos eventos de funil e limpeza de dados.
 
-Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
-- Criativos de alta performance
-- Tráfego pago qualificado
-- Funis de alta conversão
-- Atendimento e agendamento com IA
-- CRM com rastreamento completo
+### Arquivos a modificar
 
----
+1. **`src/services/metaPixel.ts`** — Reescrever completamente com:
+   - `generateEventId()` para deduplicacao Pixel/CAPI
+   - `getFbCookies()` para ler `_fbp` e `_fbc`
+   - `updateUserData()` para Advanced Matching
+   - `trackViewContent(eventId)` — inicio do quiz
+   - `trackCompleteRegistration(eventId)` — dados da empresa
+   - `trackLead(eventId)` — submissao final
+   - `trackSchedule(eventId)` — evento padrao (nao custom)
+   - Todos os eventos passam `eventID` para deduplicacao
 
-## Arquivos a Modificar (Apenas Copy)
+2. **`src/pages/Index.tsx`** — Atualizar:
+   - Import com novas funcoes (`trackViewContent`, `trackCompleteRegistration`, `generateEventId`, `getFbCookies`, `updateUserData`)
+   - `handleStartDiagnosis`: gerar `eventId` e disparar `trackViewContent`
+   - `handleCompanySubmit`: gerar `eventId` e disparar `trackCompleteRegistration`
+   - `handleFinalSubmit`: gerar `eventId`, chamar `updateUserData` (Advanced Matching), ler cookies `_fbp`/`_fbc`, e enviar tudo (`event_id`, `fbp`, `fbc`, `source_url`) no body do `save-lead`. Disparar `trackLead(eventId)` com o mesmo ID
 
-### 1. src/pages/Index.tsx
-Otimizações na tela de intro e capturas.
+3. **`src/components/funnel/SchedulingDialog.tsx`** — Atualizar:
+   - Import com `trackSchedule`, `generateEventId`, `getFbCookies`
+   - `handleConfirm`: gerar `eventId`, ler cookies, disparar `trackSchedule(eventId)` no browser, e enviar `event_id`, `fbp`, `fbc`, `source_url` no body do `notify-booking`
 
-### 2. src/components/funnel/ScoreDisplay.tsx
-Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
+4. **`supabase/functions/save-lead/index.ts`** — Atualizar:
+   - Adicionar `event_id`, `fbp`, `fbc`, `source_url` na interface `LeadPayload`
+   - Refatorar `sendMetaConversion` para aceitar esses novos parametros
+   - Incluir `event_id` no payload para deduplicacao
+   - Incluir `fbp` e `fbc` em `user_data` para match quality
+   - Usar `source_url` dinamico em vez de hardcoded
+   - Limpar phone (remover nao-digitos) e email (lowercase/trim) antes do hash
+   - Passar os novos parametros na chamada da CAPI
 
-### 3. src/services/scoreLogic.ts
-Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
+5. **`supabase/functions/notify-booking/index.ts`** — Mesma refatoracao:
+   - Refatorar `sendMetaConversion` identicamente
+   - Passar `event_id`, `fbp`, `fbc`, `source_url` na chamada da CAPI
 
----
+6. **`index.html`** — NAO alterar. O init basico e PageView estao corretos.
 
-## Mudanças Detalhadas
+### Detalhes tecnicos
 
-### Tela de Intro (Index.tsx)
+**Deduplicacao**: Cada evento gera um `event_id` unico no frontend (timestamp + random string). O mesmo ID e enviado tanto no `fbq('track', ...)` do browser quanto no payload CAPI server-side. A Meta usa esse ID para deduplicar e nao contar o evento duas vezes.
 
-**Atual:**
-> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+**Cookies `_fbp` e `_fbc`**: Sao cookies first-party criados pelo Pixel. Envia-los na CAPI aumenta significativamente o match quality porque permite a Meta associar o evento server-side ao usuario do browser.
 
-**Novo:**
-> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+**Advanced Matching**: Antes de disparar o evento Lead no browser, chamamos `fbq('init', PIXEL_ID, { ph, em, fn })` para informar ao Pixel os dados do usuario, melhorando o match no lado do browser tambem.
 
-**Adicionar frase de autoridade abaixo do botão:**
-> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+**Limpeza de dados**: Phone sem caracteres especiais (`replace(/\D/g, '')`), email em lowercase e trimmed, antes de qualquer hash SHA-256.
 
----
+**Novos eventos**:
+- `ViewContent` — quando o usuario clica "Iniciar meu diagnostico"
+- `CompleteRegistration` — quando submete os dados da empresa
+- Esses eventos mapeiam o funil completo no Events Manager da Meta
 
-### Tela de Captura Final (Index.tsx)
+### Deploy
 
-**Atual:**
-> "Diagnóstico pronto. Onde deseja recebê-lo?"
-
-**Novo:**
-> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
-
----
-
-### Tela de Resultados (ScoreDisplay.tsx)
-
-**Reformular CTA Section:**
-
-**Atual:**
-```text
-Próximo Passo
-Agende uma reunião para receber seu plano de implementação personalizado.
-[Solicitar diagnóstico estratégico]
-```
-
-**Novo:**
-```text
-O que implementamos para clínicas em Porto Velho
-
-| Criativos de alta conversão para procedimentos estéticos
-| Tráfego pago com leads qualificados — sem curiosos
-| Funis de captação e nutrição automatizados
-| Atendimento e agendamento 24/7 com Inteligência Artificial
-| CRM com rastreamento completo de cada lead até a consulta
-
-[Solicitar plano de implementação]
-
-Vagas limitadas para clínicas de Porto Velho – RO.
-```
-
----
-
-### Classificações (scoreLogic.ts)
-
-**Estrutura crítica:**
-- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
-- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
-
-**Estrutura com vazamentos:**
-- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
-- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
-
-**Estrutura funcional:**
-- Atual: "A operação funciona, mas há margem significativa para otimização."
-- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
-
-**Estrutura otimizada:**
-- Atual: "A clínica possui uma operação sólida."
-- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
-
----
-
-### Bottlenecks (scoreLogic.ts)
-
-**Aquisição:**
-- Bottleneck: "Geração de demanda inconsistente"
-- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
-- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
-
-**Atendimento:**
-- Bottleneck: "Leads esfriando antes do agendamento"
-- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
-- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
-
-**Processo:**
-- Bottleneck: "Falta de visibilidade sobre o funil"
-- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
-- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
-
----
-
-### Recomendações (scoreLogic.ts)
-
-**Aquisição:**
-```text
-7 dias:
-- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
-- Configurar pixel e eventos de conversão no site
-- Definir orçamento mensal fixo para aquisição
-
-30 dias:
-- Testar criativos com diferentes ângulos de copy
-- Implementar landing page de alta conversão
-- Criar funil de nutrição via WhatsApp
-
-60-90 dias:
-- Escalar investimento nos criativos vencedores
-- Automatizar qualificação de leads com IA
-- Construir máquina previsível de geração de demanda
-```
-
-**Atendimento:**
-```text
-7 dias:
-- Implementar resposta automática em menos de 30 segundos
-- Criar script de qualificação para atendentes
-- Configurar alertas em tempo real para novos leads
-
-30 dias:
-- Integrar chatbot de pré-atendimento no WhatsApp
-- Automatizar agendamento direto na conversa
-- Mapear e resolver principais objeções
-
-60-90 dias:
-- IA fazendo atendimento completo 24/7
-- Dashboard de métricas de conversão por atendente
-- Sistema de reativação automática de leads frios
-```
-
-**Processo:**
-```text
-7 dias:
-- Mapear jornada do lead: entrada → consulta → procedimento
-- Identificar etapa com maior perda de conversão
-- Documentar processo atual de agendamento
-
-30 dias:
-- Implementar CRM com pipeline visual de leads
-- Definir KPIs: taxa de resposta, agendamento e comparecimento
-- Criar rotina de confirmação de consultas
-
-60-90 dias:
-- Dashboard de faturamento previsível por período
-- Automação de follow-up para pacientes inativos
-- Sistema de rastreamento da origem até o fechamento
-```
-
----
-
-### Descrições dos Pilares (scoreLogic.ts)
-
-**Aquisição:**
-- Atual: "Capacidade de gerar leads qualificados de forma previsível"
-- Novo: "Tráfego pago + criativos + funis = demanda previsível"
-
-**Atendimento:**
-- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
-- Novo: "Resposta instantânea + IA = leads que viram consultas"
-
-**Processo:**
-- Atual: "Estrutura operacional para conversão e retenção"
-- Novo: "CRM + rastreamento = visibilidade total do funil"
-
----
-
-## Resumo das Mudanças
-
-| Local | O que muda |
-|-------|------------|
-| Intro | Frase de impacto + prova social |
-| Captura final | Copy mais direta e urgente |
-| Resultados | Lista clara de entregáveis + CTA reformulado |
-| Classificações | Linguagem focada em sistema e automação |
-| Bottlenecks | Conexão direta com serviços da Shekinah |
-| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
-| Pilares | Descrições curtas e impactantes |
-
----
-
-## Resultado Esperado
-
-- Copy mais persuasiva e autoritária
-- Deixar claro que a Shekinah implementa o sistema completo
-- Conexão entre diagnóstico e os serviços oferecidos
-- Maior taxa de conversão para agendamento de call
-- Cliente já entendendo o que vai ser implementado antes da reunião
+Apos editar as edge functions, deploy automatico de `save-lead` e `notify-booking`.
 
