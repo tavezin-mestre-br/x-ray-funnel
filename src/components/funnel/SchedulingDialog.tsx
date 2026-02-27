@@ -57,11 +57,15 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
 
       if (error) throw error;
 
-      setConfirmed(true);
-      toast({
-        title: '✅ Reunião agendada!',
-        description: `${format(selectedDate, "dd 'de' MMMM", { locale: ptBR })} às ${selectedTime}`,
-      });
+      const formattedDate = format(selectedDate, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
+      if (onBookingConfirmed) {
+        onBookingConfirmed(formattedDate, selectedTime);
+      } else {
+        toast({
+          title: '✅ Reunião agendada!',
+          description: `${formattedDate} às ${selectedTime}`,
+        });
+      }
     } catch {
       toast({
         title: 'Erro ao agendar',
