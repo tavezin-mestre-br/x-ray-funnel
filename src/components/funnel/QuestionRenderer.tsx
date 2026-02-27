@@ -118,7 +118,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer }) => {
               key={opt.id}
               variants={item}
               onClick={() => onAnswer(opt.id)}
-              className="w-full flex items-center justify-between p-4 sm:p-5 bg-secondary border border-border rounded-xl hover:border-primary hover:bg-primary/5 transition-all text-left group"
+              className="w-full flex items-center justify-between p-4 sm:p-5 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-left group"
             >
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-primary transition-colors">
                 {opt.label}
