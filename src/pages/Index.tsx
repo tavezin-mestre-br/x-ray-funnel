@@ -175,7 +175,7 @@ const Index: React.FC = () => {
                     Este diagnóstico é para empresários sérios.
                   </p>
                   <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
-                    Se você <span className="text-foreground font-black">fatura menos de R$ 30 mil/mês</span>, ainda não é o momento certo para a nossa solução.
+                    Se você <span className="text-foreground font-black">fatura menos de R$ 50 mil/mês</span>, ainda não é o momento certo para a nossa solução.
                   </p>
                 </div>
               </div>
