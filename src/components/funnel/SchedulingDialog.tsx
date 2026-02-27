@@ -181,6 +181,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
                   </motion.div>
                 )}
               </AnimatePresence>
+            </motion.div>
       </DialogContent>
     </Dialog>
   );
