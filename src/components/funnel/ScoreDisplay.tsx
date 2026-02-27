@@ -253,8 +253,8 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData }> = ({
 
       {/* Testimonial (single, subtle) */}
       <Testimonial data={{
-        name: "Clemir Junio",
-        company: "Artfacas Brasil",
+        name: "Daniel Bervian",
+        company: "Staff Motors",
         quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
         result: "Faturamento previsível"
       }} />
