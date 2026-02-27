@@ -138,7 +138,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
             transition={{ duration: 1 }}
-            className="h-full bg-primary rounded-full"
+            className="h-full bg-foreground rounded-full"
           />
         </div>
         <p className="text-muted-foreground text-xs lg:text-sm font-medium mt-1.5">Diagnóstico concluído</p>
