@@ -267,7 +267,8 @@ const Index: React.FC = () => {
                         { label: 'Menos de R$ 100k', value: 'menos-100k' },
                         { label: 'R$ 100k – R$ 300k', value: '100k-300k' },
                         { label: 'R$ 300k – R$ 500k', value: '300k-500k' },
-                        { label: 'Acima de R$ 500k', value: 'acima-500k' },
+                        { label: 'R$ 500k – R$ 1M', value: '500k-1m' },
+                        { label: 'Acima de R$ 1M', value: 'acima-1m' },
                       ].map((opt) => (
                         <button
                           key={opt.value}
