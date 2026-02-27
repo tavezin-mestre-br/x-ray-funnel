@@ -34,11 +34,11 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
   onOpenChange,
   userData,
   leadId,
+  onBookingConfirmed,
 }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [confirmed, setConfirmed] = useState(false);
 
   const isSunday = (date: Date) => date.getDay() === 0;
 
