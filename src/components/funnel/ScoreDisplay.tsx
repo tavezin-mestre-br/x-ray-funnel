@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FinalResults, UserData } from '@/types/funnel';
+import SchedulingDialog from './SchedulingDialog';
 import { 
   AlertTriangle, 
   TrendingUp,

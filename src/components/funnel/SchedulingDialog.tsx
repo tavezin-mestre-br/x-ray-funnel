@@ -49,7 +49,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
       const { error } = await supabase.from('bookings').insert({
         lead_id: leadId || null,
         name: userData.name,
-        phone: userData.phone,
+        phone: userData.whatsapp,
         scheduled_date: format(selectedDate, 'yyyy-MM-dd'),
         scheduled_time: selectedTime,
       });
