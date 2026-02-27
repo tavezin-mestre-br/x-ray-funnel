@@ -28,9 +28,9 @@ const TESTIMONIALS: TestimonialData[] = [
     result: "+40% de conversão"
   },
   {
-    quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+    quote: "Antes eu não sabia de onde vinham os clientes. Hoje tenho dashboard com cada lead rastreado, do clique até o fechamento. Isso mudou minha gestão.",
     name: "Ana Beatriz",
-    company: "AB Arquitetura",
+    company: "Vértice Arquitetura",
     result: "Faturamento previsível"
   },
   {
