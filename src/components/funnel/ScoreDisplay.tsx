@@ -16,7 +16,6 @@ import {
   Workflow,
   Gauge,
   Megaphone,
-  MessageCircle
 } from 'lucide-react';
 import Testimonial, { getTestimonialForStep } from './Testimonial';
 
