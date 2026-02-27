@@ -7,6 +7,7 @@ import Testimonial, { getTestimonialForStep } from './Testimonial';
 interface FunnelProps {
   question: Question;
   onResponse: (questionId: number, answer: any) => void;
+  onBack?: () => void;
   currentIndex: number;
   totalSteps: number;
 }
