@@ -14,6 +14,14 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
     Array.isArray(previousAnswer) ? previousAnswer : []
   );
 
+  const [selectedItems, setSelectedItems] = useState<string[]>(
+    Array.isArray(previousAnswer) ? previousAnswer : []
+  );
+
+  useEffect(() => {
+    setSelectedItems(Array.isArray(previousAnswer) ? previousAnswer : []);
+  }, [question.id]);
+
   const container = {
     hidden: { opacity: 0 },
     show: {
