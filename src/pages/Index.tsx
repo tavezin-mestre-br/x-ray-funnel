@@ -112,7 +112,7 @@ const Index: React.FC = () => {
   };
 
   const results = useMemo(() => {
-    if (step !== 'results') return null;
+    if (step !== 'results' && step !== 'booking_confirmed') return null;
     return calculateResults(userData.responses, userData.badges);
   }, [step, userData.responses, userData.badges]);
 
