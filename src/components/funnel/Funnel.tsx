@@ -85,7 +85,7 @@ const Funnel: React.FC<FunnelProps> = ({
             initial={{ width: 0 }}
             animate={{ width: `${(currentIndex / totalSteps) * 100}%` }}
             transition={{ duration: 0.5, ease: "easeOut" }}
-            className="h-full bg-primary rounded-full"
+            className="h-full bg-foreground rounded-full"
           />
         </div>
       </div>
