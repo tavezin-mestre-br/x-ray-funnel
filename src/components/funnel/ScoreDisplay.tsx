@@ -110,7 +110,7 @@ const TimelineStep: React.FC<{
       <ul className="mt-2 space-y-1.5">
         {items.map((item, i) => (
           <li key={i} className="text-[11px] lg:text-xs text-muted-foreground font-medium leading-snug flex items-start gap-1.5">
-            <span className="text-primary shrink-0 mt-px">•</span>
+            <span className="text-muted-foreground shrink-0 mt-px">•</span>
             <span>{item}</span>
           </li>
         ))}
