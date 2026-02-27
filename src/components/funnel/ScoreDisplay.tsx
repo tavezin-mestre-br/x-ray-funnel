@@ -130,7 +130,7 @@ const ScoreDisplay: React.FC<{ results: FinalResults; userData: UserData; onBook
     >
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
-        <span className="text-[10px] lg:text-xs text-primary mono-font font-bold uppercase tracking-widest">
+        <span className="text-[10px] lg:text-xs text-foreground mono-font font-bold uppercase tracking-widest">
           Etapa 3 de 3 · Diagnóstico Preliminar
         </span>
         <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
