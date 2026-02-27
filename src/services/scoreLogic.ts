@@ -36,10 +36,10 @@ const getAttemptLabel = (attemptId: string | undefined): string => {
 
 const getExpectationLabel = (expectationId: string | undefined): string => {
   const labels: Record<string, string> = {
-    'q4_1': 'velocidade na implementação — resolver rápido, sem enrolação',
-    'q4_2': 'transparência total — entender cada número e cada resultado',
-    'q4_3': 'automação completa — estrutura que funcione 24h sem depender de você',
-    'q4_4': 'previsibilidade — clientes novos de forma consistente todo mês',
+    'q4_1': 'velocidade na implementação, resolver rápido e sem enrolação',
+    'q4_2': 'transparência total, entender cada número e cada resultado',
+    'q4_3': 'automação completa, estrutura que funcione 24h sem depender de você',
+    'q4_4': 'previsibilidade, clientes novos de forma consistente todo mês',
   };
   return labels[expectationId || ''] || 'resultado concreto e mensurável';
 };
