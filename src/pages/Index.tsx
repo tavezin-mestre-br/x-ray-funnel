@@ -190,7 +190,7 @@ const Index: React.FC = () => {
                   Descubra onde seu negócio está perdendo faturamento
                 </h1>
 
-                <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
+                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
                   Em 3 minutos você recebe um diagnóstico real da sua operação comercial, e o que fazer para corrigir.
                 </p>
 
@@ -210,11 +210,11 @@ const Index: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
-                  <p className="text-foreground text-sm lg:text-base font-black leading-relaxed">
-                    ⚠️ Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
+                <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
+                  <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
+                    Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
                   </p>
-                  <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
+                  <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
                     Se esse não é seu momento, tudo bem, isso não é pra você ainda.
                   </p>
                 </div>
@@ -222,7 +222,7 @@ const Index: React.FC = () => {
               
               <button 
                 onClick={handleStartDiagnosis}
-                className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
+                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
               >
                 Quero meu diagnóstico gratuito →
               </button>
