@@ -187,12 +187,11 @@ const Index: React.FC = () => {
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Sua empresa tem um problema comercial.<br/>
-                  <span className="text-primary">Nós resolvemos em 30 dias.</span>
+                  Descubra onde seu negócio está perdendo faturamento
                 </h1>
 
                 <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
-                  Responda 8 perguntas. Vamos te mostrar exatamente onde está o gargalo e como a Shekinah vai agir na sua empresa.
+                  Em 3 minutos você recebe um diagnóstico real da sua operação comercial, e o que fazer para corrigir.
                 </p>
 
                 {/* Social proof badges */}
@@ -213,10 +212,10 @@ const Index: React.FC = () => {
 
                 <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
                   <p className="text-foreground text-sm lg:text-base font-black leading-relaxed">
-                    Este diagnóstico é para empresários sérios.
+                    ⚠️ Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
                   </p>
                   <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
-                    Se você <span className="text-foreground font-black">fatura menos de R$ 50 mil/mês</span>, ainda não é o momento certo para a nossa solução.
+                    Se esse não é seu momento, tudo bem, isso não é pra você ainda.
                   </p>
                 </div>
               </div>
@@ -225,15 +224,14 @@ const Index: React.FC = () => {
                 onClick={handleStartDiagnosis}
                 className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
-                Iniciar meu diagnóstico
-                <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                Quero meu diagnóstico gratuito →
               </button>
 
               {/* Intro testimonial */}
               <Testimonial data={getTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
               <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
-                Atendemos um número limitado de empresas por vez para garantir resultado.
+                Leva 3 minutos · Sem compromisso · Resultado personalizado
               </p>
             </motion.div>
           )}
