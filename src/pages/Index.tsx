@@ -182,39 +182,39 @@ const Index: React.FC = () => {
               className="max-w-xl w-full text-center space-y-6 lg:space-y-8 py-4"
             >
               <div className="space-y-5 lg:space-y-6">
-                <div className="inline-block px-3 sm:px-4 py-1.5 bg-foreground text-background rounded-full text-[8px] sm:text-[9px] lg:text-[10px] mono-font font-black tracking-[0.15em] sm:tracking-[0.2em] uppercase">
+                <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
                   IMPLEMENTAÇÃO DE MÁQUINA COMERCIAL COM IA
                 </div>
 
-                <h1 className="text-2xl sm:text-3xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
                   Descubra onde seu negócio está perdendo faturamento
                 </h1>
 
-                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
+                <p className="text-muted-foreground text-base lg:text-lg font-medium leading-relaxed max-w-md mx-auto">
                   Em 3 minutos você recebe um diagnóstico real da sua operação comercial, e o que fazer para corrigir.
                 </p>
 
                 {/* Social proof badges */}
-                <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-2 sm:gap-3 lg:gap-4">
+                <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Shield size={14} className="text-foreground" />
-                    <span className="text-[11px] sm:text-xs font-semibold text-foreground">Dados protegidos</span>
+                    <span className="text-xs font-semibold text-foreground">Dados protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <BarChart3 size={14} className="text-foreground" />
-                    <span className="text-[11px] sm:text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
+                    <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-foreground" />
-                    <span className="text-[11px] sm:text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
+                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
                   </div>
                 </div>
 
-                <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
-                  <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-relaxed">
+                <div className="bg-destructive/5 border border-destructive/20 p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-sm mx-auto space-y-2">
+                  <p className="text-foreground text-sm lg:text-base font-black leading-relaxed">
                     ⚠️ Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
                   </p>
-                  <p className="text-muted-foreground text-[11px] sm:text-xs lg:text-sm font-medium leading-relaxed">
+                  <p className="text-muted-foreground text-xs lg:text-sm font-medium leading-relaxed">
                     Se esse não é seu momento, tudo bem, isso não é pra você ainda.
                   </p>
                 </div>
@@ -222,7 +222,7 @@ const Index: React.FC = () => {
               
               <button 
                 onClick={handleStartDiagnosis}
-                className="w-full max-w-sm mx-auto bg-foreground text-background py-3.5 sm:py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
+                className="w-full max-w-sm mx-auto bg-primary text-primary-foreground py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-xl hover:opacity-90 transition-all glow-primary group flex items-center justify-center gap-3"
               >
                 Quero meu diagnóstico gratuito →
               </button>
