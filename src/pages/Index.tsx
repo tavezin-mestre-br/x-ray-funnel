@@ -100,13 +100,16 @@ const Index: React.FC = () => {
     }
   };
 
-  const handleCompanySubmit = () => {
+  const handleCompanySubmit = async () => {
     if (!companyData.contactName || !companyData.companyName || !companyData.monthlyRevenue || !companyData.trafficInvestment) {
       toast.error("Preencha todos os campos obrigatórios.");
       return;
     }
-    const eventId = generateEventId();
-    trackCompleteRegistration(eventId);
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackCompleteRegistration(eventId);
+    }
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
     setCurrentQuestionIndex(4);
