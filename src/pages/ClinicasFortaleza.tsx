@@ -227,7 +227,7 @@ const ClinicasFortaleza: React.FC = () => {
                 </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Descubra em 3 minutos por que sua clínica perde pacientes — e o que fazer pra resolver.
+                  Descubra em 3 minutos por que sua clínica perde pacientes e o que fazer pra resolver.
                 </p>
 
                 {/* Social proof badges */}
