@@ -246,9 +246,9 @@ const ClinicasFortaleza: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
+                <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[320px] sm:max-w-sm mx-auto space-y-2">
                   <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
-                    Para clínicas em Fortaleza que querem lotar a agenda usando. Com ou  internet. Com ou semncia em marketing.
+                    Para clínicas em Fortaleza que querem lotar a agenda usando internet. Com ou sem experiência em marketing.
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
                     Nós cuidamos de tudo. Você só precisa responder com sinceridade.
