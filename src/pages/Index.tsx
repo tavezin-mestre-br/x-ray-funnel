@@ -216,20 +216,20 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  DIAGN√ìSTICO GRATUITO ¬∑ 3 MINUTOSing-[1.1] tracking-tight font-heading">
-                  Descubra oSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresa est√° deixando dinheiro na mesa. Descubra onde.text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Em 3RespRespRespRespRespRespRespRespRespRespResponda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrola√ß√£oSocial proof badges */}
+                  DIAGN√ìSTICO GRATUITO ¬∑ 3 MINUTOStracking-tight font-heading">
+                  Descubra oSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresSua empresa est√° deixando dinheiro na mesa. Descubra onde.-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
+                  Em 3RespRespRespRespRespRespRespRespRespRespRespResponda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrola√ß√£oal proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Shield size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">DadoSeusSeusSeusSeusSeusSeusSeusSeusSeusSeus dddddddddd protegidos</span>
+                    <span className="text-xs font-semibold text-foreground">DadoSeusSeusSeusSeusSeusSeusSeusSeusSeusSeusSeus ddddddddddd protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <BarChart3 size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-forResultado na hora   </div>
+                    <span className="text-xs font-semibold text-foResultado na hora</div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tr√an√an√an√an√an√an√an√an√∫ncios         </div>
+                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tr√an√an√an√an√an√an√an√an√an√∫ncios       </div>
                 </div>
 
                 <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
