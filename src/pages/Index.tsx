@@ -283,7 +283,7 @@ const Index: React.FC = () => {
                     </div>
                      <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
                   </div>
-                  <p className="text-muted-foreground text-xs lg:text-sm">Perfil da empresa registrado.</p>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Já entendemos sua dor. Agora vamos personalizar.</p>
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2">
