@@ -93,7 +93,7 @@ const Index: React.FC = () => {
       responses: { ...prev.responses, [questionId]: answer }
     }));
 
-    if (currentQuestionIndex === 3 && step === 'funnel') {
+    if (currentQuestionIndex === 2 && step === 'funnel') {
       setStep('capture_company');
     } else if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
