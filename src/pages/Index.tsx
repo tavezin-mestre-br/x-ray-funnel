@@ -82,6 +82,8 @@ const Index: React.FC = () => {
       const eventId = generateEventId();
       trackViewContent(eventId);
     }
+    AudioManager.startBGM();
+    AudioManager.playClick();
     setStep('funnel');
   };
 
