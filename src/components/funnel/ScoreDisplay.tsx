@@ -240,7 +240,7 @@ const ScoreDisplay: React.FC<{
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
             O que implementamos
           </h3>
-          <p className="text-muted-foreground text-xs lg:text-sm font-medium">
+          <p className="text-muted-foreground text-xs lg:text-sm font-medium [text-wrap:balance]">
             Funcionando em até 30 dias. Sem você mexer em nada.
           </p>
         </div>
