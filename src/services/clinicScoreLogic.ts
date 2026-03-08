@@ -56,25 +56,25 @@ const getClassificationData = (totalScore: number) => {
   if (totalScore < 10) {
     return {
       classification: "Sua clínica está perdendo pacientes no escuro",
-      explanation: "Você não tem um sistema de aquisição e atendimento organizado. Pacientes entram em contato e se perdem no caminho. Cada dia sem resolver isso é agendamento que vai pra concorrência.",
+      explanation: "Pacientes entram em contato e se perdem. Sem sistema, cada dia é agendamento perdido.",
       level: 1
     };
   } else if (totalScore < 20) {
     return {
       classification: "Pacientes chegam, mas poucos viram consulta",
-      explanation: "A demanda existe, mas entre o primeiro contato e o agendamento tem muita coisa falhando. O problema não é falta de paciente. É falta de velocidade e processo.",
+      explanation: "A demanda existe. Mas entre o contato e o agendamento, muita coisa falha.",
       level: 2
     };
   } else if (totalScore < 30) {
     return {
       classification: "Boa base, pronto pra escalar os agendamentos",
-      explanation: "Você já tem uma base funcionando. Agora é hora de automatizar o atendimento, rastrear cada real investido e transformar isso em agendamentos previsíveis todo mês.",
+      explanation: "Base funcionando. Hora de automatizar e tornar os agendamentos previsíveis.",
       level: 3
     };
   } else {
     return {
       classification: "Clínica sólida, próximo passo é escalar com IA",
-      explanation: "Sua estrutura é forte. O próximo passo é usar IA pra atender mais pacientes sem precisar contratar mais gente na recepção.",
+      explanation: "Estrutura forte. Próximo passo: IA pra escalar sem contratar.",
       level: 4
     };
   }
