@@ -242,7 +242,7 @@ const ClinicasFortaleza: React.FC = () => {
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">De 8 para 31 agendamentos em 1 mês</span>
+                    <span className="text-xs font-semibold text-foreground">+R$ 10 milhões gerenciados em campanhas</span>
                   </div>
                 </div>
 
