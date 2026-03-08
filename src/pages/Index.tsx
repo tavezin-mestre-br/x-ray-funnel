@@ -400,7 +400,7 @@ const Index: React.FC = () => {
                      </div>
                      <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
                   </div>
-                  <p className="text-muted-foreground text-xs lg:text-sm">Estrutura operacional mapeada.</p>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Análise completa. Agora é só o último passo.</p>
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2 text-center">
