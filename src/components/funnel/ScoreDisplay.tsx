@@ -68,12 +68,12 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
 };
 
 const DELIVERABLES = [
-  { icon: Megaphone, title: "Tráfego Pago Estratégico", subtitle: "Campanhas otimizadas para vendas reais" },
-  { icon: Target, title: "Rastreamento Completo", subtitle: "Do clique até a venda fechada" },
-  { icon: Bot, title: "IA no Atendimento", subtitle: "Resposta em segundos, 24 horas por dia" },
-  { icon: Workflow, title: "CRM Integrado", subtitle: "Pipeline visual de vendas" },
-  { icon: BarChart3, title: "Funis de Conversão", subtitle: "Captura e qualificação automática" },
-  { icon: Gauge, title: "Dashboard de Resultados", subtitle: "Quanto cada campanha faturou" },
+  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Campanhas focadas em trazer clientes, não curtidas" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quanto voltou" },
+  { icon: Bot, title: "Atendimento 24 horas", subtitle: "IA responde seus clientes em segundos, dia e noite" },
+  { icon: Workflow, title: "Controle de vendas", subtitle: "Veja todos seus contatos e vendas num só lugar" },
+  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Filtro automático de quem realmente quer comprar" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Veja em tempo real quanto está faturando" },
 ];
 
 const TimelineStep: React.FC<{ 
