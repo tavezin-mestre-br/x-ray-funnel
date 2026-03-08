@@ -316,7 +316,7 @@ const ScoreDisplay: React.FC<{
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
-          Agendar minha implementação →
+          Agendar minha conversa gratuita →
         </button>
       </motion.div>
 
