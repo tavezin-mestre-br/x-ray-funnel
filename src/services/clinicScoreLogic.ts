@@ -56,25 +56,25 @@ const getClassificationData = (totalScore: number) => {
   if (totalScore < 10) {
     return {
       classification: "Sua clínica está perdendo pacientes no escuro",
-      explanation: "Você não tem um sistema de aquisição e atendimento organizado. Pacientes entram em contato e se perdem no caminho. Cada dia sem resolver isso é agendamento que vai pra concorrência.",
+      explanation: "Pacientes entram em contato e se perdem. Sem sistema, cada dia é agendamento perdido.",
       level: 1
     };
   } else if (totalScore < 20) {
     return {
       classification: "Pacientes chegam, mas poucos viram consulta",
-      explanation: "A demanda existe, mas entre o primeiro contato e o agendamento tem muita coisa falhando. O problema não é falta de paciente. É falta de velocidade e processo.",
+      explanation: "A demanda existe. Mas entre o contato e o agendamento, muita coisa falha.",
       level: 2
     };
   } else if (totalScore < 30) {
     return {
       classification: "Boa base, pronto pra escalar os agendamentos",
-      explanation: "Você já tem uma base funcionando. Agora é hora de automatizar o atendimento, rastrear cada real investido e transformar isso em agendamentos previsíveis todo mês.",
+      explanation: "Base funcionando. Hora de automatizar e tornar os agendamentos previsíveis.",
       level: 3
     };
   } else {
     return {
       classification: "Clínica sólida, próximo passo é escalar com IA",
-      explanation: "Sua estrutura é forte. O próximo passo é usar IA pra atender mais pacientes sem precisar contratar mais gente na recepção.",
+      explanation: "Estrutura forte. Próximo passo: IA pra escalar sem contratar.",
       level: 4
     };
   }
@@ -86,20 +86,20 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
   const analyses: Record<string, { bottleneck: string; why: string; impact: string; pillars: string[] }> = {
     "Aquisição": {
       bottleneck: "Sua clínica depende de indicação, e indicação não escala",
-      why: "Sem anúncios bem feitos e rastreados, você fica refém da sorte. Num mês lotam, no outro a agenda esvazia.",
-      impact: "Com campanhas bem montadas, você começa a receber pacientes qualificados de forma previsível em até 30 dias.",
+      why: "Sem anúncios rastreados, sua agenda depende de sorte.",
+      impact: "Campanhas bem montadas trazem pacientes previsíveis em 30 dias.",
       pillars: ["Aquisição"]
     },
     "Atendimento": {
       bottleneck: "Pacientes interessados estão desistindo antes de agendar",
-      why: "Quanto mais tempo leva pra responder, menor a chance de agendar. O paciente manda mensagem e fecha com quem responde primeiro.",
-      impact: "Com IA no atendimento, seus pacientes são respondidos em segundos, qualificados e agendados automaticamente, 24 horas por dia.",
+      why: "Paciente fecha com quem responde primeiro.",
+      impact: "IA responde em segundos e agenda automaticamente, 24h.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
       bottleneck: "Você não sabe quantos pacientes entram, quantos agendam e por quê",
-      why: "Sem controle dos agendamentos, você não sabe o que funciona e o que não funciona. É como operar no escuro.",
-      impact: "Com sistema de controletema de controletema de controle e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
+      why: "Sem controle, você não sabe o que funciona.",
+      impact: "Rastreamento completo: origem, custo e resultado de cada paciente.",
       pillars: ["Processo"]
     }
   };
@@ -202,7 +202,7 @@ export const calculateClinicResults = (responses: Record<number, any>, badges: s
   const specialtyLabel = getSpecialtyLabel(responses[2]);
   const expectationLabel = getExpectationLabel(responses[3]);
 
-  const personalizedBottleneckWhy = `Seu cenário: ${painLabel}. Sua clínica atua com ${specialtyLabel}. O que você precisa é ${expectationLabel}. ${bottleneckAnalysis.why}`;
+  const personalizedBottleneckWhy = `${bottleneckAnalysis.why} Sua clínica atua com ${specialtyLabel} e precisa de ${expectationLabel}.`;
 
   const earnedBadges: Badge[] = [{
     id: 'diagnostico_clinico',

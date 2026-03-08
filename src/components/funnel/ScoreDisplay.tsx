@@ -77,12 +77,12 @@ const DEFAULT_DELIVERABLES = [
 ];
 
 const CLINIC_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Campanhas focadas em trazer pacientes qualificados pro seu procedimento" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quantos agendamentos voltaram" },
-  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Pacientes respondidos em segundos, qualificados e agendados automaticamente" },
-  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Veja todos os contatos, agendamentos e consultas num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático que separa quem quer agendar de quem só tá pesquisando" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Acompanhe em tempo real quantos pacientes agendaram e compareceram" },
+  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes qualificados pro seu procedimento" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Quanto investiu, quantos agendamentos voltaram" },
+  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Resposta em segundos, agendamento automático" },
+  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Tudo num só lugar" },
+  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático de curiosos" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Agendamentos e comparecimentos em tempo real" },
 ];
 
 const DEFAULT_TESTIMONIAL = {
@@ -165,7 +165,7 @@ const ScoreDisplay: React.FC<{
       {/* Header */}
       <div className="text-center space-y-1.5 lg:space-y-2">
         <span className="text-[10px] lg:text-xs text-foreground mono-font font-bold uppercase tracking-widest">
-          Seu diagnóstico está pronto
+          Diagnóstico pronto
         </span>
         <div className="w-full h-1.5 lg:h-2 bg-secondary rounded-full overflow-hidden max-w-sm mx-auto">
           <motion.div 
@@ -190,7 +190,7 @@ const ScoreDisplay: React.FC<{
             <AlertTriangle size={28} className="hidden lg:block" />
           </div>
           <div className="space-y-1 lg:space-y-2">
-            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da {entityLabelCap}</span>
+            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Diagnóstico</span>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {results.classification}
             </h2>
@@ -238,10 +238,10 @@ const ScoreDisplay: React.FC<{
       >
         <div className="space-y-2 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que vai mudar na sua {entityLabel}
+            O que implementamos
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
-            Tudo isso funcionando em até 30 dias, sem você precisar entender de tecnologia.
+            Funcionando em até 30 dias. Sem você mexer em nada.
           </p>
         </div>
 
@@ -275,11 +275,11 @@ const ScoreDisplay: React.FC<{
           </button>
 
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
-            Conversa de 20 min · Gratuita · Sem compromisso · Pelo Google Meet
+            20 min · Gratuita · Sem compromisso
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Atendemos poucas {ctaLabel} por vez. Se está vendo isso, ainda tem vaga.
+            Vagas limitadas. Se está vendo isso, ainda tem.
           </p>
         </div>
       </motion.div>
@@ -292,7 +292,7 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Onde sua {entityLabel} está forte e onde precisa melhorar
+          Seus 3 pilares
         </h3>
         <PillarBars pillars={results.pillars} />
       </motion.div>
@@ -305,7 +305,7 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Seu plano de ação, semana a semana
+          Plano de ação
         </h3>
 
         <div>
