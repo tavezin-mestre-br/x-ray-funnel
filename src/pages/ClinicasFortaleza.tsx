@@ -293,7 +293,7 @@ const ClinicasFortaleza: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading [text-wrap:balance]">
                     Falta pouco pro plano de ação da sua clínica ficar pronto.
                   </h2>
                   <p className="text-muted-foreground text-xs lg:text-sm">Esses dados deixam o diagnóstico muito mais preciso pro seu caso.</p>
