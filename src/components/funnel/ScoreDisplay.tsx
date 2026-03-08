@@ -295,7 +295,7 @@ const ScoreDisplay: React.FC<{
           <TimelineStep
             number={3}
             period="Semana 3-4"
-            title="Máquina Comercial Rodando"
+            title="Vendas funcionando no automático"
             items={results.recommendations.sixtyNinetyDays}
             isLast
             delay={0.85}
