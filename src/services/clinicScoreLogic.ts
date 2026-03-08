@@ -131,9 +131,11 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   const weekTwoThree: string[] = [];
   if (lowest.name === 'Processo' || painResponse === 'q1_4') {
     weekTwoThree.push("Painel visual dos agendamentos: quem tá negociando, quem agendou, quem faltou");
-    weekTwoThree.push("Rastreamento de cada paciente: origem, custo e se virou conNúmeros definidos: custo por pacienteidos: custo por paciente: custo por lead, taxa de agendamento, comparecimento");
+    weekTwoThree.push("Rastreamento de cada paciente: origem, custo e se virou consulta");
+    weekTwoThree.push("Números definidos: custo por paciente, taxa de agendamento, comparecimento");
   } else if (lowest.name === 'Aquisição' || painResponse === 'q1_2') {
-    weekTwoThree.push("Campanhas de anúncio pro procedimento mais lucrativo da sua clínica");Página de agendamento focada no seu procedia conversão pro seu segmento");
+    weekTwoThree.push("Campanhas de anúncio pro procedimento mais lucrativo da sua clínica");
+    weekTwoThree.push("Página de agendamento focada no seu procedimento");
     weekTwoThree.push("Anúncio conectado ao WhatsApp com IA atendendo e agendando");
   } else {
     weekTwoThree.push("Agendamento automático direto na conversa do WhatsApp");
