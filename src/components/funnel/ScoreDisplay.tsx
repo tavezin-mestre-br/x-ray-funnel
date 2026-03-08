@@ -216,7 +216,7 @@ const ScoreDisplay: React.FC<{
           <h3 className="text-base sm:text-lg lg:text-xl font-black text-foreground leading-tight tracking-tight font-heading">
             {results.bottleneck}
           </h3>
-          <p className="text-muted-foreground font-medium leading-relaxed text-xs lg:text-sm">
+          <p className="text-muted-foreground font-medium leading-relaxed text-xs lg:text-sm [text-wrap:balance]">
             {results.bottleneckWhy}
           </p>
         </div>
