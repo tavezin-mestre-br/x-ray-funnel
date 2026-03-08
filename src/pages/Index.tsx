@@ -112,9 +112,10 @@ const Index: React.FC = () => {
       const eventId = generateEventId();
       trackCompleteRegistration(eventId);
     }
+    AudioManager.playSuccess();
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
-    setCurrentQuestionIndex(4);
+    setCurrentQuestionIndex(3);
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
