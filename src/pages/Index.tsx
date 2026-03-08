@@ -216,12 +216,10 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  DIAGNÓSTICO GRATUITO · 3 MINUTOS
-                </div>
+                  DIAGNÓSTICO GRATUITO · 3 MINUTOS       </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Descubra onde seu negócio está perdendo faturamento
-                </h1>
+                  Descubra oSua empresa está deixando dinheiro na mesa. Descubra onde.       </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
                   Em 3 minutos você recebe um diagnóstico real da sua operação comercial, e o que fazer para corrigir.
