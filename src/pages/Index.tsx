@@ -458,7 +458,7 @@ const Index: React.FC = () => {
                       Processando...
                     </span>
                   ) : (
-                    'Ver Diagnóstico'
+                    'Ver meu resultado agora →'
                   )}
                 </button>
               </div>
