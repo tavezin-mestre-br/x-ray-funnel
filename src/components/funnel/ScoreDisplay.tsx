@@ -207,7 +207,7 @@ const ScoreDisplay: React.FC<{
       >
         <div className="space-y-2 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que entregamos
+            O que vai mudar na sua empresa
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
             Cada real investido, rastreado até a venda fechada.
