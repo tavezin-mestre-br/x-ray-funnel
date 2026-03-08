@@ -198,7 +198,7 @@ const ScoreDisplay: React.FC<{
         </div>
 
         <div className="bg-secondary/50 border border-border rounded-xl lg:rounded-2xl p-3 lg:p-5">
-          <p className="text-foreground font-medium leading-relaxed text-sm lg:text-base">
+          <p className="text-foreground font-medium leading-relaxed text-sm lg:text-base [text-wrap:balance]">
             {results.classificationExplanation}
           </p>
         </div>
