@@ -48,6 +48,28 @@ const Index: React.FC = () => {
   const [whatsappInput, setWhatsappInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
 
+  useEffect(() => {
+    initMetaPixel();
+    captureFbclid();
+    captureClientIp();
+    waitForPixel().then((ready) => {
+      if (!ready) return;
+      const eventId = generateEventId();
+      const { fbp, fbc } = getFbCookies();
+      trackPageView(eventId);
+      supabase.functions.invoke('meta-capi-pageview', {
+        body: {
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          client_ip: getClientIp() || null,
+          source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
+        }
+      }).catch(() => {});
+    });
+  }, []);
+
   const handleBookingConfirmed = (date: string, time: string) => {
     setBookedDate(date);
     setBookedTime(time);
