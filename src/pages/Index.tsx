@@ -261,7 +261,7 @@ const Index: React.FC = () => {
               <Testimonial data={getTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
               <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
-                Leva 3 minutos · Sem compromisso · Resultado personalizado
+                Leva 3 minutos · Sem compromisso · Plano personalizado na hora
               </p>
             </motion.div>
           )}
