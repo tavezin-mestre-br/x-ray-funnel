@@ -108,7 +108,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => { AudioManager.playClick(); onAnswer(opt.id); }}
-              className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-center group"
+              className="flex items-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-left group"
             >
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">
                 {opt.label}
