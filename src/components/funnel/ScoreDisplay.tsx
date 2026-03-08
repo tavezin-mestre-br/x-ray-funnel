@@ -68,21 +68,21 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
 };
 
 const DEFAULT_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Campanhas focadas em trazer clientes, não curtidas" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quanto voltou" },
-  { icon: Bot, title: "Atendimento 24 horas", subtitle: "IA responde seus clientes em segundos, dia e noite" },
-  { icon: Workflow, title: "Controle de vendas", subtitle: "Veja todos seus contatos e vendas num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Filtro automático de quem realmente quer comprar" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Veja em tempo real quanto está faturando" },
+  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Clientes prontos pra comprar" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Investimento e retorno na tela" },
+  { icon: Bot, title: "Atendimento 24 horas", subtitle: "Responde e vende sozinha, 24h" },
+  { icon: Workflow, title: "Controle de vendas", subtitle: "Contatos e vendas num só painel" },
+  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Separa curioso de quem quer comprar" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Números reais, atualizados ao vivo" },
 ];
 
 const CLINIC_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes qualificados pro seu procedimento" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Quanto investiu, quantos agendamentos voltaram" },
-  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Resposta em segundos, agendamento automático" },
-  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Tudo num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático de curiosos" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Agendamentos e comparecimentos em tempo real" },
+  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes prontos pra agendar" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Investimento e retorno na tela" },
+  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Responde e agenda sozinha, 24h" },
+  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Contatos e agenda num só painel" },
+  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Separa curioso de quem quer agendar" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Números reais, atualizados ao vivo" },
 ];
 
 const DEFAULT_TESTIMONIAL = {
@@ -198,7 +198,7 @@ const ScoreDisplay: React.FC<{
         </div>
 
         <div className="bg-secondary/50 border border-border rounded-xl lg:rounded-2xl p-3 lg:p-5">
-          <p className="text-foreground font-medium leading-relaxed text-sm lg:text-base">
+          <p className="text-foreground font-medium leading-relaxed text-sm lg:text-base [text-wrap:balance]">
             {results.classificationExplanation}
           </p>
         </div>
@@ -216,14 +216,14 @@ const ScoreDisplay: React.FC<{
           <h3 className="text-base sm:text-lg lg:text-xl font-black text-foreground leading-tight tracking-tight font-heading">
             {results.bottleneck}
           </h3>
-          <p className="text-muted-foreground font-medium leading-relaxed text-xs lg:text-sm">
+          <p className="text-muted-foreground font-medium leading-relaxed text-xs lg:text-sm [text-wrap:balance]">
             {results.bottleneckWhy}
           </p>
         </div>
         
         <div className="flex items-start gap-3 pt-3 lg:pt-4 border-t border-border">
           <TrendingUp size={18} className="text-foreground shrink-0 mt-0.5" />
-          <p className="text-foreground font-medium leading-relaxed text-xs lg:text-sm">
+          <p className="text-foreground font-medium leading-relaxed text-xs lg:text-sm [text-wrap:balance]">
             {results.impact}
           </p>
         </div>
@@ -240,7 +240,7 @@ const ScoreDisplay: React.FC<{
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
             O que implementamos
           </h3>
-          <p className="text-muted-foreground text-xs lg:text-sm font-medium">
+          <p className="text-muted-foreground text-xs lg:text-sm font-medium [text-wrap:balance]">
             Funcionando em até 30 dias. Sem você mexer em nada.
           </p>
         </div>
@@ -253,12 +253,12 @@ const ScoreDisplay: React.FC<{
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45 + index * 0.05 }}
-              className="flex items-start gap-2.5 lg:gap-3 p-2.5 lg:p-3 rounded-xl bg-secondary/40"
+              className="flex items-start gap-2.5 lg:gap-3 p-2.5 lg:p-3 rounded-xl bg-secondary/40 min-h-[72px] sm:min-h-[76px]"
             >
               <item.icon size={16} className="text-foreground shrink-0 mt-0.5" />
               <div>
                 <p className="text-xs lg:text-sm font-bold text-foreground leading-tight">{item.title}</p>
-                <p className="text-[10px] lg:text-xs text-muted-foreground font-medium mt-0.5">{item.subtitle}</p>
+                <p className="text-[10px] lg:text-xs text-muted-foreground font-medium mt-0.5 [text-wrap:balance]">{item.subtitle}</p>
               </div>
             </motion.div>
           ))}
