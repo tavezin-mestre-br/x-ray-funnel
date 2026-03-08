@@ -92,7 +92,7 @@ export const CLINIC_QUESTIONS: Question[] = [
     phase: 2,
     type: 'single',
     title: 'Qual o ticket médio dos seus procedimentos?',
-    subtitle: 'Isso define como montamos a estratégia de aquisição.',
+    subtitle: 'Isso ajuda a montar o plano ideal pro seu caso.',
     feedback: 'Diagnóstico completo.',
     options: [
       { id: 'q7_1', label: 'R$ 1.000 a R$ 5.000', value: 2, pillar: 'processo' },

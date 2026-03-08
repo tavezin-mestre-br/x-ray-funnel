@@ -20,13 +20,13 @@ export const CLINIC_TESTIMONIALS: TestimonialData[] = [
     result: "Agenda cheia toda semana"
   },
   {
-    quote: "Gastei com 2 agências e nunca soube se deu resultado. Em 3 semanas eu já tinha painel com cada número: custo por lead, agendamentos, ROI.",
+    quote: "Gastei com 2 agências e nunca soube se deu resultado. Em 3 semanas eu já tinha painel com cada número: custo pra trazer cada paciente, agendamentos, retorno real.",
     name: "Dr. Henrique Campos",
     company: "Clínica Dermatológica · Fortaleza",
-    result: "ROI visível desde o mês 1"
+    result: "Retorno claro desde o mês 1"
   },
   {
-    quote: "A conversão das consultas subiu 45% depois que a IA começou a qualificar e agendar direto no WhatsApp. Sem precisar contratar mais ninguém.",
+    quote: "As consultas agendadas subiram 45% depois que a IA começou a qualificar e agendar direto no WhatsApp. Sem precisar contratar mais ninguém.",
     name: "Dra. Fernanda Lima",
     company: "Clínica de Cirurgia Plástica · Fortaleza",
     result: "+45% de conversão em consultas"
