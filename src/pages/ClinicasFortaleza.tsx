@@ -240,8 +240,8 @@ const ClinicasFortaleza: React.FC = () => {
                     <BarChart3 size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Resultado na hora</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Users size={14} className="text-foreground" />
+                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg w-full sm:w-auto justify-center">
+                    <Users size={14} className="text-foreground flex-shrink-0" />
                     <span className="text-xs font-semibold text-foreground">+R$ 10 milhões gerenciados em campanhas</span>
                   </div>
                 </div>
