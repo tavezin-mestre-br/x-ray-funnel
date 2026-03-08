@@ -99,7 +99,7 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
     "Processo": {
       bottleneck: "Você não sabe quantos pacientes entram, quantos agendam e por quê",
       why: "Sem controle dos agendamentos, você não sabe o que funciona e o que não funciona. É como operar no escuro.",
-      impact: "Com sistema de controle e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
+      impact: "Com sistema de controletema de controle e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
       pillars: ["Processo"]
     }
   };
@@ -132,7 +132,7 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   if (lowest.name === 'Processo' || painResponse === 'q1_4') {
     weekTwoThree.push("Painel visual dos agendamentos: quem tá negociando, quem agendou, quem faltou");
     weekTwoThree.push("Rastreamento de cada paciente: origem, custo e se virou consulta");
-    weekTwoThree.push("KPIs definidos: custo por lead, taxa de agendamento, comparecimento");
+    weeNúmeros definidos: custo por paciente: custo por lead, taxa de agendamento, comparecimento");
   } else if (lowest.name === 'Aquisição' || painResponse === 'q1_2') {
     weekTwoThree.push("Campanhas de anúncio pro procedimento mais lucrativo da sua clínica");
     weekTwoThree.push("Landing page de alta conversão pro seu segmento");
