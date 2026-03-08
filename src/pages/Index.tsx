@@ -224,7 +224,8 @@ const Index: React.FC = () => {
                 </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Em 3Responda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação              </p>
+                  Responda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
+                </p>
 
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
