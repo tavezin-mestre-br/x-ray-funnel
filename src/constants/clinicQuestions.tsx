@@ -39,10 +39,10 @@ export const CLINIC_QUESTIONS: Question[] = [
     subtitle: 'Pode marcar mais de uma opção.',
     emotionalHook: 'É exatamente isso que entregamos. Vamos continuar.',
     options: [
-      { id: 'q3_1', label: 'Que traga pacientes qualificados, não curiosos', value: 3, painPoint: 'quer_qualidade' },
-      { id: 'q3_2', label: 'Que eu veja cada número e cada resultado', value: 3, painPoint: 'quer_transparencia' },
-      { id: 'q3_3', label: 'Que funcione 24h sem depender de mim ou da recepção', value: 3, painPoint: 'quer_automacao' },
-      { id: 'q3_4', label: 'Que lote minha agenda de forma previsível', value: 3, painPoint: 'quer_previsibilidade' }
+      { id: 'q3_1', label: 'Que traga pacientes qualificados, não curiosos', value: 3, pillar: 'aquisição', painPoint: 'quer_qualidade' },
+      { id: 'q3_2', label: 'Que eu veja cada número e cada resultado', value: 3, pillar: 'processo', painPoint: 'quer_transparencia' },
+      { id: 'q3_3', label: 'Que funcione 24h sem depender de mim ou da recepção', value: 3, pillar: 'atendimento', painPoint: 'quer_automacao' },
+      { id: 'q3_4', label: 'Que lote minha agenda de forma previsível', value: 3, pillar: 'processo', painPoint: 'quer_previsibilidade' }
     ]
   },
   {
