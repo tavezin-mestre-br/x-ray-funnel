@@ -197,7 +197,7 @@ const Index: React.FC = () => {
   }, [step, userData.responses, userData.badges]);
 
   const getCurrentPhase = () => {
-    if (currentQuestionIndex < 4) return 1;
+    if (currentQuestionIndex < 3) return 1;
     return 2;
   };
 
