@@ -118,35 +118,35 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   const lowest = pillars.reduce((min, p) => p.score < min.score ? p : min, pillars[0]);
 
   const weekOne: string[] = [
-    "Colocar IA no WhatsApp da clínica. Resposta em segundos, qualificação e agendamento automático, 24h por dia",
+    "IA no WhatsApp respondendo em segundos, qualificando e agendando 24h",
   ];
 
   if (attendanceResponse === 'q5_4' || attendanceResponse === 'q5_1') {
-    weekOne.push("Criar perguntas automáticas que filtram quem realmente quer agendar procedimento");
+    weekOne.push("Perguntas automáticas que filtram quem realmente quer agendar");
   } else {
-    weekOne.push("Melhorar o filtro de quem entra em contato. Só passa pra você quem tá pronto pra agendar");
+    weekOne.push("Filtro inteligente: só chega pra você quem tá pronto pra agendar");
   }
-  weekOne.push("Mapear o caminho que o paciente faz hoje: do primeiro contato até a consulta");
+  weekOne.push("Mapeamento completo do caminho do paciente até a consulta");
 
   const weekTwoThree: string[] = [];
   if (lowest.name === 'Processo' || painResponse === 'q1_4') {
-    weekTwoThree.push("Organizar seus agendamentos num painel visual. Ver quem tá negociando, quem agendou, quem faltou");
-    weekTwoThree.push("Rastrear cada paciente: de onde veio, quanto custou pra trazer, se virou consulta");
-    weekTwoThree.push("Definir os números que importam: custo por lead, taxa de agendamento, taxa de comparecimento");
+    weekTwoThree.push("Painel visual dos agendamentos: quem tá negociando, quem agendou, quem faltou");
+    weekTwoThree.push("Rastreamento de cada paciente: origem, custo e se virou consulta");
+    weekTwoThree.push("KPIs definidos: custo por lead, taxa de agendamento, comparecimento");
   } else if (lowest.name === 'Aquisição' || painResponse === 'q1_2') {
-    weekTwoThree.push("Montar campanhas de anúncio pro procedimento que mais dá lucro na sua clínica");
-    weekTwoThree.push("Criar landing page de alta conversão específica pro seu segmento");
-    weekTwoThree.push("Conectar tudo: o anúncio leva pro WhatsApp e a IA já começa a atender e agendar");
+    weekTwoThree.push("Campanhas de anúncio pro procedimento mais lucrativo da sua clínica");
+    weekTwoThree.push("Landing page de alta conversão pro seu segmento");
+    weekTwoThree.push("Anúncio conectado ao WhatsApp com IA atendendo e agendando");
   } else {
-    weekTwoThree.push("Automatizar agendamento direto na conversa do WhatsApp");
-    weekTwoThree.push("Criar sistema de recontato automático com quem não respondeu ou não compareceu");
-    weekTwoThree.push("Montar painel pra acompanhar quantos contatos viraram consulta, em tempo real");
+    weekTwoThree.push("Agendamento automático direto na conversa do WhatsApp");
+    weekTwoThree.push("Recontato automático com quem não respondeu ou faltou");
+    weekTwoThree.push("Painel em tempo real de contatos que viraram consulta");
   }
 
   const weekFour: string[] = [
-    "Anúncios rodando com rastreamento completo. Você sabe quanto cada real investido gerou de agendamento",
-    "Painel mostrando quanto cada campanha gerou de consultas e faturamento real",
-    "Tudo conectado e funcionando: anúncios + IA no atendimento + controle total de agendamentos",
+    "Anúncios rodando com rastreamento completo do investimento ao agendamento",
+    "Painel de resultados: consultas e faturamento real por campanha",
+    "Sistema integrado funcionando: anúncios, IA no atendimento e controle total",
   ];
 
   return {

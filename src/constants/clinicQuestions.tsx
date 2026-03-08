@@ -7,8 +7,8 @@ export const CLINIC_QUESTIONS: Question[] = [
     phase: 1,
     type: 'tiles',
     title: 'Qual o maior problema da sua clínica hoje?',
-    subtitle: 'Escolha o que mais pesa no dia a dia da sua operação.',
-    emotionalHook: 'Entendido. Esse é um dos problemas que mais resolvemos em clínicas.',
+    subtitle: 'Escolha o que mais pesa na sua rotina.',
+    emotionalHook: 'Entendido. Vamos resolver isso.',
     options: [
       { id: 'q1_1', label: 'Pacientes entram em contato mas poucos agendam', value: 2, pillar: 'processo', painPoint: 'conversao' },
       { id: 'q1_2', label: 'Invisto em anúncio e não sei quantos agendamentos voltam', value: 2, pillar: 'aquisição', painPoint: 'roi_invisivel' },
@@ -20,15 +20,15 @@ export const CLINIC_QUESTIONS: Question[] = [
     id: 2,
     phase: 1,
     type: 'single',
-    title: 'Que tipo de procedimento é o carro-chefe da sua clínica?',
-    subtitle: 'Isso nos ajuda a personalizar o diagnóstico pro seu segmento.',
-    emotionalHook: 'Perfeito. Temos experiência nesse segmento.',
-    feedback: 'Registrado.',
+    title: 'Qual procedimento mais traz faturamento pra sua clínica?',
+    subtitle: 'Isso deixa o diagnóstico mais preciso pro seu caso.',
+    emotionalHook: 'Perfeito, seguimos.',
+    feedback: 'Ok.',
     options: [
       { id: 'q2_1', label: 'Estética facial (harmonização, botox, preenchimento)', value: 2, pillar: 'processo', painPoint: 'estetica_facial' },
       { id: 'q2_2', label: 'Estética corporal (lipo, abdominoplastia, silicone)', value: 2, pillar: 'processo', painPoint: 'estetica_corporal' },
       { id: 'q2_3', label: 'Odontologia estética (lentes, implantes, clareamento)', value: 2, pillar: 'processo', painPoint: 'odontologia' },
-      { id: 'q2_4', label: 'Dermatologia / Tratamentos clínicos', value: 2, pillar: 'processo', painPoint: 'dermatologia' }
+      { id: 'q2_4', label: 'Dermatologia e tratamentos clínicos', value: 2, pillar: 'processo', painPoint: 'dermatologia' }
     ]
   },
   {
@@ -36,8 +36,8 @@ export const CLINIC_QUESTIONS: Question[] = [
     phase: 1,
     type: 'multi',
     title: 'O que você espera de quem vai cuidar do marketing da sua clínica?',
-    subtitle: 'Pode marcar mais de uma opção.',
-    emotionalHook: 'É exatamente isso que entregamos. Vamos continuar.',
+    subtitle: 'Pode marcar mais de uma.',
+    emotionalHook: 'Anotado. Bora continuar.',
     options: [
       { id: 'q3_1', label: 'Que traga pacientes qualificados, não curiosos', value: 3, pillar: 'aquisição', painPoint: 'quer_qualidade' },
       { id: 'q3_2', label: 'Que eu veja cada número e cada resultado', value: 3, pillar: 'processo', painPoint: 'quer_transparencia' },
@@ -51,9 +51,9 @@ export const CLINIC_QUESTIONS: Question[] = [
     type: 'multi',
     title: 'Hoje, de onde vêm seus pacientes?',
     subtitle: 'Marque todos os canais que se aplicam.',
-    feedback: 'Canal registrado.',
+    feedback: 'Anotado.',
     options: [
-      { id: 'q4_1', label: 'WhatsApp / Instagram DM', value: 2, pillar: 'aquisição' },
+      { id: 'q4_1', label: 'WhatsApp ou Instagram DM', value: 2, pillar: 'aquisição' },
       { id: 'q4_2', label: 'Anúncios pagos (Meta, Google)', value: 4, pillar: 'aquisição' },
       { id: 'q4_3', label: 'Indicação de outros pacientes', value: 2, pillar: 'aquisição' },
       { id: 'q4_4', label: 'Não tenho um canal definido', value: 0, pillar: 'aquisição' }
@@ -64,8 +64,8 @@ export const CLINIC_QUESTIONS: Question[] = [
     phase: 2,
     type: 'single',
     title: 'Quando um paciente manda mensagem, o que acontece?',
-    subtitle: 'Queremos entender como funciona hoje, na prática.',
-    feedback: 'Fluxo mapeado.',
+    subtitle: 'Como funciona hoje quando alguém te procura.',
+    feedback: 'Entendi.',
     options: [
       { id: 'q5_1', label: 'Eu ou a recepcionista responde quando dá', value: 1, pillar: 'atendimento' },
       { id: 'q5_2', label: 'Alguém responde, mas nem sempre é rápido', value: 2, pillar: 'atendimento' },
@@ -79,7 +79,7 @@ export const CLINIC_QUESTIONS: Question[] = [
     type: 'single',
     title: 'Quantos contatos sua clínica recebe por mês?',
     subtitle: 'Um número aproximado já serve.',
-    feedback: 'Volume registrado.',
+    feedback: 'Perfeito.',
     options: [
       { id: 'q6_1', label: 'Menos de 50', value: 1, pillar: 'aquisição' },
       { id: 'q6_2', label: '50 a 200', value: 2, pillar: 'aquisição' },
@@ -92,7 +92,7 @@ export const CLINIC_QUESTIONS: Question[] = [
     phase: 2,
     type: 'single',
     title: 'Qual o ticket médio dos seus procedimentos?',
-    subtitle: 'Isso define como vamos montar a estratégia de aquisição.',
+    subtitle: 'Isso define como montamos a estratégia de aquisição.',
     feedback: 'Diagnóstico completo.',
     options: [
       { id: 'q7_1', label: 'R$ 1.000 a R$ 5.000', value: 2, pillar: 'processo' },
