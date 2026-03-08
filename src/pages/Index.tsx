@@ -216,7 +216,7 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  IMPLEMENTAÇÃO DE MÁQUINA COMERCIAL COM IA
+                  DIAGNÓSTICO GRATUITO · 3 MINUTOS
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
