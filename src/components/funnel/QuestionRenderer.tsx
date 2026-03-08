@@ -2,6 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import { ChevronRight, Check } from 'lucide-react';
+import { AudioManager } from '@/services/audio';
 
 interface Props {
   question: Question;
