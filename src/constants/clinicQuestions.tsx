@@ -70,7 +70,7 @@ export const CLINIC_QUESTIONS: Question[] = [
       { id: 'q5_1', label: 'Eu ou a recepcionista responde quando dá', value: 1, pillar: 'atendimento' },
       { id: 'q5_2', label: 'Alguém responde, mas nem sempre é rápido', value: 2, pillar: 'atendimento' },
       { id: 'q5_3', label: 'Tem resposta automática e depois entra um humano', value: 3, pillar: 'atendimento' },
-      { id: 'q5_4', label: 'Depende do dia — cada hora é diferente', value: 0, pillar: 'atendimento' }
+      { id: 'q5_4', label: 'Depende do dia, cada hora é diferente', value: 0, pillar: 'atendimento' }
     ]
   },
   {

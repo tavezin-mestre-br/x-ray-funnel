@@ -2,9 +2,9 @@ import { CLINIC_QUESTIONS, CLINIC_PILLARS } from '@/constants/clinicQuestions';
 import { FinalResults, PillarScore, Badge } from '@/types/funnel';
 
 const PILLAR_DESCRIPTIONS: Record<string, string> = {
-  "Aquisição": "Como os pacientes chegam até sua clínica — anúncios, redes sociais, indicação",
-  "Atendimento": "A velocidade com que você responde quem entra em contato e agenda",
-  "Processo": "O controle que você tem sobre seus agendamentos, do primeiro contato até a consulta"
+  "Aquisição": "Como os pacientes chegam até sua clínica. Anúncios, redes sociais, indicação.",
+  "Atendimento": "A velocidade com que você responde quem entra em contato e agenda.",
+  "Processo": "O controle que você tem sobre seus agendamentos, do primeiro contato até a consulta."
 };
 
 const getPillarStatus = (score: number, max: number): 'high' | 'medium' | 'low' => {
@@ -53,19 +53,19 @@ const getExpectationLabel = (answer: string | string[] | undefined): string => {
 };
 
 const getClassificationData = (totalScore: number) => {
-  if (totalScore < 8) {
+  if (totalScore < 10) {
     return {
       classification: "Sua clínica está perdendo pacientes no escuro",
       explanation: "Você não tem um sistema de aquisição e atendimento organizado. Pacientes entram em contato e se perdem no caminho. Cada dia sem resolver isso é agendamento que vai pra concorrência.",
       level: 1
     };
-  } else if (totalScore < 16) {
+  } else if (totalScore < 20) {
     return {
       classification: "Pacientes chegam, mas poucos viram consulta",
-      explanation: "A demanda existe, mas entre o primeiro contato e o agendamento tem muita coisa falhando. O problema não é falta de paciente — é falta de velocidade e processo.",
+      explanation: "A demanda existe, mas entre o primeiro contato e o agendamento tem muita coisa falhando. O problema não é falta de paciente. É falta de velocidade e processo.",
       level: 2
     };
-  } else if (totalScore < 24) {
+  } else if (totalScore < 30) {
     return {
       classification: "Boa base, pronto pra escalar os agendamentos",
       explanation: "Você já tem uma base funcionando. Agora é hora de automatizar o atendimento, rastrear cada real investido e transformar isso em agendamentos previsíveis todo mês.",
@@ -93,7 +93,7 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
     "Atendimento": {
       bottleneck: "Pacientes interessados estão desistindo antes de agendar",
       why: "Quanto mais tempo leva pra responder, menor a chance de agendar. O paciente manda mensagem e fecha com quem responde primeiro.",
-      impact: "Com IA no atendimento, seus pacientes são respondidos em segundos, qualificados e agendados automaticamente — 24 horas por dia.",
+      impact: "Com IA no atendimento, seus pacientes são respondidos em segundos, qualificados e agendados automaticamente, 24 horas por dia.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
@@ -118,19 +118,19 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   const lowest = pillars.reduce((min, p) => p.score < min.score ? p : min, pillars[0]);
 
   const weekOne: string[] = [
-    "Colocar IA no WhatsApp da clínica — resposta em segundos, qualificação e agendamento automático, 24h por dia",
+    "Colocar IA no WhatsApp da clínica. Resposta em segundos, qualificação e agendamento automático, 24h por dia",
   ];
 
   if (attendanceResponse === 'q5_4' || attendanceResponse === 'q5_1') {
     weekOne.push("Criar perguntas automáticas que filtram quem realmente quer agendar procedimento");
   } else {
-    weekOne.push("Melhorar o filtro de quem entra em contato — só passa pra você quem tá pronto pra agendar");
+    weekOne.push("Melhorar o filtro de quem entra em contato. Só passa pra você quem tá pronto pra agendar");
   }
   weekOne.push("Mapear o caminho que o paciente faz hoje: do primeiro contato até a consulta");
 
   const weekTwoThree: string[] = [];
   if (lowest.name === 'Processo' || painResponse === 'q1_4') {
-    weekTwoThree.push("Organizar seus agendamentos num painel visual — ver quem tá negociando, quem agendou, quem faltou");
+    weekTwoThree.push("Organizar seus agendamentos num painel visual. Ver quem tá negociando, quem agendou, quem faltou");
     weekTwoThree.push("Rastrear cada paciente: de onde veio, quanto custou pra trazer, se virou consulta");
     weekTwoThree.push("Definir os números que importam: custo por lead, taxa de agendamento, taxa de comparecimento");
   } else if (lowest.name === 'Aquisição' || painResponse === 'q1_2') {
@@ -144,7 +144,7 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   }
 
   const weekFour: string[] = [
-    "Anúncios rodando com rastreamento completo — você sabe quanto cada real investido gerou de agendamento",
+    "Anúncios rodando com rastreamento completo. Você sabe quanto cada real investido gerou de agendamento",
     "Painel mostrando quanto cada campanha gerou de consultas e faturamento real",
     "Tudo conectado e funcionando: anúncios + IA no atendimento + controle total de agendamentos",
   ];
@@ -176,7 +176,7 @@ export const calculateClinicResults = (responses: Record<number, any>, badges: s
     });
   });
 
-  const maxes = { aquisição: 12, atendimento: 6, processo: 14 };
+  const maxes: Record<string, number> = { aquisição: 17, atendimento: 8, processo: 14 };
 
   const pillars: PillarScore[] = CLINIC_PILLARS.map(p => {
     const raw = rawScores[p];
@@ -211,7 +211,7 @@ export const calculateClinicResults = (responses: Record<number, any>, badges: s
     icon: '🏥'
   }];
 
-  if (totalScore >= 20) {
+  if (totalScore >= 24) {
     earnedBadges.push({
       id: 'estrutura_solida',
       name: 'Estrutura Sólida',
