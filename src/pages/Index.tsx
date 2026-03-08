@@ -242,7 +242,7 @@ const Index: React.FC = () => {
 
                 <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
                   <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
-                    Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
+                    Para empresas que já faturam e querem vender mais usando internet, com ou sem experiência em marketing.
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
                     Se esse não é seu momento, tudo bem, isso não é pra você ainda.
