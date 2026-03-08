@@ -99,7 +99,7 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
     "Processo": {
       bottleneck: "Você não sabe quantos pacientes entram, quantos agendam e por quê",
       why: "Sem controle dos agendamentos, você não sabe o que funciona e o que não funciona. É como operar no escuro.",
-      impact: "Com CRM e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
+      impact: "Com sistema de controle e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
       pillars: ["Processo"]
     }
   };
