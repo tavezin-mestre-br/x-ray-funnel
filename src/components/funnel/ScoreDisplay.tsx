@@ -190,7 +190,7 @@ const ScoreDisplay: React.FC<{
             <AlertTriangle size={28} className="hidden lg:block" />
           </div>
           <div className="space-y-1 lg:space-y-2">
-            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da {entityLabelCap}</span>
+            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Diagnóstico</span>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {results.classification}
             </h2>
