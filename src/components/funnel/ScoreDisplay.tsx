@@ -279,7 +279,7 @@ const ScoreDisplay: React.FC<{
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Atendemos poucas {ctaLabel} por vez. Se está vendo isso, ainda tem vaga.
+            Vagas limitadas. Se está vendo isso, ainda tem.
           </p>
         </div>
       </motion.div>
