@@ -245,7 +245,7 @@ const Index: React.FC = () => {
                     Para empresas que já faturam e querem vender mais usando internet, com ou sem experiência em marketing.
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
-                    Se esse não é seu momento, tudo bem, isso não é pra você ainda.
+                    Nós cuidamos de tudo. Você só precisa responder com sinceridade.
                   </p>
                 </div>
               </div>
