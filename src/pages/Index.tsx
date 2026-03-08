@@ -343,8 +343,8 @@ const Index: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Investimento em Tráfego Pago *</label>
-                    <p className="text-muted-foreground text-[10px] lg:text-xs">Quanto investe (ou já investiu) por mês?</p>
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Quanto investe em anúncios online? *</label>
+                    <p className="text-muted-foreground text-[10px] lg:text-xs">Meta Ads, Google Ads, etc. Se nunca investiu, tudo bem.</p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { label: 'Nunca investi', value: 'nunca' },
