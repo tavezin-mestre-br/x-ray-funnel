@@ -67,7 +67,7 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
   );
 };
 
-const DELIVERABLES = [
+const DEFAULT_DELIVERABLES = [
   { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Campanhas focadas em trazer clientes, não curtidas" },
   { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quanto voltou" },
   { icon: Bot, title: "Atendimento 24 horas", subtitle: "IA responde seus clientes em segundos, dia e noite" },
@@ -75,6 +75,29 @@ const DELIVERABLES = [
   { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Filtro automático de quem realmente quer comprar" },
   { icon: Gauge, title: "Painel de resultados", subtitle: "Veja em tempo real quanto está faturando" },
 ];
+
+const CLINIC_DELIVERABLES = [
+  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Campanhas focadas em trazer pacientes qualificados pro seu procedimento" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quantos agendamentos voltaram" },
+  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Pacientes respondidos em segundos, qualificados e agendados automaticamente" },
+  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Veja todos os contatos, agendamentos e consultas num só lugar" },
+  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático que separa quem quer agendar de quem só tá pesquisando" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Acompanhe em tempo real quantos pacientes agendaram e compareceram" },
+];
+
+const DEFAULT_TESTIMONIAL = {
+  name: "Clemir Junio",
+  company: "Artfacas Brasil",
+  quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm dos anúncios e o custo por contato caiu pela metade. Finalmente consigo planejar o mês.",
+  result: "70% das vendas via anúncio"
+};
+
+const CLINIC_TESTIMONIAL = {
+  name: "Dra. Camila Reis",
+  company: "Clínica de Harmonização Facial · Fortaleza",
+  quote: "Saímos de 8 para 31 agendamentos em um único mês. A IA responde em segundos e agenda sozinha. Nunca mais perdi paciente de madrugada.",
+  result: "De 8 para 31 agendamentos"
+};
 
 const TimelineStep: React.FC<{ 
   number: number; 
@@ -121,9 +144,17 @@ const ScoreDisplay: React.FC<{
   results: FinalResults; 
   userData: UserData; 
   leadId?: string;
+  variant?: 'default' | 'clinic';
   onBookingConfirmed: (date: string, time: string) => void;
-}> = ({ results, userData, leadId, onBookingConfirmed }) => {
+}> = ({ results, userData, leadId, variant = 'default', onBookingConfirmed }) => {
   const [showScheduling, setShowScheduling] = useState(false);
+
+  const isClinic = variant === 'clinic';
+  const deliverables = isClinic ? CLINIC_DELIVERABLES : DEFAULT_DELIVERABLES;
+  const testimonial = isClinic ? CLINIC_TESTIMONIAL : DEFAULT_TESTIMONIAL;
+  const entityLabel = isClinic ? 'clínica' : 'empresa';
+  const entityLabelCap = isClinic ? 'Clínica' : 'Empresa';
+  const ctaLabel = isClinic ? 'clínicas' : 'empresas';
 
   return (
     <motion.div 
@@ -159,7 +190,7 @@ const ScoreDisplay: React.FC<{
             <AlertTriangle size={28} className="hidden lg:block" />
           </div>
           <div className="space-y-1 lg:space-y-2">
-            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da Empresa</span>
+            <span className="text-[10px] lg:text-xs font-bold text-muted-foreground mono-font uppercase tracking-widest">Status da {entityLabelCap}</span>
             <h2 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground leading-tight tracking-tight font-heading">
               {results.classification}
             </h2>
@@ -207,7 +238,7 @@ const ScoreDisplay: React.FC<{
       >
         <div className="space-y-2 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que vai mudar na sua empresa
+            O que vai mudar na sua {entityLabel}
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
             Tudo isso funcionando em até 30 dias, sem você precisar entender de tecnologia.
@@ -216,7 +247,7 @@ const ScoreDisplay: React.FC<{
 
         {/* Deliverables Grid */}
         <div className="grid grid-cols-2 gap-2.5 lg:gap-3">
-          {DELIVERABLES.map((item, index) => (
+          {deliverables.map((item, index) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 10 }}
@@ -248,7 +279,7 @@ const ScoreDisplay: React.FC<{
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Atendemos poucas empresas por vez. Se está vendo isso, ainda tem vaga.
+            Atendemos poucas {ctaLabel} por vez. Se está vendo isso, ainda tem vaga.
           </p>
         </div>
       </motion.div>
@@ -261,7 +292,7 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Onde sua empresa está forte e onde precisa melhorar
+          Onde sua {entityLabel} está forte e onde precisa melhorar
         </h3>
         <PillarBars pillars={results.pillars} />
       </motion.div>
@@ -295,7 +326,7 @@ const ScoreDisplay: React.FC<{
           <TimelineStep
             number={3}
             period="Semana 3-4"
-            title="Vendas funcionando no automático"
+            title={isClinic ? "Agendamentos funcionando no automático" : "Vendas funcionando no automático"}
             items={results.recommendations.sixtyNinetyDays}
             isLast
             delay={0.85}
@@ -321,12 +352,7 @@ const ScoreDisplay: React.FC<{
       </motion.div>
 
       {/* Testimonial */}
-      <Testimonial data={{
-        name: "Clemir Junio",
-        company: "Artfacas Brasil",
-        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm dos anúncios e o custo por contato caiu pela metade. Finalmente consigo planejar o mês.",
-        result: "70% das vendas via anúncio"
-      }} />
+      <Testimonial data={testimonial} />
 
       <SchedulingDialog
         open={showScheduling}
