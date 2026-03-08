@@ -124,12 +124,10 @@ const Index: React.FC = () => {
     const updatedUserData = { ...userData, whatsapp: normalizedPhone, email };
     setUserData(updatedUserData);
     
-    // Advanced Matching — envia dados do usuário pro pixel
-    updateUserData({ phone: normalizedPhone, email, firstName: updatedUserData.name?.split(' ')[0] });
-    
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
     const eventId = generateEventId();
     const { fbp, fbc } = getFbCookies();
+    const clientIp = getClientIp();
     
     // Transform responses from IDs to readable labels
     const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
@@ -166,7 +164,9 @@ const Index: React.FC = () => {
           event_id: eventId,
           fbp: fbp || null,
           fbc: fbc || null,
+          client_ip: clientIp || null,
           source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
         }
       });
       
@@ -175,7 +175,8 @@ const Index: React.FC = () => {
         toast.error('Erro ao salvar diagnóstico. Continuando...');
       } else {
         if (data?.lead_id) setLeadId(data.lead_id);
-        trackLead(eventId);
+        const ready = await waitForPixel();
+        if (ready) trackLead(eventId);
       }
     } catch (err) {
       console.error('Failed to save lead:', err);
