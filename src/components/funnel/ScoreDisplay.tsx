@@ -77,12 +77,12 @@ const DEFAULT_DELIVERABLES = [
 ];
 
 const CLINIC_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Campanhas focadas em trazer pacientes qualificados pro seu procedimento" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quantos agendamentos voltaram" },
-  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Pacientes respondidos em segundos, qualificados e agendados automaticamente" },
-  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Veja todos os contatos, agendamentos e consultas num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático que separa quem quer agendar de quem só tá pesquisando" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Acompanhe em tempo real quantos pacientes agendaram e compareceram" },
+  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes qualificados pro seu procedimento" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Quanto investiu, quantos agendamentos voltaram" },
+  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Resposta em segundos, agendamento automático" },
+  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Tudo num só lugar" },
+  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático de curiosos" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Agendamentos e comparecimentos em tempo real" },
 ];
 
 const DEFAULT_TESTIMONIAL = {
