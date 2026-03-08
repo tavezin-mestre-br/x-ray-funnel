@@ -278,8 +278,8 @@ const ScoreDisplay: React.FC<{
             20 min · Gratuita · Sem compromisso
           </p>
 
-          <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Vagas limitadas. Se está vendo isso, ainda tem.
+          <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center whitespace-nowrap">
+            Poucas vagas restantes — garanta a sua agora
           </p>
         </div>
       </motion.div>
