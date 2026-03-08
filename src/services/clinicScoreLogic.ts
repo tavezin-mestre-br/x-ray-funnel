@@ -202,7 +202,7 @@ export const calculateClinicResults = (responses: Record<number, any>, badges: s
   const specialtyLabel = getSpecialtyLabel(responses[2]);
   const expectationLabel = getExpectationLabel(responses[3]);
 
-  const personalizedBottleneckWhy = `Seu cenário: ${painLabel}. Sua clínica atua com ${specialtyLabel}. O que você precisa é ${expectationLabel}. ${bottleneckAnalysis.why}`;
+  const personalizedBottleneckWhy = `${bottleneckAnalysis.why} Sua clínica atua com ${specialtyLabel} e precisa de ${expectationLabel}.`;
 
   const earnedBadges: Badge[] = [{
     id: 'diagnostico_clinico',

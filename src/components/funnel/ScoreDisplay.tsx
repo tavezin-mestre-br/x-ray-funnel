@@ -305,7 +305,7 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Seu plano de ação, semana a semana
+          Plano de ação
         </h3>
 
         <div>
