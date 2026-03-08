@@ -6,6 +6,7 @@ import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
 import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
+import { AudioManager } from '@/services/audio';
 import { 
   initMetaPixel, waitForPixel, captureFbclid, captureClientIp,
   trackPageView, trackViewContent, trackCompleteRegistration, trackLead,
