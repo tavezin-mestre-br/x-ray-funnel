@@ -9,26 +9,39 @@ async function hashStr(str: string): Promise<string> {
 }
 
 async function sendMetaConversion(
+  req: Request,
   eventName: string,
-  userData: { name?: string; phone?: string; email?: string },
+  userData: { name?: string; phone?: string; email?: string; external_id?: string },
   customData?: Record<string, unknown>,
   eventId?: string,
   fbp?: string,
   fbc?: string,
-  sourceUrl?: string
+  sourceUrl?: string,
+  clientIp?: string,
+  clientUserAgent?: string,
 ) {
   const token = Deno.env.get('META_CONVERSIONS_TOKEN')
   if (!token) { console.log('META_CONVERSIONS_TOKEN not set, skipping CAPI'); return }
 
   try {
-    const userDataPayload: Record<string, unknown> = {
-      ph: userData.phone ? [await hashStr(userData.phone.replace(/\D/g, ''))] : undefined,
-      em: userData.email ? [await hashStr(userData.email.toLowerCase().trim())] : undefined,
-      fn: userData.name ? [await hashStr(userData.name.split(' ')[0].toLowerCase().trim())] : undefined,
+    const userDataPayload: Record<string, unknown> = {}
+
+    if (userData.phone) userDataPayload.ph = await hashStr(userData.phone.replace(/\D/g, ''))
+    if (userData.email) userDataPayload.em = await hashStr(userData.email.toLowerCase().trim())
+    if (userData.name) {
+      const parts = userData.name.trim().split(' ')
+      userDataPayload.fn = await hashStr(parts[0])
+      if (parts.length > 1) userDataPayload.ln = await hashStr(parts.slice(1).join(' '))
     }
+    if (userData.external_id) userDataPayload.external_id = userData.external_id
 
     if (fbp) userDataPayload.fbp = fbp
     if (fbc) userDataPayload.fbc = fbc
+
+    const ip = clientIp || req.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
+    if (ip) userDataPayload.client_ip_address = ip
+
+    if (clientUserAgent) userDataPayload.client_user_agent = clientUserAgent
 
     const eventData: Record<string, unknown> = {
       event_name: eventName,
@@ -36,16 +49,14 @@ async function sendMetaConversion(
       action_source: 'website',
       event_source_url: sourceUrl || 'https://shkinh.online',
       user_data: userDataPayload,
-      custom_data: customData,
     }
 
     if (eventId) eventData.event_id = eventId
-
-    const payload = { data: [eventData] }
+    if (customData && Object.keys(customData).length > 0) eventData.custom_data = customData
 
     const res = await fetch(
       `https://graph.facebook.com/v21.0/1396348278959400/events?access_token=${token}`,
-      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+      { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ data: [eventData] }) }
     )
     console.log('Meta CAPI response:', res.status, await res.text())
   } catch (e) {
@@ -93,13 +104,16 @@ Deno.serve(async (req) => {
 
     // Meta Conversions API
     await sendMetaConversion(
+      req,
       'Schedule',
-      { name: payload.name, phone: payload.phone },
-      { scheduled_date: payload.scheduled_date, scheduled_time: payload.scheduled_time, lead_id: payload.lead_id },
+      { name: payload.name, phone: payload.phone, email: payload.email, external_id: payload.lead_id },
+      { scheduled_date: payload.scheduled_date, scheduled_time: payload.scheduled_time },
       payload.event_id,
       payload.fbp,
       payload.fbc,
-      payload.source_url
+      payload.source_url,
+      payload.client_ip,
+      payload.client_user_agent,
     )
 
     return new Response(JSON.stringify({ success: true }), {

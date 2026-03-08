@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 import { UserData } from '@/types/funnel';
-import { trackSchedule, generateEventId, getFbCookies } from '@/services/metaPixel';
+import { trackSchedule, generateEventId, getFbCookies, getClientIp } from '@/services/metaPixel';
 
 const TIME_SLOTS = [
   '08:00', '09:00', '10:00', '11:00', '12:00',
@@ -49,6 +49,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
     setIsSubmitting(true);
     const eventId = generateEventId();
     const { fbp, fbc } = getFbCookies();
+    const clientIp = getClientIp();
 
     try {
       const { error } = await supabase.from('bookings').insert({
@@ -61,21 +62,22 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
 
       if (error) throw error;
 
-      // Dispara no Pixel do navegador COM event_id
       trackSchedule(eventId);
 
-      // Notifica n8n + CAPI com event_id e cookies
       supabase.functions.invoke('notify-booking', {
         body: {
           lead_id: leadId || null,
           name: userData.name,
           phone: userData.whatsapp,
+          email: userData.email || null,
           scheduled_date: format(selectedDate, 'yyyy-MM-dd'),
           scheduled_time: selectedTime,
           event_id: eventId,
           fbp: fbp || null,
           fbc: fbc || null,
+          client_ip: clientIp || null,
           source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
         }
       }).catch(err => console.error('notify-booking error:', err));
 

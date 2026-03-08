@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { UserData } from '@/types/funnel';
 import { QUESTIONS } from '@/constants/questions';
@@ -6,7 +6,11 @@ import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
 import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
-import { trackLead, trackViewContent, trackCompleteRegistration, generateEventId, getFbCookies, updateUserData } from '@/services/metaPixel';
+import { 
+  initMetaPixel, waitForPixel, captureFbclid, captureClientIp,
+  trackPageView, trackViewContent, trackCompleteRegistration, trackLead,
+  generateEventId, getFbCookies, getClientIp
+} from '@/services/metaPixel';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import Testimonial, { getTestimonialForStep } from '@/components/funnel/Testimonial';
@@ -44,15 +48,40 @@ const Index: React.FC = () => {
   const [whatsappInput, setWhatsappInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
 
+  useEffect(() => {
+    initMetaPixel();
+    captureFbclid();
+    captureClientIp();
+    waitForPixel().then((ready) => {
+      if (!ready) return;
+      const eventId = generateEventId();
+      const { fbp, fbc } = getFbCookies();
+      trackPageView(eventId);
+      supabase.functions.invoke('meta-capi-pageview', {
+        body: {
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          client_ip: getClientIp() || null,
+          source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
+        }
+      }).catch(() => {});
+    });
+  }, []);
+
   const handleBookingConfirmed = (date: string, time: string) => {
     setBookedDate(date);
     setBookedTime(time);
     setStep('booking_confirmed');
   };
 
-  const handleStartDiagnosis = () => {
-    const eventId = generateEventId();
-    trackViewContent(eventId);
+  const handleStartDiagnosis = async () => {
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackViewContent(eventId);
+    }
     setStep('funnel');
   };
 
@@ -71,13 +100,16 @@ const Index: React.FC = () => {
     }
   };
 
-  const handleCompanySubmit = () => {
+  const handleCompanySubmit = async () => {
     if (!companyData.contactName || !companyData.companyName || !companyData.monthlyRevenue || !companyData.trafficInvestment) {
       toast.error("Preencha todos os campos obrigatórios.");
       return;
     }
-    const eventId = generateEventId();
-    trackCompleteRegistration(eventId);
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackCompleteRegistration(eventId);
+    }
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
     setCurrentQuestionIndex(4);
@@ -92,12 +124,10 @@ const Index: React.FC = () => {
     const updatedUserData = { ...userData, whatsapp: normalizedPhone, email };
     setUserData(updatedUserData);
     
-    // Advanced Matching — envia dados do usuário pro pixel
-    updateUserData({ phone: normalizedPhone, email, firstName: updatedUserData.name?.split(' ')[0] });
-    
     const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
     const eventId = generateEventId();
     const { fbp, fbc } = getFbCookies();
+    const clientIp = getClientIp();
     
     // Transform responses from IDs to readable labels
     const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
@@ -134,7 +164,9 @@ const Index: React.FC = () => {
           event_id: eventId,
           fbp: fbp || null,
           fbc: fbc || null,
+          client_ip: clientIp || null,
           source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
         }
       });
       
@@ -143,7 +175,8 @@ const Index: React.FC = () => {
         toast.error('Erro ao salvar diagnóstico. Continuando...');
       } else {
         if (data?.lead_id) setLeadId(data.lead_id);
-        trackLead(eventId);
+        const ready = await waitForPixel();
+        if (ready) trackLead(eventId);
       }
     } catch (err) {
       console.error('Failed to save lead:', err);
