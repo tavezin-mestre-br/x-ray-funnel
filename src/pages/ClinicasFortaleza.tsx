@@ -266,7 +266,7 @@ const ClinicasFortaleza: React.FC = () => {
               {/* Intro testimonial */}
               <Testimonial data={getClinicTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
-              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
+              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center [text-wrap:balance]">
                 Leva 3 minutos · Sem compromisso · Plano personalizado pra sua clínica
               </p>
             </motion.div>
