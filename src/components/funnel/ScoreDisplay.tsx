@@ -281,7 +281,7 @@ const ScoreDisplay: React.FC<{
           <TimelineStep
             number={1}
             period="Semana 1"
-            title="Diagnóstico e Implementação Rápida"
+            title="Atendimento automático no ar"
             items={results.recommendations.sevenDays}
             delay={0.65}
           />
