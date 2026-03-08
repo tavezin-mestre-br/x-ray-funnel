@@ -115,7 +115,7 @@ const SchedulingDialog: React.FC<SchedulingDialogProps> = ({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-lg font-black font-heading">
             <CalendarCheck size={20} className="text-primary" />
-            Escolha o melhor horário pra conversar
+            Agendar Implementação
           </DialogTitle>
         </DialogHeader>
 

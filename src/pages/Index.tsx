@@ -216,39 +216,39 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  DIAGNÓSTICO GRATUITO · 3 MINUTOS
+                  IMPLEMENTAÇÃO DE MÁQUINA COMERCIAL COM IA
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Sua empresa está deixando dinheiro na mesa. Descubra onde.
+                  Descubra onde seu negócio está perdendo faturamento
                 </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Responda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
+                  Em 3 minutos você recebe um diagnóstico real da sua operação comercial, e o que fazer para corrigir.
                 </p>
 
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Shield size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">Seus dados protegidos</span>
+                    <span className="text-xs font-semibold text-foreground">Dados protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <BarChart3 size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">Resultado na hora</span>
+                    <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em anúncios</span>
+                    <span className="text-xs font-semibold text-foreground">+R$ 2M gerenciados em tráfego</span>
                   </div>
                 </div>
 
                 <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
                   <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
-                    Para empresas que já faturam e querem vender mais usando internet, com ou sem experiência em marketing.
+                    Este diagnóstico é para empresas que já investem ou estão prontas para investir no mínimo R$3.000/mês em tráfego pago, além da mão de obra.
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
-                    Nós cuidamos de tudo. Você só precisa responder com sinceridade.
+                    Se esse não é seu momento, tudo bem, isso não é pra você ainda.
                   </p>
                 </div>
               </div>
@@ -257,14 +257,14 @@ const Index: React.FC = () => {
                 onClick={handleStartDiagnosis}
                 className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
               >
-                Começar meu diagnóstico gratuito →
+                Quero meu diagnóstico gratuito →
               </button>
 
               {/* Intro testimonial */}
               <Testimonial data={getTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
               <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
-                Leva 3 minutos · Sem compromisso · Plano personalizado na hora
+                Leva 3 minutos · Sem compromisso · Resultado personalizado
               </p>
             </motion.div>
           )}
@@ -286,14 +286,14 @@ const Index: React.FC = () => {
                     </div>
                      <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
                   </div>
-                  <p className="text-muted-foreground text-xs lg:text-sm">Já entendemos sua dor. Agora vamos personalizar.</p>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Perfil da empresa registrado.</p>
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
-                    Falta pouco pro seu plano de ação ficar pronto.
+                    Para personalizar seu plano de ação
                   </h2>
-                  <p className="text-muted-foreground text-xs lg:text-sm">Esses dados deixam o diagnóstico muito mais preciso pro seu caso.</p>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Precisamos de alguns dados para personalizar o diagnóstico.</p>
                 </div>
 
                 <div className="space-y-3 lg:space-y-4">
@@ -346,8 +346,8 @@ const Index: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Quanto investe em anúncios online? *</label>
-                    <p className="text-muted-foreground text-[10px] lg:text-xs">Meta Ads, Google Ads, etc. Se nunca investiu, tudo bem.</p>
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Investimento em Tráfego Pago *</label>
+                    <p className="text-muted-foreground text-[10px] lg:text-xs">Quanto investe (ou já investiu) por mês?</p>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { label: 'Nunca investi', value: 'nunca' },
@@ -377,7 +377,7 @@ const Index: React.FC = () => {
                   onClick={handleCompanySubmit}
                   className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary"
                 >
-                  Continuar meu diagnóstico →
+                  Ver onde vamos agir →
                 </button>
               </div>
 
@@ -403,14 +403,14 @@ const Index: React.FC = () => {
                      </div>
                      <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
                   </div>
-                  <p className="text-muted-foreground text-xs lg:text-sm">Análise completa. Agora é só o último passo.</p>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Estrutura operacional mapeada.</p>
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2 text-center">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
                     Seu plano de ação está pronto.
                   </h2>
-                  <p className="text-muted-foreground text-sm lg:text-base">Coloque seu WhatsApp pra ver o resultado agora e receber o passo a passo.</p>
+                  <p className="text-muted-foreground text-sm lg:text-base">Veja onde sua empresa está deixando dinheiro na mesa e como resolver.</p>
                 </div>
 
                 <div className="space-y-3 lg:space-y-4">
@@ -424,7 +424,7 @@ const Index: React.FC = () => {
                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
                     />
                     <p className="text-[10px] lg:text-xs text-muted-foreground">
-                      Prometemos: zero spam. Só o diagnóstico e o passo a passo pro seu caso.
+                      Usaremos esse número para enviar seu diagnóstico e confirmar seu horário.
                     </p>
                   </div>
                   <div className="space-y-1.5 lg:space-y-2">
@@ -461,7 +461,7 @@ const Index: React.FC = () => {
                       Processando...
                     </span>
                   ) : (
-                    'Ver meu resultado agora →'
+                    'Ver Diagnóstico'
                   )}
                 </button>
               </div>

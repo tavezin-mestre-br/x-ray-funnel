@@ -10,34 +10,34 @@ export interface TestimonialData {
 
 const TESTIMONIALS: TestimonialData[] = [
   {
-    quote: "Gastei R$ 80 mil em 2 agências diferentes e nunca soube quanto voltou. A Shekinah montou tudo em 3 semanas e no primeiro mês eu já sabia exatamente quanto cada campanha faturou.",
+    quote: "Já tinha gasto R$ 80 mil com 2 agências e não sabia se voltava 1 real. A Shekinah montou tudo em 3 semanas. No primeiro mês eu já sabia quanto cada campanha faturou.",
     name: "Daniel Bervian",
     company: "Staff Motors",
-    result: "ROI visível desde o mês 1"
+    result: "ROI rastreado desde o dia 1"
   },
   {
-    quote: "Em 7 dias eu já tinha IA respondendo no WhatsApp. Antes eu perdia cliente de madrugada, hoje a resposta sai em segundos e a conversão subiu 40%.",
+    quote: "O que me convenceu foi a velocidade. Em 7 dias já tinha IA respondendo no WhatsApp. Em 30 dias, o comercial inteiro estava rodando.",
+    name: "Fernanda Costa",
+    company: "Clínica Essence",
+    result: "Implementação em 30 dias"
+  },
+  {
+    quote: "Antes eu perdia lead de madrugada. Hoje a IA responde em 15 segundos, qualifica e agenda sozinha. Conversão subiu 40% sem contratar ninguém.",
     name: "Carlos Mendes",
     company: "Praxis Consultoria",
     result: "+40% de conversão"
   },
   {
-    quote: "Eu achava que precisava contratar mais vendedores. Na verdade, precisava de processo. O faturamento dobrou em 60 dias sem contratar ninguém.",
-    name: "Thiago Oliveira",
-    company: "Orien Serviços",
-    result: "Faturamento 2x em 60 dias"
-  },
-  {
-    quote: "Antes eu não sabia de onde vinham meus clientes. Hoje tenho um painel mostrando cada contato, de onde veio e se virou venda. Mudou completamente minha gestão.",
+    quote: "Antes eu não sabia de onde vinham os clientes. Hoje tenho dashboard com cada lead rastreado, do clique até o fechamento. Isso mudou minha gestão.",
     name: "Ana Beatriz",
     company: "Vértice Arquitetura",
-    result: "Controle total das vendas"
+    result: "Faturamento previsível"
   },
   {
-    quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm dos anúncios e o custo por contato caiu pela metade. Finalmente consigo planejar o mês.",
-    name: "Clemir Junio",
-    company: "Artfacas Brasil",
-    result: "70% das vendas via anúncio"
+    quote: "Eu achava que precisava de mais vendedores. Na verdade precisava de processo. A Shekinah implementou a máquina comercial e o faturamento dobrou em 60 dias.",
+    name: "Thiago Oliveira",
+    company: "Orien Serviços",
+    result: "+108% em 60 dias"
   },
 ];
 

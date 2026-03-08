@@ -68,12 +68,12 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
 };
 
 const DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Campanhas focadas em trazer clientes, não curtidas" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quanto voltou" },
-  { icon: Bot, title: "Atendimento 24 horas", subtitle: "IA responde seus clientes em segundos, dia e noite" },
-  { icon: Workflow, title: "Controle de vendas", subtitle: "Veja todos seus contatos e vendas num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Filtro automático de quem realmente quer comprar" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Veja em tempo real quanto está faturando" },
+  { icon: Megaphone, title: "Tráfego Pago Estratégico", subtitle: "Campanhas otimizadas para vendas reais" },
+  { icon: Target, title: "Rastreamento Completo", subtitle: "Do clique até a venda fechada" },
+  { icon: Bot, title: "IA no Atendimento", subtitle: "Resposta em segundos, 24 horas por dia" },
+  { icon: Workflow, title: "CRM Integrado", subtitle: "Pipeline visual de vendas" },
+  { icon: BarChart3, title: "Funis de Conversão", subtitle: "Captura e qualificação automática" },
+  { icon: Gauge, title: "Dashboard de Resultados", subtitle: "Quanto cada campanha faturou" },
 ];
 
 const TimelineStep: React.FC<{ 
@@ -207,10 +207,10 @@ const ScoreDisplay: React.FC<{
       >
         <div className="space-y-2 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que vai mudar na sua empresa
+            O que entregamos
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
-            Tudo isso funcionando em até 30 dias, sem você precisar entender de tecnologia.
+            Cada real investido, rastreado até a venda fechada.
           </p>
         </div>
 
@@ -240,15 +240,15 @@ const ScoreDisplay: React.FC<{
           >
             <CalendarCheck size={18} className="lg:hidden" />
             <CalendarCheck size={20} className="hidden lg:block" />
-            Quero resolver isso agora →
+            Agendar minha implementação →
           </button>
 
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
-            Conversa de 20 min · Gratuita · Sem compromisso · Pelo Google Meet
+            Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Atendemos poucas empresas por vez. Se está vendo isso, ainda tem vaga.
+            Implementamos para um número limitado de empresas por vez para garantir resultado.
           </p>
         </div>
       </motion.div>
@@ -261,7 +261,7 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Onde sua empresa está forte e onde precisa melhorar
+          Análise por Pilar
         </h3>
         <PillarBars pillars={results.pillars} />
       </motion.div>
@@ -274,28 +274,28 @@ const ScoreDisplay: React.FC<{
         className="bg-card border border-border rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-8 space-y-4 lg:space-y-5 shadow-soft"
       >
         <h3 className="text-[10px] lg:text-sm font-bold text-muted-foreground mono-font uppercase tracking-widest">
-          Seu plano de ação, semana a semana
+          Como implementamos na sua empresa
         </h3>
 
         <div>
           <TimelineStep
             number={1}
             period="Semana 1"
-            title="Atendimento automático no ar"
+            title="Diagnóstico e Implementação Rápida"
             items={results.recommendations.sevenDays}
             delay={0.65}
           />
           <TimelineStep
             number={2}
             period="Semana 2-3"
-            title="Tudo organizado e conectado"
+            title="Estruturação Completa"
             items={results.recommendations.thirtyDays}
             delay={0.75}
           />
           <TimelineStep
             number={3}
             period="Semana 3-4"
-            title="Vendas funcionando no automático"
+            title="Máquina Comercial Rodando"
             items={results.recommendations.sixtyNinetyDays}
             isLast
             delay={0.85}
@@ -316,7 +316,7 @@ const ScoreDisplay: React.FC<{
         >
           <CalendarCheck size={18} className="lg:hidden" />
           <CalendarCheck size={20} className="hidden lg:block" />
-          Agendar minha conversa gratuita →
+          Agendar minha implementação →
         </button>
       </motion.div>
 
@@ -324,8 +324,8 @@ const ScoreDisplay: React.FC<{
       <Testimonial data={{
         name: "Clemir Junio",
         company: "Artfacas Brasil",
-        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm dos anúncios e o custo por contato caiu pela metade. Finalmente consigo planejar o mês.",
-        result: "70% das vendas via anúncio"
+        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
+        result: "Faturamento previsível"
       }} />
 
       <SchedulingDialog
