@@ -409,10 +409,10 @@ const ClinicasFortaleza: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2 text-center">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading [text-wrap:balance]">
                     O plano de ação da sua clínica está pronto.
                   </h2>
-                  <p className="text-muted-foreground text-sm lg:text-base">Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica.</p>
+                  <p className="text-muted-foreground text-sm lg:text-base [text-wrap:balance]">Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica.</p>
                 </div>
 
                 <div className="space-y-3 lg:space-y-4">
