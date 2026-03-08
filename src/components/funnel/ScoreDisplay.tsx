@@ -210,7 +210,7 @@ const ScoreDisplay: React.FC<{
             O que vai mudar na sua empresa
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
-            Cada real investido, rastreado até a venda fechada.
+            Tudo isso funcionando em até 30 dias, sem você precisar entender de tecnologia.
           </p>
         </div>
 
