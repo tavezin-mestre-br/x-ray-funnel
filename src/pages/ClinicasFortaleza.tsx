@@ -250,8 +250,8 @@ const ClinicasFortaleza: React.FC = () => {
                   <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug [text-wrap:balance]">
                     Para clínicas em Fortaleza que querem lotar a agenda usando internet. Com ou sem experiência em marketing.
                   </p>
-                  <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
-                    Nós cuidamos de tudo. Você só precisa responder com sinceridade.
+                  <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed [text-wrap:balance]">
+                    Responda com sinceridade. Em 3 minutos você vai ver o raio-X completo da sua operação.
                   </p>
                 </div>
               </div>
