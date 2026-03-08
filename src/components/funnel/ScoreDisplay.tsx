@@ -248,7 +248,7 @@ const ScoreDisplay: React.FC<{
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
-            Implementamos para um número limitado de empresas por vez para garantir resultado.
+            Atendemos poucas empresas por vez. Se está vendo isso, ainda tem vaga.
           </p>
         </div>
       </motion.div>
