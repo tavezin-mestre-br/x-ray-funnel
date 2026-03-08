@@ -53,7 +53,7 @@ const Funnel: React.FC<FunnelProps> = ({
       setTimeout(() => {
         setShowFeedback(false);
         onResponse(question.id, answer);
-      }, 800);
+      }, 500);
     } else {
       onResponse(question.id, answer);
     }

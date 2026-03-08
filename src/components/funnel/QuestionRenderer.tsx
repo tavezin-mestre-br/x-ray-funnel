@@ -88,7 +88,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
             }}
             className="w-full bg-primary text-primary-foreground py-3.5 sm:py-4 rounded-xl font-black text-sm sm:text-base disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
-            Confirmar ({selectedItems.length} selecionado{selectedItems.length !== 1 ? 's' : ''})
+            Continuar →
           </motion.button>
         </div>
       );
