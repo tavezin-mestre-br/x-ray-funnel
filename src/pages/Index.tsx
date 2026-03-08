@@ -421,7 +421,7 @@ const Index: React.FC = () => {
                       className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
                     />
                     <p className="text-[10px] lg:text-xs text-muted-foreground">
-                      Usaremos esse número para enviar seu diagnóstico e confirmar seu horário.
+                      Prometemos: zero spam. Só o diagnóstico e o passo a passo pro seu caso.
                     </p>
                   </div>
                   <div className="space-y-1.5 lg:space-y-2">
