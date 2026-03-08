@@ -86,20 +86,20 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
   const analyses: Record<string, { bottleneck: string; why: string; impact: string; pillars: string[] }> = {
     "Aquisição": {
       bottleneck: "Sua clínica depende de indicação, e indicação não escala",
-      why: "Sem anúncios bem feitos e rastreados, você fica refém da sorte. Num mês lotam, no outro a agenda esvazia.",
-      impact: "Com campanhas bem montadas, você começa a receber pacientes qualificados de forma previsível em até 30 dias.",
+      why: "Sem anúncios rastreados, sua agenda depende de sorte.",
+      impact: "Campanhas bem montadas trazem pacientes previsíveis em 30 dias.",
       pillars: ["Aquisição"]
     },
     "Atendimento": {
       bottleneck: "Pacientes interessados estão desistindo antes de agendar",
-      why: "Quanto mais tempo leva pra responder, menor a chance de agendar. O paciente manda mensagem e fecha com quem responde primeiro.",
-      impact: "Com IA no atendimento, seus pacientes são respondidos em segundos, qualificados e agendados automaticamente, 24 horas por dia.",
+      why: "Paciente fecha com quem responde primeiro.",
+      impact: "IA responde em segundos e agenda automaticamente, 24h.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
       bottleneck: "Você não sabe quantos pacientes entram, quantos agendam e por quê",
-      why: "Sem controle dos agendamentos, você não sabe o que funciona e o que não funciona. É como operar no escuro.",
-      impact: "Com sistema de controletema de controletema de controle e rastreamento completo, você vê tudo: de onde veio o paciente, quanto custou pra trazer e se virou consulta.",
+      why: "Sem controle, você não sabe o que funciona.",
+      impact: "Rastreamento completo: origem, custo e resultado de cada paciente.",
       pillars: ["Processo"]
     }
   };
