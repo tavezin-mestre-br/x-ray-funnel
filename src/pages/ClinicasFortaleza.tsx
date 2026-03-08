@@ -258,7 +258,7 @@ const ClinicasFortaleza: React.FC = () => {
               
               <button 
                 onClick={handleStartDiagnosis}
-                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
+                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-xs sm:text-sm lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
               >
                 Começar diagnóstico da minha clínica →
               </button>
