@@ -6,6 +6,7 @@ import Funnel from '@/components/funnel/Funnel';
 import ScoreDisplay from '@/components/funnel/ScoreDisplay';
 import { calculateResults } from '@/services/scoreLogic';
 import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
+import { AudioManager } from '@/services/audio';
 import { 
   initMetaPixel, waitForPixel, captureFbclid, captureClientIp,
   trackPageView, trackViewContent, trackCompleteRegistration, trackLead,
@@ -37,7 +38,6 @@ const Index: React.FC = () => {
   });
   const [companyData, setCompanyData] = useState({
     companyName: '',
-    instagram: '',
     monthlyRevenue: '',
     trafficInvestment: '',
     contactName: ''
@@ -82,6 +82,8 @@ const Index: React.FC = () => {
       const eventId = generateEventId();
       trackViewContent(eventId);
     }
+    AudioManager.startBGM();
+    AudioManager.playClick();
     setStep('funnel');
   };
 
@@ -91,7 +93,7 @@ const Index: React.FC = () => {
       responses: { ...prev.responses, [questionId]: answer }
     }));
 
-    if (currentQuestionIndex === 3 && step === 'funnel') {
+    if (currentQuestionIndex === 2 && step === 'funnel') {
       setStep('capture_company');
     } else if (currentQuestionIndex < QUESTIONS.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
@@ -110,9 +112,10 @@ const Index: React.FC = () => {
       const eventId = generateEventId();
       trackCompleteRegistration(eventId);
     }
+    AudioManager.playSuccess();
     setUserData(prev => ({ ...prev, name: companyData.contactName }));
     setStep('funnel');
-    setCurrentQuestionIndex(4);
+    setCurrentQuestionIndex(3);
   };
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -183,6 +186,7 @@ const Index: React.FC = () => {
       toast.error('Erro ao salvar diagnóstico. Continuando...');
     } finally {
       setIsSubmitting(false);
+      AudioManager.playReveal();
       setStep('results');
     }
   };
@@ -193,7 +197,7 @@ const Index: React.FC = () => {
   }, [step, userData.responses, userData.badges]);
 
   const getCurrentPhase = () => {
-    if (currentQuestionIndex < 4) return 1;
+    if (currentQuestionIndex < 3) return 1;
     return 2;
   };
 
@@ -224,7 +228,7 @@ const Index: React.FC = () => {
                 </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Responda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
+                  Responda 7 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
                 </p>
 
                 {/* Social proof badges */}
@@ -477,7 +481,7 @@ const Index: React.FC = () => {
               question={QUESTIONS[currentQuestionIndex]} 
               onResponse={handleResponse}
               onBack={() => {
-                if (currentQuestionIndex === 4) {
+                if (currentQuestionIndex === 3) {
                   setStep('capture_company');
                 } else if (currentQuestionIndex === 0) {
                   setStep('intro');

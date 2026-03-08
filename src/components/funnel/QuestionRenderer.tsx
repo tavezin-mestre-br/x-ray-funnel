@@ -2,6 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import { ChevronRight, Check } from 'lucide-react';
+import { AudioManager } from '@/services/audio';
 
 interface Props {
   question: Question;
@@ -87,7 +88,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
             }}
             className="w-full bg-primary text-primary-foreground py-3.5 sm:py-4 rounded-xl font-black text-sm sm:text-base disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
-            Confirmar ({selectedItems.length} selecionado{selectedItems.length !== 1 ? 's' : ''})
+            Continuar →
           </motion.button>
         </div>
       );
@@ -106,7 +107,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
               variants={item}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => onAnswer(opt.id)}
+              onClick={() => { AudioManager.playClick(); onAnswer(opt.id); }}
               className="flex items-center justify-center p-4 sm:p-6 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-center group"
             >
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">
@@ -124,7 +125,7 @@ const QuestionRenderer: React.FC<Props> = ({ question, onAnswer, previousAnswer 
             <motion.button
               key={opt.id}
               variants={item}
-              onClick={() => onAnswer(opt.id)}
+              onClick={() => { AudioManager.playClick(); onAnswer(opt.id); }}
               className="w-full flex items-center justify-between p-4 sm:p-5 bg-secondary border border-border rounded-xl hover:border-foreground hover:bg-foreground/5 transition-all text-left group"
             >
               <span className="font-bold text-foreground text-sm sm:text-base group-hover:text-foreground transition-colors">

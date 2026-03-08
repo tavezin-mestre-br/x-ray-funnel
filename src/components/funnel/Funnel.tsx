@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import QuestionRenderer from './QuestionRenderer';
 import Testimonial, { getTestimonialForStep } from './Testimonial';
+import { AudioManager } from '@/services/audio';
 
 interface FunnelProps {
   question: Question;
@@ -41,6 +42,9 @@ const Funnel: React.FC<FunnelProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
     startTime.current = Date.now();
     setShowFeedback(false);
+    if (currentIndex > 0) {
+      AudioManager.playTransition();
+    }
   }, [currentIndex, question.id]);
 
   const handleAnswer = (answer: any) => {
@@ -49,7 +53,7 @@ const Funnel: React.FC<FunnelProps> = ({
       setTimeout(() => {
         setShowFeedback(false);
         onResponse(question.id, answer);
-      }, 800);
+      }, 500);
     } else {
       onResponse(question.id, answer);
     }
