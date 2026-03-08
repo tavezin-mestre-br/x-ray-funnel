@@ -216,21 +216,21 @@ const Index: React.FC = () => {
             >
               <div className="space-y-5 lg:space-y-6">
                 <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
-                  DIAGNÓSTICO GRATUITO · 3 MINUTOS           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
-                  Descubra oSua empresSua empresSua empresa está deixando dinheiro na mesa. Descubra onde./h1>
+                  DIAGNÓSTICO GRATUITO · 3 MINUTOS <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                  Descubra oSua empresSua empresSua empresSua empresa está deixando dinheiro na mesa. Descubra onde.
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Em 3RespResponda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação          </p>
+                  Em 3RespRespResponda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação      </p>
 
                 {/* Social proof badges */}
                 <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Shield size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">DadoSeus d protegidos</span>
+                    <span className="text-xs font-semibold text-foreground">DadoSeusSeus dd protegidos</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <BarChart3 size={14} className="text-foreground" />
-                    <span className="text-xs font-semibold text-foreground">Diagnóstico gratuito</span>
+                    <span className="text-xs font-semibold text-foreground"Resultado na horao</span>
                   </div>
                   <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
                     <Users size={14} className="text-foreground" />
