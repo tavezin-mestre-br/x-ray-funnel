@@ -42,6 +42,9 @@ const Funnel: React.FC<FunnelProps> = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
     startTime.current = Date.now();
     setShowFeedback(false);
+    if (currentIndex > 0) {
+      AudioManager.playTransition();
+    }
   }, [currentIndex, question.id]);
 
   const handleAnswer = (answer: any) => {
