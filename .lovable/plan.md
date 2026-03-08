@@ -1,66 +1,219 @@
 
 
-## Plano: Página exclusiva `/clinicasfortaleza` para clínicas high ticket
-
-Criar rota dedicada com copy 100% focada em clínicas médicas e estéticas em Fortaleza. Reutiliza Funnel, ScoreDisplay, SchedulingDialog e audio. Apenas copy e dados mudam.
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
 ---
 
-### 5 arquivos (4 novos + 1 alterado)
+## Objetivo
 
-**1. `src/constants/clinicQuestions.tsx`** — 7 perguntas para clínicas
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-- Q1 (tiles): "Qual o maior problema da sua clínica hoje?" — poucos agendam / ROI invisível / demora / sem previsibilidade
-- Q2 (single): "Que tipo de procedimento é o carro-chefe?" — Estética facial / corporal / Odontologia estética / Dermatologia
-- Q3 (multi): "O que espera de quem vai cuidar do marketing?" — pacientes qualificados / transparência / 24h sem recepção / agenda previsível
-- Q4 (multi): "De onde vêm seus pacientes?" — WhatsApp-DM / Anúncios / Indicação / Sem canal
-- Q5 (single): "Quando um paciente manda mensagem, o que acontece?" — respondo quando dá / nem sempre rápido / automação / depende do dia
-- Q6 (single): "Quantos contatos por mês?" — <50 / 50-200 / 200-500 / 500+
-- Q7 (single): "Ticket médio?" — R$1k-5k / R$5k-15k / R$15k-50k / R$50k+
+---
 
-Mesmos pillars (aquisição, atendimento, processo), values e painPoints.
+## Arquivos a Modificar (Apenas Copy)
 
-**2. `src/constants/clinicTestimonials.ts`** — 5 depoimentos de clínicas em Fortaleza
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-- Clínica de harmonização: "De 8 para 31 agendamentos em um mês"
-- Clínica odontológica: "Agenda cheia 7 dias por semana"
-- Clínica dermatológica: "ROI visível desde o mês 1"
-- Clínica de harmonização: "70% dos pacientes via anúncio"
-- Clínica de estética: "+45% de conversão em consultas"
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
 
-**3. `src/services/clinicScoreLogic.ts`** — Score logic com linguagem de clínica
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
-Cópia estrutural do `scoreLogic.ts` com:
-- PILLAR_DESCRIPTIONS: "pacientes", "agendamentos" em vez de "clientes", "vendas"
-- getPainLabel: "pacientes entram em contato mas poucos viram consulta"
-- getSpecialtyLabel: mapeia Q2 pra nome do segmento
-- getClassificationData: "Sua clínica está perdendo pacientes no escuro", etc.
-- getBottleneckAnalysis: focado em agendamentos
-- getActionPlan: "IA no WhatsApp da clínica", "procedimento que mais dá lucro", "consulta"
-- Badge: "Diagnóstico Clínico Concluído" com ícone 🏥
-- Exporta `calculateClinicResults`
+---
 
-**4. `src/pages/ClinicasFortaleza.tsx`** — Página completa do funil
+## Mudanças Detalhadas
 
-Cópia estrutural do `Index.tsx` com toda a copy adaptada:
+### Tela de Intro (Index.tsx)
 
-- Badge: "EXCLUSIVO PARA CLÍNICAS EM FORTALEZA"
-- H1: "O paciente manda mensagem. Quem responde primeiro, agenda."
-- Subtítulo: "Descubra em 3 minutos por que sua clínica perde pacientes — e o que fazer pra resolver."
-- Social proof: "Seus dados protegidos" / "Resultado na hora" / "De 8 para 31 agendamentos em 1 mês"
-- Caixa destaque: "Para clínicas em Fortaleza que querem lotar a agenda usando internet"
-- CTA: "Começar diagnóstico da minha clínica →"
-- capture_company: "Nome da Clínica", placeholder "Ex: Clínica Renova"
-- capture_final: "Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica."
-- Botão final: "Ver resultado da minha clínica →"
-- Importa CLINIC_QUESTIONS, clinicTestimonials, calculateClinicResults
-- Mantém audio, Meta Pixel, save-lead integrados
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
 
-**5. `src/App.tsx`** — Adicionar rota
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
 
-```tsx
-<Route path="/clinicasfortaleza" element={<ClinicasFortaleza />} />
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+
+---
+
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
+```text
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
 ```
 
-### URL final: `shknh.online/clinicasfortaleza`
+**Novo:**
+```text
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
+```
+
+---
+
+### Classificações (scoreLogic.ts)
+
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
+
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 

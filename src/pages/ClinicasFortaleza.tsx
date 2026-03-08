@@ -1,0 +1,566 @@
+import React, { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { UserData } from '@/types/funnel';
+import { CLINIC_QUESTIONS } from '@/constants/clinicQuestions';
+import Funnel from '@/components/funnel/Funnel';
+import ScoreDisplay from '@/components/funnel/ScoreDisplay';
+import { calculateClinicResults } from '@/services/clinicScoreLogic';
+import { ArrowRight, Loader2, Shield, BarChart3, Users, Check, MessageCircle } from 'lucide-react';
+import { AudioManager } from '@/services/audio';
+import { 
+  initMetaPixel, waitForPixel, captureFbclid, captureClientIp,
+  trackPageView, trackViewContent, trackCompleteRegistration, trackLead,
+  generateEventId, getFbCookies, getClientIp
+} from '@/services/metaPixel';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import Testimonial from '@/components/funnel/Testimonial';
+import { getClinicTestimonialForStep } from '@/constants/clinicTestimonials';
+import Header from '@/components/Header';
+
+type Step = 'intro' | 'funnel' | 'capture_company' | 'capture_final' | 'results' | 'booking_confirmed';
+
+const normalizePhone = (raw: string): string => {
+  const digits = raw.replace(/\D/g, '');
+  return `+${digits.startsWith('55') ? digits : '55' + digits}`;
+};
+
+const ClinicasFortaleza: React.FC = () => {
+  const [step, setStep] = useState<Step>('intro');
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [userData, setUserData] = useState<UserData>({
+    name: '',
+    whatsapp: '',
+    email: '',
+    responses: {},
+    xp: 0,
+    streak: 0,
+    badges: []
+  });
+  const [companyData, setCompanyData] = useState({
+    companyName: '',
+    monthlyRevenue: '',
+    trafficInvestment: '',
+    contactName: ''
+  });
+  const [bookedDate, setBookedDate] = useState('');
+  const [bookedTime, setBookedTime] = useState('');
+  const [leadId, setLeadId] = useState<string | undefined>();
+  const [whatsappInput, setWhatsappInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+
+  useEffect(() => {
+    initMetaPixel();
+    captureFbclid();
+    captureClientIp();
+    waitForPixel().then((ready) => {
+      if (!ready) return;
+      const eventId = generateEventId();
+      const { fbp, fbc } = getFbCookies();
+      trackPageView(eventId);
+      supabase.functions.invoke('meta-capi-pageview', {
+        body: {
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          client_ip: getClientIp() || null,
+          source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
+        }
+      }).catch(() => {});
+    });
+  }, []);
+
+  const handleBookingConfirmed = (date: string, time: string) => {
+    setBookedDate(date);
+    setBookedTime(time);
+    setStep('booking_confirmed');
+  };
+
+  const handleStartDiagnosis = async () => {
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackViewContent(eventId);
+    }
+    AudioManager.startBGM();
+    AudioManager.playClick();
+    setStep('funnel');
+  };
+
+  const handleResponse = (questionId: number, answer: any) => {
+    setUserData(prev => ({
+      ...prev,
+      responses: { ...prev.responses, [questionId]: answer }
+    }));
+
+    if (currentQuestionIndex === 2 && step === 'funnel') {
+      setStep('capture_company');
+    } else if (currentQuestionIndex < CLINIC_QUESTIONS.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
+    } else {
+      setStep('capture_final');
+    }
+  };
+
+  const handleCompanySubmit = async () => {
+    if (!companyData.contactName || !companyData.companyName || !companyData.monthlyRevenue || !companyData.trafficInvestment) {
+      toast.error("Preencha todos os campos obrigatórios.");
+      return;
+    }
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackCompleteRegistration(eventId);
+    }
+    AudioManager.playSuccess();
+    setUserData(prev => ({ ...prev, name: companyData.contactName }));
+    setStep('funnel');
+    setCurrentQuestionIndex(3);
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleFinalSubmit = async (whatsapp: string, email: string) => {
+    setIsSubmitting(true);
+    
+    const normalizedPhone = normalizePhone(whatsapp);
+    const updatedUserData = { ...userData, whatsapp: normalizedPhone, email };
+    setUserData(updatedUserData);
+    
+    const resultsToSave = calculateClinicResults(updatedUserData.responses, updatedUserData.badges);
+    const eventId = generateEventId();
+    const { fbp, fbc } = getFbCookies();
+    const clientIp = getClientIp();
+    
+    const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
+      const question = CLINIC_QUESTIONS.find(q => q.id === Number(qId));
+      if (!question) return acc;
+
+      let formattedAnswer: string | string[];
+      if (Array.isArray(answer)) {
+        formattedAnswer = answer.map((optId: string) => question.options.find(o => o.id === optId)?.label || optId);
+      } else {
+        formattedAnswer = question.options.find(o => o.id === answer)?.label || answer;
+      }
+
+      acc[qId] = { question: question.title, answer: formattedAnswer };
+      return acc;
+    }, {} as Record<string, { question: string; answer: string | string[] }>);
+
+    try {
+      const { data, error } = await supabase.functions.invoke('save-lead', {
+        body: {
+          name: updatedUserData.name,
+          phone: normalizedPhone,
+          email: email || null,
+          company_name: companyData.companyName,
+          monthly_revenue: companyData.monthlyRevenue,
+          traffic_investment: companyData.trafficInvestment,
+          answers: formattedAnswers,
+          score_total: resultsToSave.totalScore,
+          pillars: resultsToSave.pillars.reduce((acc, p) => ({ ...acc, [p.name]: p.score }), {}),
+          bottleneck: resultsToSave.bottleneck,
+          badges: resultsToSave.earnedBadges.map(b => b.name),
+          recommendations: resultsToSave.recommendations,
+          classification: resultsToSave.classification,
+          event_id: eventId,
+          fbp: fbp || null,
+          fbc: fbc || null,
+          client_ip: clientIp || null,
+          source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
+        }
+      });
+      
+      if (error) {
+        console.error('Error saving lead:', error);
+        toast.error('Erro ao salvar diagnóstico. Continuando...');
+      } else {
+        if (data?.lead_id) setLeadId(data.lead_id);
+        const ready = await waitForPixel();
+        if (ready) trackLead(eventId);
+      }
+    } catch (err) {
+      console.error('Failed to save lead:', err);
+      toast.error('Erro ao salvar diagnóstico. Continuando...');
+    } finally {
+      setIsSubmitting(false);
+      AudioManager.playReveal();
+      setStep('results');
+    }
+  };
+
+  const results = useMemo(() => {
+    if (step !== 'results' && step !== 'booking_confirmed') return null;
+    return calculateClinicResults(userData.responses, userData.badges);
+  }, [step, userData.responses, userData.badges]);
+
+  const getCurrentPhase = () => {
+    if (currentQuestionIndex < 3) return 1;
+    return 2;
+  };
+
+  return (
+    <div className="min-h-screen w-full flex flex-col bg-background transition-colors duration-300 relative">
+      <Header currentPhase={getCurrentPhase()} showPhase={step === 'funnel'} />
+
+      <main className="flex-1 flex items-start sm:items-center justify-center p-3 sm:p-4 lg:p-6 pt-4 sm:pt-4">
+        <AnimatePresence mode="wait">
+          {/* INTRO SCREEN */}
+          {step === 'intro' && (
+            <motion.div 
+              key="intro"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-xl w-full text-center space-y-6 lg:space-y-8 py-4"
+            >
+              <div className="space-y-5 lg:space-y-6">
+                <div className="inline-block px-4 py-1.5 bg-foreground text-background rounded-full text-[9px] lg:text-[10px] mono-font font-black tracking-[0.2em] uppercase">
+                  EXCLUSIVO PARA CLÍNICAS EM FORTALEZA
+                </div>
+
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                  O paciente manda mensagem. Quem responde primeiro, agenda.
+                </h1>
+
+                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
+                  Descubra em 3 minutos por que sua clínica perde pacientes — e o que fazer pra resolver.
+                </p>
+
+                {/* Social proof badges */}
+                <div className="flex flex-wrap items-center justify-center gap-3 lg:gap-4">
+                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
+                    <Shield size={14} className="text-foreground" />
+                    <span className="text-xs font-semibold text-foreground">Seus dados protegidos</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
+                    <BarChart3 size={14} className="text-foreground" />
+                    <span className="text-xs font-semibold text-foreground">Resultado na hora</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
+                    <Users size={14} className="text-foreground" />
+                    <span className="text-xs font-semibold text-foreground">De 8 para 31 agendamentos em 1 mês</span>
+                  </div>
+                </div>
+
+                <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[300px] sm:max-w-sm mx-auto space-y-2">
+                  <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
+                    Para clínicas em Fortaleza que querem lotar a agenda usando internet — com ou sem experiência em marketing.
+                  </p>
+                  <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
+                    Nós cuidamos de tudo. Você só precisa responder com sinceridade.
+                  </p>
+                </div>
+              </div>
+              
+              <button 
+                onClick={handleStartDiagnosis}
+                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
+              >
+                Começar diagnóstico da minha clínica →
+              </button>
+
+              {/* Intro testimonial */}
+              <Testimonial data={getClinicTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
+
+              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
+                Leva 3 minutos · Sem compromisso · Plano personalizado pra sua clínica
+              </p>
+            </motion.div>
+          )}
+
+          {/* COMPANY DATA CAPTURE */}
+          {step === 'capture_company' && (
+            <motion.div 
+              key="capture_company"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              className="max-w-sm lg:max-w-md w-full space-y-5"
+            >
+              <div className="bg-card p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl border border-border space-y-5 lg:space-y-6">
+                <div className="space-y-2 lg:space-y-3">
+                  <div className="flex items-center gap-2 lg:gap-3">
+                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-foreground/5 border border-foreground/20 flex items-center justify-center">
+                       <span className="text-foreground font-black text-xs lg:text-sm">✓</span>
+                    </div>
+                     <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 1 concluída</span>
+                  </div>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Já entendemos o cenário da sua clínica. Agora vamos personalizar.</p>
+                </div>
+
+                <div className="space-y-1.5 lg:space-y-2">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                    Falta pouco pro plano de ação da sua clínica ficar pronto.
+                  </h2>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Esses dados deixam o diagnóstico muito mais preciso pro seu caso.</p>
+                </div>
+
+                <div className="space-y-3 lg:space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Seu Nome *</label>
+                    <input 
+                      autoFocus
+                      type="text"
+                      placeholder="Ex: Dra. Camila"
+                      value={companyData.contactName}
+                      onChange={(e) => setCompanyData(prev => ({ ...prev, contactName: e.target.value }))}
+                     className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Nome da Clínica *</label>
+                    <input 
+                      type="text"
+                      placeholder="Ex: Clínica Renova"
+                      value={companyData.companyName}
+                      onChange={(e) => setCompanyData(prev => ({ ...prev, companyName: e.target.value }))}
+                     className="w-full bg-secondary border border-border p-3.5 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base transition-all"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Faturamento Mensal *</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { label: 'Menos de R$ 100k', value: 'menos-100k' },
+                        { label: 'R$ 100k – R$ 300k', value: '100k-300k' },
+                        { label: 'R$ 300k – R$ 500k', value: '300k-500k' },
+                        { label: 'R$ 500k – R$ 1M', value: '500k-1m' },
+                        { label: 'Acima de R$ 1M', value: 'acima-1m' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => setCompanyData(prev => ({ ...prev, monthlyRevenue: opt.value }))}
+                          className={`p-3 rounded-lg border text-sm font-bold transition-all ${
+                            companyData.monthlyRevenue === opt.value
+                              ? 'bg-foreground text-background border-foreground'
+                              : 'bg-secondary border-border text-foreground hover:border-foreground/30'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">Quanto investe em anúncios online? *</label>
+                    <p className="text-muted-foreground text-[10px] lg:text-xs">Meta Ads, Google Ads, etc. Se nunca investiu, tudo bem.</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { label: 'Nunca investi', value: 'nunca' },
+                        { label: 'Menos de R$ 3k', value: 'menos-3k' },
+                        { label: 'R$ 3k – R$ 5k', value: '3k-5k' },
+                        { label: 'R$ 5k – R$ 10k', value: '5k-10k' },
+                        { label: 'R$ 10k – R$ 30k', value: '10k-30k' },
+                        { label: 'Acima de R$ 30k', value: 'acima-30k' },
+                      ].map((opt) => (
+                        <button
+                          key={opt.value}
+                          onClick={() => setCompanyData(prev => ({ ...prev, trafficInvestment: opt.value }))}
+                          className={`p-3 rounded-lg border text-sm font-bold transition-all ${
+                            companyData.trafficInvestment === opt.value
+                              ? 'bg-foreground text-background border-foreground'
+                              : 'bg-secondary border-border text-foreground hover:border-foreground/30'
+                          }`}
+                        >
+                          {opt.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                
+                <button 
+                  onClick={handleCompanySubmit}
+                  className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary"
+                >
+                  Continuar diagnóstico da minha clínica →
+                </button>
+              </div>
+
+              <Testimonial data={getClinicTestimonialForStep(1)} />
+            </motion.div>
+          )}
+
+          {/* FINAL CAPTURE */}
+          {step === 'capture_final' && (
+            <motion.div 
+              key="capture_final"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              className="max-w-sm lg:max-w-md w-full space-y-5"
+            >
+              <div className="bg-card p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl border border-border space-y-5 lg:space-y-6">
+                <div className="space-y-2 lg:space-y-3">
+                  <div className="flex items-center gap-2 lg:gap-3">
+                     <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-lg lg:rounded-xl bg-foreground/5 border border-foreground/20 flex items-center justify-center">
+                       <span className="text-foreground font-black text-xs lg:text-sm">✓</span>
+                     </div>
+                     <span className="text-xs lg:text-sm text-foreground font-bold mono-font uppercase tracking-wider">Etapa 2 concluída</span>
+                  </div>
+                  <p className="text-muted-foreground text-xs lg:text-sm">Análise da sua clínica completa. Agora é só o último passo.</p>
+                </div>
+
+                <div className="space-y-1.5 lg:space-y-2 text-center">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                    O plano de ação da sua clínica está pronto.
+                  </h2>
+                  <p className="text-muted-foreground text-sm lg:text-base">Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica.</p>
+                </div>
+
+                <div className="space-y-3 lg:space-y-4">
+                  <div className="space-y-1.5 lg:space-y-2">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">WhatsApp (Obrigatório)</label>
+                    <input 
+                      type="tel" 
+                      placeholder="(85) 90000-0000" 
+                      value={whatsappInput}
+                      onChange={(e) => setWhatsappInput(e.target.value)}
+                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
+                    />
+                    <p className="text-[10px] lg:text-xs text-muted-foreground">
+                      Prometemos: zero spam. Só o diagnóstico e o passo a passo pra sua clínica.
+                    </p>
+                  </div>
+                  <div className="space-y-1.5 lg:space-y-2">
+                    <label className="text-[10px] lg:text-xs font-bold text-muted-foreground uppercase mono-font tracking-wider">E-mail (Opcional)</label>
+                    <input 
+                      type="email" 
+                      placeholder="seu@email.com" 
+                      value={emailInput}
+                      onChange={(e) => setEmailInput(e.target.value)}
+                      className="w-full bg-secondary border border-border p-3 lg:p-4 rounded-lg lg:rounded-xl focus:border-foreground focus:ring-1 focus:ring-foreground/30 outline-none text-foreground font-semibold text-base lg:text-lg transition-all" 
+                    />
+                  </div>
+                </div>
+
+                <button 
+                  disabled={isSubmitting}
+                  onClick={() => {
+                    const waDigits = whatsappInput.replace(/\D/g, '');
+                    const isEmailValid = !emailInput || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput);
+                    
+                    if (waDigits.length < 10) {
+                      toast.error("Informe um WhatsApp válido.");
+                    } else if (!isEmailValid) {
+                      toast.error("E-mail inválido.");
+                    } else {
+                      handleFinalSubmit(whatsappInput, emailInput);
+                    }
+                  }}
+                  className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-3">
+                      <Loader2 className="animate-spin" size={18} />
+                      Processando...
+                    </span>
+                  ) : (
+                    'Ver resultado da minha clínica →'
+                  )}
+                </button>
+              </div>
+
+              <Testimonial data={getClinicTestimonialForStep(2)} />
+            </motion.div>
+          )}
+
+          {/* FUNNEL */}
+          {step === 'funnel' && (
+            <Funnel 
+              question={CLINIC_QUESTIONS[currentQuestionIndex]} 
+              onResponse={handleResponse}
+              onBack={() => {
+                if (currentQuestionIndex === 3) {
+                  setStep('capture_company');
+                } else if (currentQuestionIndex === 0) {
+                  setStep('intro');
+                } else {
+                  setCurrentQuestionIndex(prev => prev - 1);
+                }
+              }}
+              currentIndex={currentQuestionIndex + 1}
+              totalSteps={CLINIC_QUESTIONS.length}
+              previousAnswer={userData.responses[CLINIC_QUESTIONS[currentQuestionIndex].id]}
+            />
+          )}
+
+          {/* RESULTS */}
+          {step === 'results' && results && (
+            <ScoreDisplay results={results} userData={userData} leadId={leadId} onBookingConfirmed={handleBookingConfirmed} />
+          )}
+
+          {/* BOOKING CONFIRMED */}
+          {step === 'booking_confirmed' && (
+            <motion.div
+              key="booking_confirmed"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="max-w-sm lg:max-w-md w-full text-center space-y-6 lg:space-y-8 py-8"
+            >
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: 'spring', stiffness: 200, delay: 0.2 }}
+                className="w-20 h-20 lg:w-24 lg:h-24 bg-success/10 border-2 border-success/30 rounded-full flex items-center justify-center mx-auto"
+              >
+                <Check size={40} className="text-success lg:hidden" />
+                <Check size={48} className="hidden lg:block text-success" />
+              </motion.div>
+
+              <div className="space-y-2">
+                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading">
+                  Horário reservado com sucesso
+                </h2>
+                <p className="text-base lg:text-lg text-muted-foreground font-medium">
+                  {bookedDate} às {bookedTime}
+                </p>
+              </div>
+
+              <div className="bg-card border border-border rounded-2xl p-5 lg:p-6 space-y-3">
+                <p className="text-sm lg:text-base text-foreground font-medium leading-relaxed">
+                  Nossa equipe vai confirmar os detalhes pelo WhatsApp.
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Prepare-se: vamos analisar o diagnóstico da sua clínica e orientar os próximos passos.
+                </p>
+              </div>
+
+              <a
+                href="https://wa.me/5569992286633"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full max-w-sm mx-auto bg-[hsl(142,71%,45%)] hover:bg-[hsl(142,71%,40%)] text-white py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-lg flex items-center justify-center gap-3 transition-all shadow-lg"
+              >
+                <MessageCircle size={20} />
+                Falar no WhatsApp
+              </a>
+
+              <p className="text-[10px] lg:text-xs text-muted-foreground font-medium">
+                Shekinah | Marketing · Tecnologia · IA
+              </p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </main>
+
+      <footer className="w-full py-3 lg:py-4 px-4 lg:px-6 border-t border-border/50">
+        <div className="max-w-3xl mx-auto text-center">
+          <span className="text-[10px] lg:text-xs text-muted-foreground">
+            Shekinah | Marketing · Tecnologia · IA
+          </span>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default ClinicasFortaleza;
