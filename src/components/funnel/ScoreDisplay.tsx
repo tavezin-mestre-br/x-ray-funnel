@@ -68,21 +68,21 @@ const PillarBars = ({ pillars }: { pillars: FinalResults['pillars'] }) => {
 };
 
 const DEFAULT_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Campanhas focadas em trazer clientes, não curtidas" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Você sabe exatamente quanto investiu e quanto voltou" },
-  { icon: Bot, title: "Atendimento 24 horas", subtitle: "IA responde seus clientes em segundos, dia e noite" },
-  { icon: Workflow, title: "Controle de vendas", subtitle: "Veja todos seus contatos e vendas num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Filtro automático de quem realmente quer comprar" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Veja em tempo real quanto está faturando" },
+  { icon: Megaphone, title: "Anúncios que vendem", subtitle: "Clientes prontos pra comprar" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Investimento e retorno na tela" },
+  { icon: Bot, title: "Atendimento 24 horas", subtitle: "Responde e vende sozinha, 24h" },
+  { icon: Workflow, title: "Controle de vendas", subtitle: "Contatos e vendas num só painel" },
+  { icon: BarChart3, title: "Mais contatos virando venda", subtitle: "Separa curioso de quem quer comprar" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Números reais, atualizados ao vivo" },
 ];
 
 const CLINIC_DELIVERABLES = [
-  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes qualificados pro seu procedimento" },
-  { icon: Target, title: "Cada real rastreado", subtitle: "Quanto investiu, quantos agendamentos voltaram" },
-  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Resposta em segundos, agendamento automático" },
-  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Tudo num só lugar" },
-  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Filtro automático de curiosos" },
-  { icon: Gauge, title: "Painel de resultados", subtitle: "Agendamentos e comparecimentos em tempo real" },
+  { icon: Megaphone, title: "Anúncios que agendam", subtitle: "Pacientes prontos pra agendar" },
+  { icon: Target, title: "Cada real rastreado", subtitle: "Investimento e retorno na tela" },
+  { icon: Bot, title: "IA no WhatsApp 24h", subtitle: "Responde e agenda sozinha, 24h" },
+  { icon: Workflow, title: "Controle de agendamentos", subtitle: "Contatos e agenda num só painel" },
+  { icon: BarChart3, title: "Mais contatos virando consulta", subtitle: "Separa curioso de quem quer agendar" },
+  { icon: Gauge, title: "Painel de resultados", subtitle: "Números reais, atualizados ao vivo" },
 ];
 
 const DEFAULT_TESTIMONIAL = {
