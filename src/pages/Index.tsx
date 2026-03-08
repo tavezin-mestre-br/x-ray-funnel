@@ -76,9 +76,12 @@ const Index: React.FC = () => {
     setStep('booking_confirmed');
   };
 
-  const handleStartDiagnosis = () => {
-    const eventId = generateEventId();
-    trackViewContent(eventId);
+  const handleStartDiagnosis = async () => {
+    const ready = await waitForPixel();
+    if (ready) {
+      const eventId = generateEventId();
+      trackViewContent(eventId);
+    }
     setStep('funnel');
   };
 
