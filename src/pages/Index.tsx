@@ -374,7 +374,7 @@ const Index: React.FC = () => {
                   onClick={handleCompanySubmit}
                   className="w-full bg-primary text-primary-foreground py-4 lg:py-5 rounded-lg lg:rounded-xl font-black text-base lg:text-lg glow-primary"
                 >
-                  Ver onde vamos agir →
+                  Continuar meu diagnóstico →
                 </button>
               </div>
 
