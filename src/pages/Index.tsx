@@ -38,7 +38,6 @@ const Index: React.FC = () => {
   });
   const [companyData, setCompanyData] = useState({
     companyName: '',
-    instagram: '',
     monthlyRevenue: '',
     trafficInvestment: '',
     contactName: ''
