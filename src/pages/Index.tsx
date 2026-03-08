@@ -186,6 +186,7 @@ const Index: React.FC = () => {
       toast.error('Erro ao salvar diagnóstico. Continuando...');
     } finally {
       setIsSubmitting(false);
+      AudioManager.playReveal();
       setStep('results');
     }
   };
