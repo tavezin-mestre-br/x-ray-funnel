@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Question } from '@/types/funnel';
 import QuestionRenderer from './QuestionRenderer';
 import Testimonial, { getTestimonialForStep } from './Testimonial';
+import { AudioManager } from '@/services/audio';
 
 interface FunnelProps {
   question: Question;
