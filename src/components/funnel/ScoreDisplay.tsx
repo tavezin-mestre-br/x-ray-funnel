@@ -238,10 +238,10 @@ const ScoreDisplay: React.FC<{
       >
         <div className="space-y-2 text-center">
           <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-foreground tracking-tight font-heading">
-            O que vai mudar na sua {entityLabel}
+            O que implementamos
           </h3>
           <p className="text-muted-foreground text-xs lg:text-sm font-medium">
-            Tudo isso funcionando em até 30 dias, sem você precisar entender de tecnologia.
+            Funcionando em até 30 dias. Sem você mexer em nada.
           </p>
         </div>
 
