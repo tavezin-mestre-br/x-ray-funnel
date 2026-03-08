@@ -26,7 +26,7 @@ export const CLINIC_TESTIMONIALS: TestimonialData[] = [
     result: "Retorno claro desde o mês 1"
   },
   {
-    quote: "A conversão das consultas subiu 45% depois que a IA começou a qualificar e agendar direto no WhatsApp. Sem precisar contratar mais ninguém.",
+    quote: "As consultas agendadas subiram 45% depois que a IA começou a qualificar e agendar direto no WhatsApp. Sem precisar contratar mais ninguém.",
     name: "Dra. Fernanda Lima",
     company: "Clínica de Cirurgia Plástica · Fortaleza",
     result: "+45% de conversão em consultas"

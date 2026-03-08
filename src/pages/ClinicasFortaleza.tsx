@@ -363,7 +363,7 @@ const ClinicasFortaleza: React.FC = () => {
                         <button
                           key={opt.value}
                           onClick={() => setCompanyData(prev => ({ ...prev, trafficInvestment: opt.value }))}
-                          className={`p-3 rounded-lg border text-sm font-bold transition-all ${
+                          className={`p-2.5 sm:p-3 rounded-lg border text-xs sm:text-sm font-bold transition-all ${
                             companyData.trafficInvestment === opt.value
                               ? 'bg-foreground text-background border-foreground'
                               : 'bg-secondary border-border text-foreground hover:border-foreground/30'
