@@ -222,11 +222,11 @@ const ClinicasFortaleza: React.FC = () => {
                   EXCLUSIVO PARA CLÍNICAS EM FORTALEZA
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading [text-wrap:balance]">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading [text-wrap:balance] [text-wrap:balance]">
                   O paciente manda mensagem. Quem responde primeiro, agenda.
                 </h1>
 
-                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
+                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium lea300px] sm:max-w-md mx-auto [text-wrap:balance] sm:max-w-md mx-auto">
                   Descubra em 3 minutos por que sua clínica perde pacientes. E o que fazer pra resolver.
                 </p>
 
