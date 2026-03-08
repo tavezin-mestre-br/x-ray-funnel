@@ -517,7 +517,7 @@ const ClinicasFortaleza: React.FC = () => {
               </motion.div>
 
               <div className="space-y-2">
-                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading">
+                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading [text-wrap:balance]">
                   Horário reservado com sucesso
                 </h2>
                 <p className="text-base lg:text-lg text-muted-foreground font-medium">
