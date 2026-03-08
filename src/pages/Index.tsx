@@ -481,7 +481,7 @@ const Index: React.FC = () => {
               question={QUESTIONS[currentQuestionIndex]} 
               onResponse={handleResponse}
               onBack={() => {
-                if (currentQuestionIndex === 4) {
+                if (currentQuestionIndex === 3) {
                   setStep('capture_company');
                 } else if (currentQuestionIndex === 0) {
                   setStep('intro');
