@@ -1,219 +1,68 @@
 
 
-# Plano: Otimização de Copy para Shekinah
-## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
+## Plano: Trilha sonora MP3 + SFX sintetizados + Otimizações de conversão
 
----
+### 1. Trilha sonora — MP3 como BGM
 
-## Objetivo
+**Copiar** o arquivo `user-uploads://ByErik_ヵ_-_desolate_Slowed_-_ByErik_ヵ_youtube.mp3` para `public/audio/bgm.mp3`.
 
-Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
-- Criativos de alta performance
-- Tráfego pago qualificado
-- Funis de alta conversão
-- Atendimento e agendamento com IA
-- CRM com rastreamento completo
+**Reescrever `src/services/audio.ts`** para:
+- Substituir o BGM sintetizado (osciladores) por reprodução do MP3 via `Audio` element
+- Loop infinito com crossfade suave
+- Volume baixo (0.06) com fade-in de 2s
+- Manter a estrutura de mute/unmute existente
+- Manter todos os SFX sintetizados mas melhorar para serem mais sutis e agradáveis
 
----
+**SFX a criar/melhorar** (todos sintetizados via Web Audio API — sem dependência externa):
+- `playClick()` — tap suave ao selecionar opção (sine sweep descendente, curto)
+- `playTransition()` — whoosh suave na troca de pergunta
+- `playSuccess()` — novo — arpejo ascendente ao completar etapa (capture_company, capture_final)
+- `playReveal()` — novo — som de "revelação" na tela de resultados
+- `playBadge()` — manter — arpejo de conquista
 
-## Arquivos a Modificar (Apenas Copy)
+### 2. Integrar áudio no funil
 
-### 1. src/pages/Index.tsx
-Otimizações na tela de intro e capturas.
+**`src/pages/Index.tsx`**:
+- No `handleStartDiagnosis`: chamar `AudioManager.startBGM()` + `AudioManager.playClick()`
+- No `handleCompanySubmit`: chamar `AudioManager.playSuccess()`
+- No `handleFinalSubmit` (ao ir pra results): chamar `AudioManager.playReveal()`
 
-### 2. src/components/funnel/ScoreDisplay.tsx
-Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
+**`src/components/funnel/Funnel.tsx`**:
+- No `handleAnswer`: chamar `AudioManager.playClick()`
+- Na troca de pergunta (useEffect do currentIndex): chamar `AudioManager.playTransition()`
 
-### 3. src/services/scoreLogic.ts
-Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
+**`src/components/funnel/QuestionRenderer.tsx`**:
+- No click de opção single/tiles: chamar `AudioManager.playClick()`
 
----
+**`src/components/Header.tsx`**:
+- Adicionar botão mute/unmute (ícone Volume2/VolumeX) ao lado do ThemeToggle
+- Estado gerenciado pelo AudioManager.toggleMute()
 
-## Mudanças Detalhadas
+### 3. Otimizações de conversão identificadas
 
-### Tela de Intro (Index.tsx)
+Após analisar o funil completo, identifiquei pontos de atrito:
 
-**Atual:**
-> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
+**3a. Remover pergunta Q3 (urgência)** — De 8 para 7 perguntas
+- Q3 ("Se a gente resolvesse isso em 30 dias...") não gera dados acionáveis e adiciona fricção. O score de urgência não influencia o resultado final de forma significativa. Menos perguntas = menos abandono.
 
-**Novo:**
-> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
+**3b. Simplificar capture_company** — Remover campo "Instagram"
+- O campo Instagram já não está no form mas existe no state. Limpar o state `companyData` removendo `instagram`.
 
-**Adicionar frase de autoridade abaixo do botão:**
-> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
+**3c. Auto-scroll suave** — Já existe no Funnel.tsx mas adicionar também nas transições de step no Index.tsx para mobile.
 
----
+**3d. Feedback visual mais rápido** — Reduzir o delay do micro-feedback de 800ms para 500ms no Funnel.tsx. Cada 300ms a menos no funil reduz abandono.
 
-### Tela de Captura Final (Index.tsx)
+**3e. Botão "Confirmar" no multi-select** — Trocar texto de "Confirmar (X selecionados)" para "Continuar →" quando pelo menos 1 item selecionado. Menos intimidante.
 
-**Atual:**
-> "Diagnóstico pronto. Onde deseja recebê-lo?"
+### Resumo de arquivos
 
-**Novo:**
-> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
-
----
-
-### Tela de Resultados (ScoreDisplay.tsx)
-
-**Reformular CTA Section:**
-
-**Atual:**
-```text
-Próximo Passo
-Agende uma reunião para receber seu plano de implementação personalizado.
-[Solicitar diagnóstico estratégico]
-```
-
-**Novo:**
-```text
-O que implementamos para clínicas em Porto Velho
-
-| Criativos de alta conversão para procedimentos estéticos
-| Tráfego pago com leads qualificados — sem curiosos
-| Funis de captação e nutrição automatizados
-| Atendimento e agendamento 24/7 com Inteligência Artificial
-| CRM com rastreamento completo de cada lead até a consulta
-
-[Solicitar plano de implementação]
-
-Vagas limitadas para clínicas de Porto Velho – RO.
-```
-
----
-
-### Classificações (scoreLogic.ts)
-
-**Estrutura crítica:**
-- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
-- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
-
-**Estrutura com vazamentos:**
-- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
-- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
-
-**Estrutura funcional:**
-- Atual: "A operação funciona, mas há margem significativa para otimização."
-- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
-
-**Estrutura otimizada:**
-- Atual: "A clínica possui uma operação sólida."
-- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
-
----
-
-### Bottlenecks (scoreLogic.ts)
-
-**Aquisição:**
-- Bottleneck: "Geração de demanda inconsistente"
-- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
-- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
-
-**Atendimento:**
-- Bottleneck: "Leads esfriando antes do agendamento"
-- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
-- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
-
-**Processo:**
-- Bottleneck: "Falta de visibilidade sobre o funil"
-- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
-- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
-
----
-
-### Recomendações (scoreLogic.ts)
-
-**Aquisição:**
-```text
-7 dias:
-- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
-- Configurar pixel e eventos de conversão no site
-- Definir orçamento mensal fixo para aquisição
-
-30 dias:
-- Testar criativos com diferentes ângulos de copy
-- Implementar landing page de alta conversão
-- Criar funil de nutrição via WhatsApp
-
-60-90 dias:
-- Escalar investimento nos criativos vencedores
-- Automatizar qualificação de leads com IA
-- Construir máquina previsível de geração de demanda
-```
-
-**Atendimento:**
-```text
-7 dias:
-- Implementar resposta automática em menos de 30 segundos
-- Criar script de qualificação para atendentes
-- Configurar alertas em tempo real para novos leads
-
-30 dias:
-- Integrar chatbot de pré-atendimento no WhatsApp
-- Automatizar agendamento direto na conversa
-- Mapear e resolver principais objeções
-
-60-90 dias:
-- IA fazendo atendimento completo 24/7
-- Dashboard de métricas de conversão por atendente
-- Sistema de reativação automática de leads frios
-```
-
-**Processo:**
-```text
-7 dias:
-- Mapear jornada do lead: entrada → consulta → procedimento
-- Identificar etapa com maior perda de conversão
-- Documentar processo atual de agendamento
-
-30 dias:
-- Implementar CRM com pipeline visual de leads
-- Definir KPIs: taxa de resposta, agendamento e comparecimento
-- Criar rotina de confirmação de consultas
-
-60-90 dias:
-- Dashboard de faturamento previsível por período
-- Automação de follow-up para pacientes inativos
-- Sistema de rastreamento da origem até o fechamento
-```
-
----
-
-### Descrições dos Pilares (scoreLogic.ts)
-
-**Aquisição:**
-- Atual: "Capacidade de gerar leads qualificados de forma previsível"
-- Novo: "Tráfego pago + criativos + funis = demanda previsível"
-
-**Atendimento:**
-- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
-- Novo: "Resposta instantânea + IA = leads que viram consultas"
-
-**Processo:**
-- Atual: "Estrutura operacional para conversão e retenção"
-- Novo: "CRM + rastreamento = visibilidade total do funil"
-
----
-
-## Resumo das Mudanças
-
-| Local | O que muda |
-|-------|------------|
-| Intro | Frase de impacto + prova social |
-| Captura final | Copy mais direta e urgente |
-| Resultados | Lista clara de entregáveis + CTA reformulado |
-| Classificações | Linguagem focada em sistema e automação |
-| Bottlenecks | Conexão direta com serviços da Shekinah |
-| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
-| Pilares | Descrições curtas e impactantes |
-
----
-
-## Resultado Esperado
-
-- Copy mais persuasiva e autoritária
-- Deixar claro que a Shekinah implementa o sistema completo
-- Conexão entre diagnóstico e os serviços oferecidos
-- Maior taxa de conversão para agendamento de call
-- Cliente já entendendo o que vai ser implementado antes da reunião
+| Arquivo | Alteração |
+|---|---|
+| `public/audio/bgm.mp3` | Copiar MP3 uploadado |
+| `src/services/audio.ts` | Reescrever: BGM via MP3, SFX melhorados, novos sons |
+| `src/pages/Index.tsx` | Integrar AudioManager nos handlers |
+| `src/components/funnel/Funnel.tsx` | Adicionar SFX em answer e transition, reduzir feedback delay |
+| `src/components/funnel/QuestionRenderer.tsx` | Adicionar click SFX, melhorar botão multi |
+| `src/components/Header.tsx` | Botão mute/unmute |
+| `src/constants/questions.tsx` | Remover Q3 (8→7 perguntas), reindexar IDs |
 
