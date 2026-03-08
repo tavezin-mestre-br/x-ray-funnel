@@ -254,7 +254,7 @@ const Index: React.FC = () => {
                 onClick={handleStartDiagnosis}
                 className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
               >
-                Quero meu diagnóstico gratuito →
+                Começar meu diagnóstico gratuito →
               </button>
 
               {/* Intro testimonial */}
