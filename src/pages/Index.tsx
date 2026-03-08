@@ -228,7 +228,7 @@ const Index: React.FC = () => {
                 </h1>
 
                 <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
-                  Responda 8 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
+                  Responda 7 perguntas e receba um plano claro do que fazer pra vender mais, sem achismo, sem enrolação.
                 </p>
 
                 {/* Social proof badges */}
