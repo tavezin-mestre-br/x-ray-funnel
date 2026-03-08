@@ -222,11 +222,11 @@ const ClinicasFortaleza: React.FC = () => {
                   EXCLUSIVO PARA CLÍNICAS EM FORTALEZA
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading [text-wrap:balance] [text-wrap:balance]">
                   O paciente manda mensagem. Quem responde primeiro, agenda.
                 </h1>
 
-                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-[280px] sm:max-w-md mx-auto">
+                <p className="text-muted-foreground text-sm sm:text-base lg:text-lg font-medium lea300px] sm:max-w-md mx-auto [text-wrap:balance] sm:max-w-md mx-auto">
                   Descubra em 3 minutos por que sua clínica perde pacientes. E o que fazer pra resolver.
                 </p>
 
@@ -240,14 +240,14 @@ const ClinicasFortaleza: React.FC = () => {
                     <BarChart3 size={14} className="text-foreground" />
                     <span className="text-xs font-semibold text-foreground">Resultado na hora</span>
                   </div>
-                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg">
-                    <Users size={14} className="text-foreground" />
+                  <div className="flex items-center gap-2 bg-card border border-border px-3 py-2 rounded-lg w-full sm:w-auto justify-center">
+                    <Users size={14} className="text-foreground flex-shrink-0" />
                     <span className="text-xs font-semibold text-foreground">+R$ 10 milhões gerenciados em campanhas</span>
                   </div>
                 </div>
 
                 <div className="bg-destructive/5 border border-destructive/20 p-3 sm:p-4 lg:p-5 rounded-xl lg:rounded-2xl max-w-[320px] sm:max-w-sm mx-auto space-y-2">
-                  <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug">
+                  <p className="text-foreground text-xs sm:text-sm lg:text-base font-black leading-snug [text-wrap:balance]">
                     Para clínicas em Fortaleza que querem lotar a agenda usando internet. Com ou sem experiência em marketing.
                   </p>
                   <p className="text-muted-foreground text-[10px] sm:text-xs lg:text-sm font-medium leading-relaxed">
@@ -258,7 +258,7 @@ const ClinicasFortaleza: React.FC = () => {
               
               <button 
                 onClick={handleStartDiagnosis}
-                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-sm sm:text-base lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
+                className="w-full max-w-sm mx-auto bg-foreground text-background py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-xs sm:text-sm lg:text-xl hover:opacity-90 transition-all group flex items-center justify-center gap-3"
               >
                 Começar diagnóstico da minha clínica →
               </button>
@@ -266,7 +266,7 @@ const ClinicasFortaleza: React.FC = () => {
               {/* Intro testimonial */}
               <Testimonial data={getClinicTestimonialForStep(0)} className="max-w-sm mx-auto text-left" />
 
-              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center">
+              <p className="text-muted-foreground text-[10px] lg:text-xs font-medium text-center [text-wrap:balance]">
                 Leva 3 minutos · Sem compromisso · Plano personalizado pra sua clínica
               </p>
             </motion.div>
@@ -293,7 +293,7 @@ const ClinicasFortaleza: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading [text-wrap:balance]">
                     Falta pouco pro plano de ação da sua clínica ficar pronto.
                   </h2>
                   <p className="text-muted-foreground text-xs lg:text-sm">Esses dados deixam o diagnóstico muito mais preciso pro seu caso.</p>
@@ -409,10 +409,10 @@ const ClinicasFortaleza: React.FC = () => {
                 </div>
 
                 <div className="space-y-1.5 lg:space-y-2 text-center">
-                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
+                  <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading [text-wrap:balance]">
                     O plano de ação da sua clínica está pronto.
                   </h2>
-                  <p className="text-muted-foreground text-sm lg:text-base">Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica.</p>
+                  <p className="text-muted-foreground text-sm lg:text-base [text-wrap:balance]">Coloque seu WhatsApp pra ver o resultado e receber o passo a passo da sua clínica.</p>
                 </div>
 
                 <div className="space-y-3 lg:space-y-4">
@@ -517,7 +517,7 @@ const ClinicasFortaleza: React.FC = () => {
               </motion.div>
 
               <div className="space-y-2">
-                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading">
+                <h2 className="text-2xl lg:text-3xl font-black text-foreground tracking-tight font-heading [text-wrap:balance]">
                   Horário reservado com sucesso
                 </h2>
                 <p className="text-base lg:text-lg text-muted-foreground font-medium">

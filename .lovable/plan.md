@@ -1,47 +1,219 @@
 
 
-## Plano: Ajuste de responsividade mobile — eliminar palavras órfãs e quebras feias
+# Plano: Otimização de Copy para Shekinah
+## Foco em Autoridade e Entregáveis de Marketing, Tecnologia e IA
 
-Foco em telas 375px–428px. Só CSS e ajustes de layout, sem mudar copy.
+---
 
-### Problemas identificados
+## Objetivo
 
-1. **H1 intro** (linha 225): Em 375px, `text-3xl` com texto longo pode deixar "agenda." sozinha numa linha. Adicionar `text-wrap: balance` pra distribuir melhor.
+Tornar a copy mais persuasiva e demonstrar autoridade, deixando claro que a Shekinah implementa um sistema completo para clínicas high ticket:
+- Criativos de alta performance
+- Tráfego pago qualificado
+- Funis de alta conversão
+- Atendimento e agendamento com IA
+- CRM com rastreamento completo
 
-2. **Subtítulo intro** (linha 229): `max-w-[280px]` é muito apertado e pode gerar palavra órfã. Ajustar para `max-w-[300px]`.
+---
 
-3. **Badge 3** (linha 245): "+R$ 10 milhões gerenciados em campanhas" é longo demais pra um badge em 375px — vai ocupar 2 linhas dentro do badge. Trocar layout: esse badge deve ser `w-full` em mobile pra não ficar espremido.
+## Arquivos a Modificar (Apenas Copy)
 
-4. **Caixa vermelha** (linha 249): OK com `max-w-[320px]`, mas o texto interno pode deixar "marketing." isolado. Adicionar `text-wrap: balance`.
+### 1. src/pages/Index.tsx
+Otimizações na tela de intro e capturas.
 
-5. **Botão CTA intro** (linha 261): "Começar diagnóstico da minha clínica →" pode quebrar em 2 linhas com `text-sm`. Reduzir pra `text-xs sm:text-sm` no botão.
+### 2. src/components/funnel/ScoreDisplay.tsx
+Reformular a tela de resultados para deixar claro os entregáveis e criar urgência.
 
-6. **H2 capture_company** (linha 296): "Falta pouco pro plano de ação da sua clínica ficar pronto." — longo. Adicionar `text-wrap: balance`.
+### 3. src/services/scoreLogic.ts
+Atualizar classificações, bottlenecks e recomendações com linguagem focada nos serviços.
 
-7. **H2 capture_final** (linha 412): "O plano de ação da sua clínica está pronto." — adicionar `text-wrap: balance`.
+---
 
-8. **Subtítulo capture_final** (linha 415): Pode deixar "clínica." órfã. Adicionar `text-wrap: balance`.
+## Mudanças Detalhadas
 
-9. **H2 booking_confirmed** (linha 520): Adicionar `text-wrap: balance`.
+### Tela de Intro (Index.tsx)
 
-10. **Texto inferior intro** (linha 269): `text-[10px]` com "Leva 3 minutos · Sem compromisso · Plano personalizado pra sua clínica" pode deixar "clínica" sozinha. Adicionar `text-wrap: balance`.
+**Atual:**
+> "Descubra onde sua operação deixa faturamento na mesa — e como recuperá-lo."
 
-### Alterações no `src/pages/ClinicasFortaleza.tsx`
+**Novo:**
+> "Sua clínica tem a demanda. Mas sem sistema, cada lead que entra é uma consulta perdida."
 
-| Linha | Elemento | Mudança |
-|---|---|---|
-| 225 | h1 | Adicionar `[text-wrap:balance]` |
-| 229 | p subtitle | `max-w-[280px]` → `max-w-[300px]`, adicionar `[text-wrap:balance]` |
-| 243-246 | Badge 3 | Adicionar `w-full sm:w-auto` pra não ficar espremido em mobile |
-| 249-256 | Caixa vermelha p | Adicionar `[text-wrap:balance]` no texto principal |
-| 261 | Botão CTA | `text-sm sm:text-base` → `text-xs sm:text-sm lg:text-base` |
-| 269 | Texto inferior | Adicionar `[text-wrap:balance]` |
-| 296 | h2 capture_company | Adicionar `[text-wrap:balance]` |
-| 412 | h2 capture_final | Adicionar `[text-wrap:balance]` |
-| 415 | p capture_final | Adicionar `[text-wrap:balance]` |
-| 520 | h2 booking_confirmed | Adicionar `[text-wrap:balance]` |
+**Adicionar frase de autoridade abaixo do botão:**
+> "Mais de R$ 2M gerenciados em campanhas para clínicas no Brasil."
 
-### Resumo
+---
 
-~10 mudanças CSS no `ClinicasFortaleza.tsx`. Nenhuma copy alterada, nenhuma lógica tocada. Só `text-wrap: balance` nos textos principais + ajuste de max-width e tamanho de fonte do CTA pra eliminar palavras órfãs em mobile.
+### Tela de Captura Final (Index.tsx)
+
+**Atual:**
+> "Diagnóstico pronto. Onde deseja recebê-lo?"
+
+**Novo:**
+> "Seu diagnóstico está pronto. Vamos mostrar onde está o vazamento — e como fechar."
+
+---
+
+### Tela de Resultados (ScoreDisplay.tsx)
+
+**Reformular CTA Section:**
+
+**Atual:**
+```text
+Próximo Passo
+Agende uma reunião para receber seu plano de implementação personalizado.
+[Solicitar diagnóstico estratégico]
+```
+
+**Novo:**
+```text
+O que implementamos para clínicas em Porto Velho
+
+| Criativos de alta conversão para procedimentos estéticos
+| Tráfego pago com leads qualificados — sem curiosos
+| Funis de captação e nutrição automatizados
+| Atendimento e agendamento 24/7 com Inteligência Artificial
+| CRM com rastreamento completo de cada lead até a consulta
+
+[Solicitar plano de implementação]
+
+Vagas limitadas para clínicas de Porto Velho – RO.
+```
+
+---
+
+### Classificações (scoreLogic.ts)
+
+**Estrutura crítica:**
+- Atual: "A clínica apresenta falhas estruturais que impactam diretamente o faturamento."
+- Novo: "Sua clínica está operando sem sistema. Cada dia sem estrutura é faturamento deixado na mesa."
+
+**Estrutura com vazamentos:**
+- Atual: "Existem oportunidades de faturamento sendo perdidas por falhas de processo."
+- Novo: "Leads estão entrando, mas não estão virando consultas. O problema não é demanda — é processo."
+
+**Estrutura funcional:**
+- Atual: "A operação funciona, mas há margem significativa para otimização."
+- Novo: "A base existe. Agora é hora de automatizar o atendimento e escalar a aquisição."
+
+**Estrutura otimizada:**
+- Atual: "A clínica possui uma operação sólida."
+- Novo: "Sua operação é sólida. O próximo passo é IA para escalar sem aumentar equipe."
+
+---
+
+### Bottlenecks (scoreLogic.ts)
+
+**Aquisição:**
+- Bottleneck: "Geração de demanda inconsistente"
+- Why: "Sem tráfego pago estruturado e criativos de alta conversão, sua clínica depende de indicação — que não escala."
+- Impact: "Com campanhas otimizadas e funis de captura, clínicas dobram o volume de leads qualificados em 60 dias."
+
+**Atendimento:**
+- Bottleneck: "Leads esfriando antes do agendamento"
+- Why: "Tempo de resposta acima de 5 minutos reduz conversão em até 80%. Sem IA, você perde consultas enquanto dorme."
+- Impact: "Atendimento automatizado com IA responde em segundos, qualifica e agenda — 24 horas por dia."
+
+**Processo:**
+- Bottleneck: "Falta de visibilidade sobre o funil"
+- Why: "Sem CRM, você não sabe quantos leads entraram, quantos agendaram e quantos compareceram. Gestão no escuro."
+- Impact: "CRM estruturado com rastreamento completo permite prever faturamento e identificar vazamentos em tempo real."
+
+---
+
+### Recomendações (scoreLogic.ts)
+
+**Aquisição:**
+```text
+7 dias:
+- Estruturar campanha de tráfego pago para o procedimento mais lucrativo
+- Configurar pixel e eventos de conversão no site
+- Definir orçamento mensal fixo para aquisição
+
+30 dias:
+- Testar criativos com diferentes ângulos de copy
+- Implementar landing page de alta conversão
+- Criar funil de nutrição via WhatsApp
+
+60-90 dias:
+- Escalar investimento nos criativos vencedores
+- Automatizar qualificação de leads com IA
+- Construir máquina previsível de geração de demanda
+```
+
+**Atendimento:**
+```text
+7 dias:
+- Implementar resposta automática em menos de 30 segundos
+- Criar script de qualificação para atendentes
+- Configurar alertas em tempo real para novos leads
+
+30 dias:
+- Integrar chatbot de pré-atendimento no WhatsApp
+- Automatizar agendamento direto na conversa
+- Mapear e resolver principais objeções
+
+60-90 dias:
+- IA fazendo atendimento completo 24/7
+- Dashboard de métricas de conversão por atendente
+- Sistema de reativação automática de leads frios
+```
+
+**Processo:**
+```text
+7 dias:
+- Mapear jornada do lead: entrada → consulta → procedimento
+- Identificar etapa com maior perda de conversão
+- Documentar processo atual de agendamento
+
+30 dias:
+- Implementar CRM com pipeline visual de leads
+- Definir KPIs: taxa de resposta, agendamento e comparecimento
+- Criar rotina de confirmação de consultas
+
+60-90 dias:
+- Dashboard de faturamento previsível por período
+- Automação de follow-up para pacientes inativos
+- Sistema de rastreamento da origem até o fechamento
+```
+
+---
+
+### Descrições dos Pilares (scoreLogic.ts)
+
+**Aquisição:**
+- Atual: "Capacidade de gerar leads qualificados de forma previsível"
+- Novo: "Tráfego pago + criativos + funis = demanda previsível"
+
+**Atendimento:**
+- Atual: "Velocidade e eficiência no primeiro contato com pacientes"
+- Novo: "Resposta instantânea + IA = leads que viram consultas"
+
+**Processo:**
+- Atual: "Estrutura operacional para conversão e retenção"
+- Novo: "CRM + rastreamento = visibilidade total do funil"
+
+---
+
+## Resumo das Mudanças
+
+| Local | O que muda |
+|-------|------------|
+| Intro | Frase de impacto + prova social |
+| Captura final | Copy mais direta e urgente |
+| Resultados | Lista clara de entregáveis + CTA reformulado |
+| Classificações | Linguagem focada em sistema e automação |
+| Bottlenecks | Conexão direta com serviços da Shekinah |
+| Recomendações | Entregáveis específicos de marketing, tecnologia e IA |
+| Pilares | Descrições curtas e impactantes |
+
+---
+
+## Resultado Esperado
+
+- Copy mais persuasiva e autoritária
+- Deixar claro que a Shekinah implementa o sistema completo
+- Conexão entre diagnóstico e os serviços oferecidos
+- Maior taxa de conversão para agendamento de call
+- Cliente já entendendo o que vai ser implementado antes da reunião
 
