@@ -494,7 +494,7 @@ const ClinicasFortaleza: React.FC = () => {
 
           {/* RESULTS */}
           {step === 'results' && results && (
-            <ScoreDisplay results={results} userData={userData} leadId={leadId} onBookivariant="clinic" ngConfirmed={handleBookingConfirmed} />
+            <ScoreDisplay results={results} userData={userData} leadId={leadId} variant="clinic" onBookingConfirmed={handleBookingConfirmed} />
           )}
 
           {/* BOOKING CONFIRMED */}
