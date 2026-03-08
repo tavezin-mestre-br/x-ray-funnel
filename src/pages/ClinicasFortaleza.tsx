@@ -222,7 +222,7 @@ const ClinicasFortaleza: React.FC = () => {
                   EXCLUSIVO PARA CLÍNICAS EM FORTALEZA
                 </div>
 
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-foreground leading-[1.1] tracking-tight font-heading [text-wrap:balance]">
                   O paciente manda mensagem. Quem responde primeiro, agenda.
                 </h1>
 
