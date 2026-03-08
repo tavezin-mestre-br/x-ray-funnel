@@ -240,7 +240,7 @@ const ScoreDisplay: React.FC<{
           >
             <CalendarCheck size={18} className="lg:hidden" />
             <CalendarCheck size={20} className="hidden lg:block" />
-            Agendar minha implementação →
+            Quero resolver isso agora →
           </button>
 
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
