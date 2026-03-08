@@ -244,7 +244,7 @@ const ScoreDisplay: React.FC<{
           </button>
 
           <p className="text-[10px] lg:text-xs text-muted-foreground font-medium text-center">
-            Conversa estratégica de 20 minutos · Sem compromisso · Plano personalizado
+            Conversa de 20 min · Gratuita · Sem compromisso · Pelo Google Meet
           </p>
 
           <p className="text-[10px] lg:text-xs text-foreground font-bold mono-font uppercase tracking-wider text-center">
