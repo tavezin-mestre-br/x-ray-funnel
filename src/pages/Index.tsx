@@ -288,7 +288,7 @@ const Index: React.FC = () => {
 
                 <div className="space-y-1.5 lg:space-y-2">
                   <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-foreground leading-tight tracking-tight font-heading">
-                    Para personalizar seu plano de ação
+                    Falta pouco pro seu plano de ação ficar pronto.
                   </h2>
                   <p className="text-muted-foreground text-xs lg:text-sm">Precisamos de alguns dados para personalizar o diagnóstico.</p>
                 </div>
