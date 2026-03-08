@@ -288,7 +288,7 @@ const ScoreDisplay: React.FC<{
           <TimelineStep
             number={2}
             period="Semana 2-3"
-            title="Estruturação Completa"
+            title="Tudo organizado e conectado"
             items={results.recommendations.thirtyDays}
             delay={0.75}
           />
