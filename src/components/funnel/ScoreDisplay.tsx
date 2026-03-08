@@ -324,8 +324,8 @@ const ScoreDisplay: React.FC<{
       <Testimonial data={{
         name: "Clemir Junio",
         company: "Artfacas Brasil",
-        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm do tráfego e o custo por lead caiu pela metade. Finalmente tenho previsibilidade.",
-        result: "Faturamento previsível"
+        quote: "Paramos de depender de indicação. Hoje 70% dos clientes vêm dos anúncios e o custo por contato caiu pela metade. Finalmente consigo planejar o mês.",
+        result: "70% das vendas via anúncio"
       }} />
 
       <SchedulingDialog

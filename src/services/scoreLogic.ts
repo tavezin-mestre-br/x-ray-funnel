@@ -2,9 +2,9 @@ import { QUESTIONS, PILLARS } from '@/constants/questions';
 import { FinalResults, PillarScore, Badge } from '@/types/funnel';
 
 const PILLAR_DESCRIPTIONS: Record<string, string> = {
-  "Aquisição": "Tráfego qualificado + funis de captura = demanda previsível de clientes novos",
-  "Atendimento": "IA + resposta instantânea = leads que viram vendas, não curiosos",
-  "Processo": "CRM + pipeline + rastreamento = visibilidade total e faturamento previsível"
+  "Aquisição": "Como seus clientes chegam até você, anúncios, redes sociais, indicação",
+  "Atendimento": "A velocidade e qualidade com que você responde quem entra em contato",
+  "Processo": "O controle que você tem sobre suas vendas, do primeiro contato até o fechamento"
 };
 
 const getPillarStatus = (score: number, max: number): 'high' | 'medium' | 'low' => {
@@ -16,30 +16,30 @@ const getPillarStatus = (score: number, max: number): 'high' | 'medium' | 'low' 
 
 const getPainLabel = (painPoint: string | undefined): string => {
   const labels: Record<string, string> = {
-    'conversao': 'perda de conversão por falta de processo',
-    'roi_invisivel': 'investimento em anúncio sem rastreamento de retorno',
-    'atendimento_lento': 'leads esfriando por atendimento lento ou manual',
-    'sem_previsibilidade': 'faturamento imprevisível por falta de estrutura comercial',
+    'conversao': 'muita gente entra em contato mas poucas viram venda',
+    'roi_invisivel': 'você investe em anúncio mas não sabe se está dando retorno',
+    'atendimento_lento': 'clientes interessados desistem porque a resposta demora',
+    'sem_previsibilidade': 'seu faturamento sobe e desce sem você entender o porquê',
   };
-  return labels[painPoint || ''] || 'gargalos na operação comercial';
+  return labels[painPoint || ''] || 'problemas na forma como você atrai e converte clientes';
 };
 
 const getAttemptLabel = (attemptId: string | undefined): string => {
   const labels: Record<string, string> = {
-    'q2_1': 'Você já investiu em agência de tráfego sem resultado mensurável',
-    'q2_2': 'Você tentou estruturar o comercial sozinho, mas não escalou',
-    'q2_3': 'Você colocou atendimento humano no WhatsApp, mas perde lead fora do horário',
-    'q2_4': 'Você ainda não tentou nada estruturado. Isso é uma vantagem, porque vamos implementar do zero, com a estrutura certa desde o início',
+    'q2_1': 'Você já investiu em agência e não teve resultado claro, isso é mais comum do que imagina',
+    'q2_2': 'Você tentou organizar sozinho e chegou num limite, faz parte',
+    'q2_3': 'Você tem gente respondendo no WhatsApp mas perde cliente fora do horário',
+    'q2_4': 'Você ainda não tentou nada organizado, e isso é uma vantagem, porque vamos montar do zero, do jeito certo',
   };
-  return labels[attemptId || ''] || 'Tentativas anteriores não trouxeram resultado previsível';
+  return labels[attemptId || ''] || 'O que você tentou antes não trouxe resultado previsível';
 };
 
 const getExpectationLabel = (answer: string | string[] | undefined): string => {
   const labels: Record<string, string> = {
-    'q4_1': 'velocidade na implementação',
-    'q4_2': 'transparência total',
-    'q4_3': 'automação completa',
-    'q4_4': 'previsibilidade',
+    'q4_1': 'resolver rápido, sem enrolação',
+    'q4_2': 'saber exatamente o retorno de cada real',
+    'q4_3': 'um sistema que funcione sem depender de você',
+    'q4_4': 'clientes novos todo mês de forma previsível',
   };
 
   if (Array.isArray(answer)) {
@@ -55,26 +55,26 @@ const getExpectationLabel = (answer: string | string[] | undefined): string => {
 const getClassificationData = (totalScore: number) => {
   if (totalScore < 8) {
     return {
-      classification: "Operação sem estrutura comercial",
-      explanation: "Sua empresa está operando sem sistema de vendas. Leads entram e se perdem. Cada dia sem estrutura é faturamento que escoa.",
+      classification: "Sua empresa está vendendo no escuro",
+      explanation: "Você não tem um sistema de vendas organizado. Clientes entram em contato e se perdem no caminho. Cada dia sem resolver isso é dinheiro que você deixa na mesa.",
       level: 1
     };
   } else if (totalScore < 16) {
     return {
-      classification: "Estrutura com vazamentos críticos",
-      explanation: "Você tem demanda, mas o processo entre o lead entrar e a venda fechar está cheio de buracos. O problema não é falta de cliente — é falta de máquina comercial.",
+      classification: "Você tem clientes, mas está perdendo muitos pelo caminho",
+      explanation: "A demanda existe, mas entre o primeiro contato e a venda tem muita coisa falhando. O problema não é falta de cliente, é falta de um processo que funcione.",
       level: 2
     };
   } else if (totalScore < 24) {
     return {
-      classification: "Base funcional, pronta para escalar",
-      explanation: "A fundação existe. Agora é hora de automatizar com IA, rastrear cada centavo investido e transformar isso numa máquina previsível de faturamento.",
+      classification: "Boa base, pronto pra crescer de verdade",
+      explanation: "Você já tem uma base funcionando. Agora é hora de automatizar o atendimento, rastrear cada real investido e transformar isso em vendas previsíveis todo mês.",
       level: 3
     };
   } else {
     return {
-      classification: "Operação sólida — pronta para IA",
-      explanation: "Sua estrutura é forte. O próximo passo é implementar IA para escalar o atendimento e a qualificação sem aumentar equipe.",
+      classification: "Empresa sólida, próximo passo é escalar",
+      explanation: "Sua estrutura é forte. O próximo passo é usar tecnologia e IA pra atender mais clientes sem precisar contratar mais gente.",
       level: 4
     };
   }
@@ -85,29 +85,29 @@ const getBottleneckAnalysis = (pillars: PillarScore[]) => {
 
   const analyses: Record<string, { bottleneck: string; why: string; impact: string; pillars: string[] }> = {
     "Aquisição": {
-      bottleneck: "Geração de demanda inconsistente",
-      why: "Sem tráfego pago estruturado e rastreado, sua empresa depende de indicação — que não escala e não é previsível.",
-      impact: "Com campanhas otimizadas e funis de captura, implementamos demanda previsível em até 30 dias.",
+      bottleneck: "Você depende de indicação, e indicação não escala",
+      why: "Sem anúncios bem feitos e rastreados, você fica refém da sorte. Num mês vem cliente, no outro não.",
+      impact: "Com campanhas bem montadas, você começa a receber clientes novos de forma previsível em até 30 dias.",
       pillars: ["Aquisição"]
     },
     "Atendimento": {
-      bottleneck: "Leads esfriando antes do fechamento",
-      why: "Resposta lenta ou manual mata a conversão. Cada minuto que passa após o contato, a chance de venda despenca.",
-      impact: "IA no WhatsApp responde em segundos, qualifica e agenda — 24 horas por dia, 7 dias por semana. Implementação em 7 dias.",
+      bottleneck: "Clientes interessados estão desistindo antes de comprar",
+      why: "Quanto mais tempo leva pra responder, menor a chance de vender. Cada minuto conta.",
+      impact: "Com atendimento automático, seus clientes são respondidos em segundos, 24 horas por dia, 7 dias por semana.",
       pillars: ["Atendimento", "Processo"]
     },
     "Processo": {
-      bottleneck: "Zero visibilidade sobre o funil de vendas",
-      why: "Sem CRM e sem rastreamento, você não sabe quantos leads entraram, quantos avançaram e quanto cada campanha faturou. É gestão no escuro.",
-      impact: "CRM com pipeline visual + rastreamento do clique até a venda = previsibilidade total de faturamento.",
+      bottleneck: "Você não sabe quantos clientes entram, quantos compram e por quê",
+      why: "Sem controle das vendas, você não sabe o que funciona e o que não funciona. É como dirigir sem painel.",
+      impact: "Com um sistema de vendas organizado, você vê tudo: de onde veio o cliente, quanto gastou pra trazer e quanto faturou.",
       pillars: ["Processo"]
     }
   };
 
   return analyses[lowest.name] || {
-    bottleneck: "Operação comercial fragmentada",
-    why: "Sem sistema integrado de aquisição, atendimento com IA e CRM, leads entram mas não viram receita previsível.",
-    impact: "Implementar Máquina Comercial completa (tráfego + IA + CRM) transforma operação em faturamento previsível.",
+    bottleneck: "Várias áreas precisam de atenção ao mesmo tempo",
+    why: "Sem um sistema que conecte anúncios, atendimento e vendas, os clientes entram mas não viram receita previsível.",
+    impact: "Montando tudo integrado (anúncios + atendimento automático + controle de vendas), seu faturamento fica previsível.",
     pillars: pillars.filter(p => p.status === 'low').map(p => p.name)
   };
 };
@@ -118,35 +118,35 @@ const getActionPlan = (responses: Record<number, any>, pillars: PillarScore[]) =
   const lowest = pillars.reduce((min, p) => p.score < min.score ? p : min, pillars[0]);
 
   const weekOne: string[] = [
-    "Implementar IA no WhatsApp — resposta automática em menos de 30 segundos, 24/7",
+    "Colocar atendimento automático no WhatsApp, resposta em segundos, 24 horas por dia",
   ];
 
   if (attendanceResponse === 'q6_4' || attendanceResponse === 'q6_1') {
-    weekOne.push("Criar fluxo de qualificação automática: perguntas-chave antes do humano entrar");
+    weekOne.push("Criar perguntas automáticas que filtram quem realmente quer comprar");
   } else {
-    weekOne.push("Configurar qualificação inteligente com IA para filtrar leads quentes");
+    weekOne.push("Melhorar o filtro de quem entra em contato, só passa pra você quem tá pronto pra comprar");
   }
-  weekOne.push("Mapear jornada atual do lead: entrada → contato → venda");
+  weekOne.push("Mapear o caminho que o cliente faz hoje: do primeiro contato até a venda");
 
   const weekTwoThree: string[] = [];
   if (lowest.name === 'Processo' || painResponse === 'q1_4') {
-    weekTwoThree.push("Configurar CRM com pipeline visual de vendas");
-    weekTwoThree.push("Implementar rastreamento: cada lead rastreado do clique até a venda");
-    weekTwoThree.push("Definir KPIs: custo por lead, taxa de conversão, ticket médio, ROI por campanha");
+    weekTwoThree.push("Organizar suas vendas num painel visual, ver quem tá negociando, quem fechou, quem sumiu");
+    weekTwoThree.push("Rastrear cada contato: de onde veio, quanto custou pra trazer, se virou venda");
+    weekTwoThree.push("Definir os números que importam: custo por contato, quantos viram venda, valor médio");
   } else if (lowest.name === 'Aquisição' || painResponse === 'q1_2') {
-    weekTwoThree.push("Estruturar campanhas de tráfego pago para o produto/serviço mais lucrativo");
-    weekTwoThree.push("Implementar landing page de alta conversão com pixel de rastreamento");
-    weekTwoThree.push("Configurar funil de captura integrado ao WhatsApp com IA");
+    weekTwoThree.push("Montar campanhas de anúncio pro seu produto/serviço que mais dá lucro");
+    weekTwoThree.push("Criar página de captura que converte visitante em contato qualificado");
+    weekTwoThree.push("Conectar tudo: o anúncio leva pro WhatsApp e a IA já começa a atender");
   } else {
-    weekTwoThree.push("Automatizar agendamento direto na conversa via IA");
-    weekTwoThree.push("Implementar sistema de follow-up automático para leads que não responderam");
-    weekTwoThree.push("Configurar dashboard de métricas de conversão em tempo real");
+    weekTwoThree.push("Automatizar agendamento direto na conversa do WhatsApp");
+    weekTwoThree.push("Criar sistema que volta a falar com quem não respondeu, sem você precisar lembrar");
+    weekTwoThree.push("Montar painel pra acompanhar quantos contatos viraram venda, em tempo real");
   }
 
   const weekFour: string[] = [
-    "Tráfego pago rodando com rastreamento completo até a venda",
-    "Dashboard de faturamento: quanto cada campanha gerou de receita real",
-    "Máquina Comercial operando: aquisição + IA + CRM integrados",
+    "Anúncios rodando com rastreamento completo, você sabe quanto cada real investido voltou",
+    "Painel mostrando quanto cada campanha gerou de venda de verdade",
+    "Tudo conectado e funcionando: anúncios + atendimento automático + controle de vendas",
   ];
 
   return {
