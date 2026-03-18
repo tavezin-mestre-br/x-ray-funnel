@@ -536,7 +536,7 @@ const ClinicasFortaleza: React.FC = () => {
               </div>
 
               <a
-                href="https://wa.me/5569992286633"
+                href="https://wa.me/5585976766180"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full max-w-sm mx-auto bg-[hsl(142,71%,45%)] hover:bg-[hsl(142,71%,40%)] text-white py-4 lg:py-5 rounded-xl lg:rounded-2xl font-black text-base lg:text-lg flex items-center justify-center gap-3 transition-all shadow-lg"
