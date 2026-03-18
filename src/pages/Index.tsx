@@ -127,28 +127,28 @@ const Index: React.FC = () => {
     const updatedUserData = { ...userData, whatsapp: normalizedPhone, email };
     setUserData(updatedUserData);
     
-    const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
-    const eventId = generateEventId();
-    const { fbp, fbc } = getFbCookies();
-    const clientIp = getClientIp();
-    
-    // Transform responses from IDs to readable labels
-    const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
-      const question = QUESTIONS.find(q => q.id === Number(qId));
-      if (!question) return acc;
-
-      let formattedAnswer: string | string[];
-      if (Array.isArray(answer)) {
-        formattedAnswer = answer.map((optId: string) => question.options.find(o => o.id === optId)?.label || optId);
-      } else {
-        formattedAnswer = question.options.find(o => o.id === answer)?.label || answer;
-      }
-
-      acc[qId] = { question: question.title, answer: formattedAnswer };
-      return acc;
-    }, {} as Record<string, { question: string; answer: string | string[] }>);
-
     try {
+      const resultsToSave = calculateResults(updatedUserData.responses, updatedUserData.badges);
+      const eventId = generateEventId();
+      const { fbp, fbc } = getFbCookies();
+      const clientIp = getClientIp();
+      
+      // Transform responses from IDs to readable labels
+      const formattedAnswers = Object.entries(updatedUserData.responses).reduce((acc, [qId, answer]) => {
+        const question = QUESTIONS.find(q => q.id === Number(qId));
+        if (!question) return acc;
+
+        let formattedAnswer: string | string[];
+        if (Array.isArray(answer)) {
+          formattedAnswer = answer.map((optId: string) => question.options.find(o => o.id === optId)?.label || optId);
+        } else {
+          formattedAnswer = question.options.find(o => o.id === answer)?.label || answer;
+        }
+
+        acc[qId] = { question: question.title, answer: formattedAnswer };
+        return acc;
+      }, {} as Record<string, { question: string; answer: string | string[] }>);
+
       const { data, error } = await supabase.functions.invoke('save-lead', {
         body: {
           name: updatedUserData.name,
