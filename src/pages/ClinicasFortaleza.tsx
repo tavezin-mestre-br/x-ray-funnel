@@ -187,8 +187,9 @@ const ClinicasFortaleza: React.FC = () => {
     } finally {
       setIsSubmitting(false);
       AudioManager.playReveal();
-      setStep('results');
     }
+
+    setStep('results');
   };
 
   const results = useMemo(() => {
